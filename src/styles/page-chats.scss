@@ -1,0 +1,16 @@
+#app {
+    display: flex;
+    justify-content: center;
+    //align-items: center;
+    margin-top: 50vh;
+}
+.title {
+    font-family: 'Inter', Helvetica, sans-serif;
+    font-size: 40px;
+    line-height: 40px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #3369f3;
+    margin: 0;
+    padding: 0;
+}

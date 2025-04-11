@@ -1,0 +1,25 @@
+.submit-button {
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    text-align: center;
+    font-size: 13px;
+    line-height: 13px;
+    background-color: #3369F3;
+    width: 280px;
+    height: 37px;
+    margin: 0;
+    padding: 0;
+    &:hover {
+        opacity: 0.8;
+        transition: opacity 0.2s linear;
+        cursor: pointer;
+    }
+
+    &_type_change-data {
+        margin: 60px auto 0;
+    }
+    &_type_change-password {
+        margin: 162px auto 0;
+    }
+}
