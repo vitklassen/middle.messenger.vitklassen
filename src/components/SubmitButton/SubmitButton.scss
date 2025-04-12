@@ -1,21 +1,20 @@
+@use '../../pages/styles/utils/constants.scss' as *;
+
 .submit-button {
     border: none;
     border-radius: 8px;
-    color: #ffffff;
+    color: $white_color;
     text-align: center;
     font-size: 13px;
     line-height: 13px;
-    background-color: #3369F3;
+    background-color: $blue_color_type_1;
     width: 280px;
     height: 37px;
     margin: 0;
     padding: 0;
     &:hover {
-        opacity: 0.8;
-        transition: opacity 0.2s linear;
-        cursor: pointer;
+        @include hover_element;
     }
-
     &_type_change-data {
         margin: 60px auto 0;
     }

@@ -1,3 +1,5 @@
+@use '../../pages/styles/utils/constants.scss' as *;
+
 .error {
     display: flex;
     flex-direction: column;
@@ -19,16 +21,12 @@
         padding: 0;
         font-size: 11px;
         line-height: 11px;
-        background-color: #ffffff;
-        color: #3369f3;
+        background-color: $white_color;
+        color: $blue_color_type_1;
         font-weight: 500;
         text-decoration: none;
         &:hover {
-            opacity: 0.8;
-            transition: opacity 0.2s linear;
-            cursor: pointer;
+            @include hover_element;
         }
     }
 }
-
-

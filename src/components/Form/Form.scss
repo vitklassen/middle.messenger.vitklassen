@@ -1,10 +1,6 @@
+@use '../../pages/styles/utils/constants.scss' as *;
 @import url('../SubmitButton/SubmitButton.scss');
 
-@mixin hover_element {
-    opacity: 0.8;
-    transition: opacity 0.2s linear;
-    cursor: pointer;
-}
 .form {
     display: flex;
     max-width: 340px;
@@ -12,13 +8,13 @@
     box-sizing: border-box;
     margin: 0;
     padding: 50px 30px 30px 30px;
-    background-color: #ffffff;
+    background-color: $white_color;
     border-radius: 12px;
     font-family: 'Inter'; 
     max-height: fit-content;
     filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.14));
     &__title {
-        color: #1e1e1e;
+        color: $gray_color_type_3;
         text-align: center;
         font-size: 20px;
         line-height: 20px;
@@ -26,7 +22,7 @@
         font-weight: 400;
     }
     &__link {
-        color: #3369F3;
+        color: $blue_color_type_1;
         text-align: center;
         font-size: 11px;
         line-height: 11px;
@@ -63,13 +59,13 @@
         font-size: 9px;
         line-height: 9px;
         font-weight: 500;
-        color: #999999;
+        color: $gray_color_type_4;
         
         &_type_error {
             font-size: 9px;
             line-height: 9px;
             margin: 7px 0 0;
-            color: #ff2f2f;
+            color: $red_color_type_2;
         }
     }
     .form__input {
@@ -78,14 +74,14 @@
         font-size: 13px;
         line-height: 13px;
         font-weight: 500;
-        color: #1e1e1e;
+        color: $gray_color_type_3;
         margin: 0;
         padding: 0 0 7px;
         border: none;
-        border-bottom: 1px solid #3369F3;
+        border-bottom: 1px solid $blue_color_type_1;
     
         &:focus {
-            outline-color: #3369F3;
+            outline-color: $blue_color_type_1;
             outline-style: solid;
             outline-width: 2px;
             border: none;
