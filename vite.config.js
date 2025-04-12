@@ -7,14 +7,14 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 index: resolve(__dirname, 'index.html'),
-                page_not_found_error: resolve(__dirname, 'page-not-found-error.html'),
-                page_server_error: resolve(__dirname, 'page-server-error.html'),
-                page_signin: resolve(__dirname, 'page-signin.html'),
-                page_sigup: resolve(__dirname, 'page-signup.html'),
-                page_profile: resolve(__dirname, 'page-profile.html'),
-                page_profile_change_data: resolve(__dirname, 'page-profile-change-data.html'),
-                page_profile_change_password: resolve(__dirname, 'page-profile-change-password.html'),
-                page_chats: resolve(__dirname, 'page-chats.html'),
+                page_not_found_error: resolve(__dirname, 'src/pages/page-not-found-error.html'),
+                page_server_error: resolve(__dirname, 'src/pages/page-server-error.html'),
+                page_signin: resolve(__dirname, 'src/pages/page-signin.html'),
+                page_sigup: resolve(__dirname, 'src/pages/page-signup.html'),
+                page_profile: resolve(__dirname, 'src/pages/page-profile.html'),
+                page_profile_change_data: resolve(__dirname, 'src/pages/page-profile-change-data.html'),
+                page_profile_change_password: resolve(__dirname, 'src/pages/page-profile-change-password.html'),
+                page_chats: resolve(__dirname, 'src/pages/page-chats.html'),
             }
         },
         outDir: resolve(__dirname, 'dist'),

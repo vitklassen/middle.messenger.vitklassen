@@ -1,7 +1,8 @@
+@use './utils/constants.scss' as *;
+
 #app {
     display: flex;
     justify-content: center;
-    //align-items: center;
     margin-top: 50vh;
 }
 .title {
@@ -10,7 +11,7 @@
     line-height: 40px;
     font-weight: 500;
     text-decoration: none;
-    color: #3369f3;
+    color: $blue_color_type_1;
     margin: 0;
     padding: 0;
 }
