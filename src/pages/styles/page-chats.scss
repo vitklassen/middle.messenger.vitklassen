@@ -1,0 +1,17 @@
+@use './utils/constants.scss' as *;
+
+#app {
+    display: flex;
+    justify-content: center;
+    margin-top: 50vh;
+}
+.title {
+    font-family: 'Inter', Helvetica, sans-serif;
+    font-size: 40px;
+    line-height: 40px;
+    font-weight: 500;
+    text-decoration: none;
+    color: $blue_color_type_1;
+    margin: 0;
+    padding: 0;
+}

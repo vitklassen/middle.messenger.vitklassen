@@ -1,0 +1,19 @@
+<form class="form" action="">
+    <h2 class="form__title">{{formTitle}}</h2>
+    {{#if isLogin}}
+        {{>FormLabel labelClassName="form__label form__label_type_login" inputName="login" inputType="text" spanHint="Логин" spanError="Неверный логин"}}
+        {{>FormLabel labelClassName="form__label form__label_type_login" inputName="password" inputType="password" spanHint="Пароль" spanError="Неверный пароль"}}
+        {{>SubmitButton buttonClassName="submit-button" buttonText="Авторизоваться"}}
+    {{else}}
+        {{>FormLabel inputName="email" inputType="email" spanHint="Почта" spanError="Неверный формат почты" labelClassName="form__label form__label_type_register"}}
+        {{>FormLabel inputName="login" inputType="text" spanHint="Логин" spanError="Такой логин уже занят" labelClassName="form__label form__label_type_register"}}
+        {{>FormLabel inputName="first_name" inputType="text" spanHint="Имя" spanError="Некорректный формат" labelClassName="form__label form__label_type_register"}}
+        {{>FormLabel inputName="second_name" inputType="text" spanHint="Фамилия" spanError="Некорректный формат" labelClassName="form__label form__label_type_register"}}
+        {{>FormLabel inputName="phone" inputType="tel" spanHint="Телефон" spanError="Некорректный формат" labelClassName="form__label form__label_type_register"}}
+        {{>FormLabel inputName="password" inputType="password" spanHint="Пароль" spanError="Неверный формат" labelClassName="form__label form__label_type_register"}}
+        {{>FormLabel inputName="password" inputType="password" spanHint="Пароль (ещё раз)" spanError="Пароли не совпадают" labelClassName="form__label form__label_type_register"}}
+        {{>SubmitButton buttonClassName="submit-button" buttonText="Зарегистрироваться"}}
+    {{/if}}
+    {{!-- <button type="submit" class="form__button">{{buttonText}}</button> --}}
+    <a href={{ref}} class="form__link">{{linkText}}</a>
+</form>

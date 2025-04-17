@@ -1,0 +1,204 @@
+@use './utils/constants.scss' as *;
+@import url('./common-styles.scss');
+@import url('../../components/SubmitButton/SubmitButton.scss');
+
+@mixin hover-avatar {
+    opacity: 0.5;
+    cursor: pointer; 
+    background-color: $black_color;
+}
+
+
+.content_type_profile {
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    justify-content: space-between;
+}
+
+.back-button-container {
+    display: flex;
+    align-items: center;
+    width: 64px;
+    height: 100vh;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: $white_color;
+    border-right: 1px solid $gray_color_type_2;
+}
+.back-button {
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    background-color: $blue_color_type_1;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-image: url("../../../image/back-button-image.svg");
+    background-position: center;
+    &:hover {
+        @include hover_element; 
+    }
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    margin: 60px auto 0px;
+    max-width: 95%;
+    max-height: 100vh;
+    padding:0;
+
+    &__name {
+        margin: 0 auto 60px;
+        padding: 0;
+        font-size: 16px;
+        line-height: 16px;
+        font-weight: 600;
+
+        &_type_change {
+            color: $white_color;
+        }
+    }
+
+    &__footer {
+        display: flex;
+        flex-direction: column;
+        margin: 52px 0 0;
+        padding: 0;
+        max-width: 100%;
+    }
+    &__footer-button {
+        border: none;
+        border-bottom: 1px solid $gray_color_type_2;
+        margin: 0;
+        margin-bottom: 10px;
+        padding: 0;
+        padding-bottom: 10px;
+        text-align: left;
+        background-color: $white_color;
+        color: $blue_color_type_1;
+        font-size: 13px;
+        line-height: 13px;
+        font-weight: 500;
+
+        &:hover {
+            @include hover_element; 
+        }
+
+        &:last-of-type {
+            color: $red_color_type_1;
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+    }
+}
+
+.profile-form {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+    width: 510px;
+    max-height: fit-content;
+    background-color: $white_color;
+    border: none;
+    font-family: 'Inter', Helvetica, sans-serif;
+    box-sizing: border-box;
+
+    &__fieldset {
+        display: flex;
+        justify-content: space-between;
+        border: none;
+        border-bottom: 1px solid $gray_color_type_2;
+        margin: 0;
+        margin-bottom: 10px;
+        padding: 0;
+        padding-bottom: 10px;
+        max-width: 100%;
+        box-sizing: border-box;
+        &:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0px;
+            padding-bottom: 0px;
+        }
+    }
+
+    &__label {
+        margin: 0;
+        padding: 0;
+        text-align: left;
+        font-size: 13px;
+        line-height: 13px;
+        font-weight: 500;
+        color: $gray_color_type_3;
+    }
+
+    &__input {
+        font-family: inherit; 
+        text-align: right;
+        font-size: 13px;
+        line-height: 13px;
+        font-weight: 500;
+        margin: 0;
+        padding: 0;
+        border: none;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__avatar-wrapper {
+        position: relative;
+        margin: 0 auto 21px;
+        padding: 0;
+        border-radius: 50%;
+        width: 130px;
+        height: 130px;
+        text-align: center;
+        background-color: $gray_color_type_1;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+
+        &:hover {
+            @include hover-avatar;
+            .profile-form__avatar-label {
+                @include hover-avatar;
+                visibility: visible;
+            }
+        }
+    }
+    &__avatar-input {
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+    }
+    &__avatar-image {
+        width: 40px;
+        height: 40px;
+        margin: 45px;
+        z-index: 2;
+    }
+    &__avatar-label {
+        background-color: $gray_color_type_1;
+        border-radius: 3px;
+        cursor: pointer;
+        width: 64px;
+        position: absolute;
+        left: 33px;
+        top: 51px;
+        opacity: 0;
+        visibility: hidden;
+    }
+    &__avatar-span {
+        color: $white_color;
+        line-height: 14px;
+        font-size: 13px;
+        font-weight: 500;
+    }
+}
