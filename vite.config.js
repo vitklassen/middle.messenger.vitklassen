@@ -25,8 +25,6 @@ export default defineConfig({
     },
     plugins: [handlebars({
         partialDirectory: [
-            './src/components/ErrorDescription', 
-            './src/components/Form',
-            "./src/components/SubmitButton",]
+            './src/components/Form',]
     })]
 });

@@ -6,6 +6,11 @@
   "engines": {
     "node": ">=18"
   },
+  "targets": {
+    "default": {
+      "includeNodeModules": true
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -13,11 +18,14 @@
     "start": "vite build && vite preview --port 3000"
   },
   "devDependencies": {
+    "@types/node": "^22.14.1",
     "sass": "^1.86.3",
+    "typescript": "^5.8.3",
     "vite": "^6.2.0",
     "vite-plugin-handlebars": "^2.0.0"
   },
   "dependencies": {
-    "handlebars": "^4.7.8"
+    "handlebars": "^4.7.8",
+    "uuid": "^11.1.0"
   }
 }
