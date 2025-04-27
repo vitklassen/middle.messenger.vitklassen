@@ -1,5 +1,6 @@
 import EventBus, {EventCallback} from "./EventBus";
 import {v4 as makeUuid} from "uuid";
+import Handlebars from "handlebars";
 
 type TAttr = Record<string, string>;
 type TEvents = Record<string, (evt: Event) => void>;
@@ -109,8 +110,8 @@ export default class Component {
         Object.entries(this._children).forEach(([key, child]) => {
             propsAndStubs[key] = `<div data-id=${child._id}></div>`;
         });
-        Object.entries(this._lists).forEach(([key, value]) => {
-            propsAndStubs[key] = `<div data-id=_l_"${key}"></div>`;
+        Object.entries(this._lists).forEach(([key,]) => {
+            propsAndStubs[key] = `<div data-id=_l_${key}></div>`;
         });
         const fragment = this._createDocumentElement('template') as HTMLTemplateElement;
         fragment.innerHTML = Handlebars.compile(this.render())(propsAndStubs);
@@ -121,7 +122,7 @@ export default class Component {
             }
         });
         Object.entries(this._lists).forEach(([key, child]) => {
-            const stub = fragment.content.querySelector(`[data-id=_l_"${key}"]`);
+            const stub = fragment.content.querySelector(`[data-id=_l_${key}]`);
             if(!stub) {
                 return;
             }
@@ -150,12 +151,31 @@ export default class Component {
         return document.createElement(tagName);
     }
 
-    public addEvents() {
-
+    public addEvents(): void {
+        const {events = {}} = this._props;
+        if(this._element instanceof HTMLElement) { 
+            Object.entries(events).forEach(([eventName, eventCallback]) => {
+                this._element!.addEventListener(eventName, eventCallback);
+            });
+        }
     }
 
-    public removeEvents() {
+    public removeEvents(): void {
+        const {events = {}} = this._props;
+        if(this._element instanceof HTMLElement) { 
+            Object.entries(events).forEach(([eventName, eventCallback]) => {
+                this._element!.removeEventListener(eventName, eventCallback);
+            });
+        }
+    }
 
+    public addAttributes() {
+        const {attr = {}} = this._props;
+        Object.entries(attr).forEach(([attrName, attrValue]) => {
+            if(this._element) {
+                this._element.setAttribute(attrName, attrValue);
+            }
+        });
     }
 
     public getContent(): HTMLElement{
@@ -191,10 +211,13 @@ export default class Component {
     
     public dispatchComponentDidMount(): void {
         this.eventBus().notify(Component.EVENTS.FLOW_CDM);
-        //if()
+        if(Object.keys(this._children).length) {
+            this.eventBus().notify(Component.EVENTS.FLOW_RENDER);
+        }
     }
 
     public componentDidUpdate(oldProps: ComponentProps, newProps: ComponentProps): boolean {
+        console.log(oldProps, newProps);
         return true;
     }
 

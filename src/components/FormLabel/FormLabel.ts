@@ -1,8 +1,7 @@
 import template from "./template";
-import NewBlock, {BlockProps} from "../../framework/NewBlock";
-
-export default class FormLabel extends NewBlock {
-    constructor(props: BlockProps) {
+import Component, {ComponentProps} from "../../services/Component";
+export default class FormLabel extends Component {
+    constructor(props: ComponentProps) {
         super({...props});
     }
     override render () {

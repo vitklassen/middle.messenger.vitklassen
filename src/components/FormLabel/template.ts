@@ -1,10 +1,19 @@
 const template = `
-<label class="{{labelClassName}}" for={{inputName}}>
+<label class="form__label {{labelClassName}}">
     <span class="form__span">{{spanHint}}</span>
-    {{#each childrenId}}
-        <div data-id={{this}}></div>
-    {{/each}}
-    <span class="form__span form__span_type_error">{{spanError}}</span>
+    <input 
+        class="form__input"
+        id={{inputId}}
+        name={{inputName}}
+        type={{inputType}}
+        placeHolder={{inputPlaceHolder}}
+        aria-describedby={{ariaDescribedby}}
+        pattern={{validPattern}}
+        data-error-message="{{errorMessage}}"
+        minlength={{minLength}}
+        maxlength={{maxLength}}
+    />
+    <span class="form__error {{errorClassname}}" id={{ariaDescribedby}}></span>
 </label>
 `;
 export default template;

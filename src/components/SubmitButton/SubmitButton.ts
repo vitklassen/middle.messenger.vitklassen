@@ -1,17 +1,8 @@
-import Block from "../../framework/Block";
 import template from './template';
-import NewBlock from "../../framework/NewBlock";
-type SubmitButtonProps = {
-    buttonText: string;
-}
-
-export default class SubmitButton extends NewBlock {
-    constructor(props: SubmitButtonProps) {
-        super({...props,             
-            attr: {
-                class: 'submit-button'
-            },
-    });
+import Component, {ComponentProps} from '../../services/Component';
+export default class SubmitButton extends Component {
+    constructor(props: ComponentProps) {
+        super({...props});
     }
     override render() {
         return template;

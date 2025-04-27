@@ -34,7 +34,7 @@
             @include hover_element
         }
     }
-    .form__label {
+    &__label {
         display: flex;
         flex-direction: column;
         max-width: 100vw;
@@ -52,7 +52,7 @@
             }
         }
     }
-    .form__span {
+    &__span {
         margin: 0 0 8px;
         padding: 0;
         text-align: left;
@@ -60,15 +60,19 @@
         line-height: 9px;
         font-weight: 500;
         color: $gray_color_type_4;
-        
-        &_type_error {
-            font-size: 9px;
-            line-height: 9px;
-            margin: 7px 0 0;
-            color: $red_color_type_2;
+    }
+    &__error {
+        margin: 7px 0 0;
+        font-size: 9px;
+        line-height: 9px;
+        color: $red_color_type_2;
+        display: none;
+
+        &_type_active {
+            display: block;
         }
     }
-    .form__input {
+    &__input {
         font-family: inherit; 
         text-align: left;
         font-size: 13px;

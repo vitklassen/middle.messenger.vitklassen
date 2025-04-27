@@ -1,5 +1,5 @@
 const template = `
-<main class="content content_type_signin"> 
+<main class="content content_type_signup"> 
       {{{Form}}}
 </main>
 `;
