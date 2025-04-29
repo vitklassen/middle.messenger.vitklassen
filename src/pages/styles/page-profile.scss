@@ -69,6 +69,9 @@
         margin: 52px 0 0;
         padding: 0;
         max-width: 100%;
+        &_display_none {
+            display: none;
+        }
     }
     &__footer-button {
         border: none;
