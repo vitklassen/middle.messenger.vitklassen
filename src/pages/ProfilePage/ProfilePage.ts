@@ -3,7 +3,7 @@ import ProfileForm from "../../components/ProfileForm/ProfileForm";
 import ProfileFormFieldset from "../../components/ProfileFormFieldset/ProfileFormFieldset";
 import Component from "../../services/Component";
 import template from "./template";
-import { profileChangeData, passwordChangeData } from "../../utils/constants";
+import { profileChangeData, passwordChangeData } from '../../utils/constants';
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 
 const submitButton = new SubmitButton({
@@ -15,20 +15,7 @@ const submitButton = new SubmitButton({
 
 const profileForm = new ProfileForm({
     fieldsets: [...profileChangeData.map(item => {
-        return new ProfileFormFieldset({
-            inputId: item.inputId,
-            labelText: item.labelText,
-            inputName: item.inputName,
-            inputType: item.inputType,
-            inputPlaceHolder:item.inputPlaceHolder,
-            ariaDescribedby: item.ariaDescribedby,
-            validPattern: item.validPattern,
-            errorMessage: item.errorMessage,
-            minLength: item.minLength,
-            maxLength: item.maxLength,
-            disabled: item.disabled,
-            required: item.required
-        })
+        return new ProfileFormFieldset({...item})
     })],
     events: {
         submit: (evt: Event) => {
@@ -50,20 +37,7 @@ const profileFooter = new ProfileFooter({
                 });        
                 profileForm.setProps({
                     fieldsets: [...profileChangeData.map(item => {
-                        return new ProfileFormFieldset({
-                            inputId: item.inputId,
-                            labelText: item.labelText,
-                            inputName: item.inputName,
-                            inputType: item.inputType,
-                            inputPlaceHolder:item.inputPlaceHolder,
-                            ariaDescribedby: item.ariaDescribedby,
-                            validPattern: item.validPattern,
-                            errorMessage: item.errorMessage,
-                            minLength: item.minLength,
-                            maxLength: item.maxLength,
-                            disabled: false,
-                            required: item.required
-                        })
+                        return new ProfileFormFieldset({...item, disabled: false})
                     })],
                     SubmitButton: submitButton,
                 });
@@ -76,20 +50,7 @@ const profileFooter = new ProfileFooter({
                 });
                 profileForm.setProps({
                     fieldsets: [...passwordChangeData.map(item => {
-                        return new ProfileFormFieldset({
-                            inputId: item.inputId,
-                            labelText: item.labelText,
-                            inputName: item.inputName,
-                            inputType: item.inputType,
-                            inputPlaceHolder: '',
-                            ariaDescribedby: item.ariaDescribedby,
-                            validPattern: item.validPattern,
-                            errorMessage: item.errorMessage,
-                            minLength: item.minLength,
-                            maxLength: item.maxLength,
-                            disabled: item.disabled,
-                            required: item.required
-                        })
+                        return new ProfileFormFieldset({...item})
                     })],
                     SubmitButton: submitButton,
                 })
@@ -104,7 +65,6 @@ const profileFooter = new ProfileFooter({
 });
 
 export default class ProfilePage extends Component {
-    protected currentForm: string = "profile-data";
     constructor() {
         super({
             ProfileForm: profileForm,

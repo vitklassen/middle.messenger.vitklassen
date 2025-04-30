@@ -12,20 +12,7 @@ const submitButton = new SubmitButton({
 const formElement = new Form({
     formTitle: "Регистрация",
     labels: [...signUpFormLabelsInfo.map(item => 
-        new FormLabel({
-            labelClassName: item.labelClassName,
-            spanHint: item.spanHint,
-            inputId: item.inputId,
-            inputName: item.inputName,
-            inputType: item.inputType,
-            inputPlaceHolder: item.inputPlaceHolder,
-            ariaDescribedby: item.ariaDescribedby,
-            validPattern: item.validPattern,
-            errorMessage: item.errorMessage,
-            errorClassname: item.errorClassname,
-            minLength: item.minLength,
-            maxLength: item.maxLength,
-        })
+        new FormLabel({...item})
     )],
     href: "#",
     linkText: "Войти",

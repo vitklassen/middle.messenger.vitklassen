@@ -1,5 +1,4 @@
-@use '../../pages/styles/utils/constants.scss' as *;
-@import url('../SubmitButton/SubmitButton.scss');
+@use '../../styles/utils/constants.scss' as *;
 
 .form {
     display: flex;
@@ -67,10 +66,6 @@
         line-height: 9px;
         color: $red_color_type_2;
         display: none;
-
-        &_type_active {
-            display: block;
-        }
     }
     &__input {
         font-family: inherit; 

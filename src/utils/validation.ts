@@ -33,10 +33,10 @@ function toggleErrorSpan(inputElement: HTMLInputElement, errorMessage?: string){
     if(errorElement !== null) {
         if (errorMessage) {
             errorElement.textContent = errorMessage;
-            errorElement.classList.add('form__error_type_active');
+            errorElement.classList.add('error_type_active');
           } else {
             errorElement.textContent = '';
-            errorElement.classList.remove('form__error_type_active');
+            errorElement.classList.remove('error_type_active');
           }
     }
 }

@@ -1,4 +1,4 @@
-@use './utils/constants.scss' as *;
+@use './constants.scss' as *;
 @import url('../../../vendor/normalize.scss');
 @import url('../../../vendor/fonts/fonts.scss');
 
@@ -14,4 +14,8 @@
     background-color: $white_color;
     font-family: 'Inter'; 
     text-align: center;
+}
+
+.error_type_active {
+    display: block;
 }

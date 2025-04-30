@@ -22,10 +22,10 @@ export default class App {
         //     href: "#",
         // });
         // const signInPage = new SignInPage();
-        const signUpPage = new SignUpPage();
-        //const profilePage = new ProfilePage();
+        //const signUpPage = new SignUpPage();
+        const profilePage = new ProfilePage();
         if (this.appElement) {
-            this.appElement.appendChild(signUpPage.getContent());
+            this.appElement.appendChild(profilePage.getContent());
         }
     }
      

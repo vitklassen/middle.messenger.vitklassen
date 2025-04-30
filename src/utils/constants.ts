@@ -1,7 +1,5 @@
-export const signInFormLabelsInfo = [
-    {
-        labelClassName: "form__label_type_login",
-        spanHint: "Логин",
+const formElementsDescription = {
+    login: {
         inputId: "input__login",
         inputName: "login",
         inputType: "text",
@@ -12,57 +10,19 @@ export const signInFormLabelsInfo = [
         errorClassname: "input__login-error",
         minLength: 3,
         maxLength: 20,
-        required: true
+        required: true,
     },
-    {
-        labelClassName: "form__label_type_login",
-        spanHint: "Пароль",
-        inputId: "input__password",
+    password: {
         inputName: "password",
         inputType: "password",
         inputPlaceHolder: "Пароль",
-        ariaDescribedby: "password-error",
         validPattern: "[a-zA-Z]{8,40}$", //добавить нормальное регулярное выражение
-        errorMessage: "Неверный пароль",
-        errorClassname: "input__password-error",
+        errorMessage: "Неверный формат пароля",
         minLength: 8,
         maxLength: 40,
         required: true
-    }
-];
-
-export const signUpFormLabelsInfo = [
-    {
-        labelClassName: "form__label_type_register",
-        spanHint: "Почта",
-        inputId: "input__email",
-        inputName: "email",
-        inputType: "email",
-        inputPlaceHolder: "Виктор",
-        ariaDescribedby: "email-error",
-        validPattern: "[a-zA-Z]{2,30}$", //добавить нормальное регулярное выражение
-        errorMessage: "Неверный формат почты",
-        errorClassname: "input__email-error",
-        minLength: 0,
-        maxLength: 100000,
     },
-    {
-        labelClassName: "form__label_type_register",
-        spanHint: "Логин",
-        inputId: "input__login",
-        inputName: "login",
-        inputType: "text",
-        inputPlaceHolder: "vitklassen",
-        ariaDescribedby: "login-error",
-        validPattern: "[a-zA-Z]{2,30}$", //добавить нормальное регулярное выражение
-        errorMessage: "Неверный логин",
-        errorClassname: "input__login-error",
-        minLength: 3,
-        maxLength: 20,
-    },
-    {
-        labelClassName: "form__label_type_register",
-        spanHint: "Имя",
+    firstName: {
         inputId: "input__first_name",
         inputName: "first_name",
         inputType: "text",
@@ -72,11 +32,10 @@ export const signUpFormLabelsInfo = [
         errorMessage: "Неверный формат имени",
         errorClassname: "input__first_name-error",
         minLength: 0,
-        maxLength: 100000,
+        maxLength: 100,
+        reqiured: true,
     },
-    {
-        labelClassName: "form__label_type_register",
-        spanHint: "Фамилия",
+    secondName: {
         inputId: "input__second_name",
         inputName: "second_name",
         inputType: "text",
@@ -86,115 +45,15 @@ export const signUpFormLabelsInfo = [
         errorMessage: "Неверный формат фамилии",
         errorClassname: "input__second_name-error",
         minLength: 0,
-        maxLength: 100000,
+        maxLength: 100,
+        reqiured: true,
     },
-    {
-        labelClassName: "form__label_type_register",
-        spanHint: "Телефон",
-        inputId: "input__phone",
-        inputName: "phone",
-        inputType: "tel",
-        inputPlaceHolder: "+7-(800)-555-35-35",
-        ariaDescribedby: "phone-error",
-        validPattern: "[0-9]{2,30}$", //добавить нормальное регулярное выражение
-        errorMessage: "Неверный формат телефона",
-        errorClassname: "input__phone-error",
-        minLength: 0,
-        maxLength: 100000,
-    },
-    {
-        labelClassName: "form__label_type_login",
-        spanHint: "Пароль",
-        inputId: "input__password_1",
-        inputName: "password",
-        inputType: "password",
-        inputPlaceHolder: "Пароль",
-        ariaDescribedby: "password_1-error",
-        validPattern: "[a-zA-Z]{8,40}$", //добавить нормальное регулярное выражение
-        errorMessage: "Неверный пароль",
-        errorClassname: "input__password_1-error",
-        minLength: 8,
-        maxLength: 40,
-    },
-    {
-        labelClassName: "form__label_type_login",
-        spanHint: "Пароль (еще раз)",
-        inputId: "input__password_2",
-        inputName: "password",
-        inputType: "password",
-        inputPlaceHolder: "Пароль",
-        ariaDescribedby: "password_2-error",
-        validPattern: "[a-zA-Z]{8,40}$", //добавить нормальное регулярное выражение
-        errorMessage: "Неверный пароль",
-        errorClassname: "input__password_2-error",
-        minLength: 8,
-        maxLength: 40,
-    },
-];
-
-export const profileChangeData = [
-    {
-        inputId: 'input__email',
-        labelText: 'Почта',
-        inputName: 'email',
-        inputType: 'email',
-        inputPlaceHolder:'vit.klassen@yandex.ru',
-        ariaDescribedby: 'email-error',
-        validPattern: '',
-        errorMessage: '',
-        minLength: 0,
-        maxLength: 10000,
-        disabled: true,
-        required: true,
-    },
-    {
-        inputId: 'input__login',
-        labelText: 'Логин',
-        inputName: 'login',
-        inputType: 'text',
-        inputPlaceHolder:'vitklassen',
-        ariaDescribedby: 'login-error',
-        validPattern: '',
-        errorMessage: '',
-        minLength: 0,
-        maxLength: 10000,
-        disabled: true,
-        required: true,
-    },
-    {
-        inputId: 'input__first_name',
-        labelText: 'Имя',
-        inputName: 'first_name',
-        inputType: 'text',
-        inputPlaceHolder:'Виктор',
-        ariaDescribedby: 'first_name-error',
-        validPattern: '',
-        errorMessage: '',
-        minLength: 0,
-        maxLength: 10000,
-        disabled: true,
-        required: true,
-    },
-    {
-        inputId: 'input__second_name',
-        labelText: 'Фамилия',
-        inputName: 'second_name',
-        inputType: 'text',
-        inputPlaceHolder:'Классен',
-        ariaDescribedby: 'second_name-error',
-        validPattern: '',
-        errorMessage: '',
-        minLength: 0,
-        maxLength: 10000,
-        disabled: true,
-        required: true,
-    },
-    {
+    displayName: {
         inputId: 'input__display_name',
         labelText: 'Имя в чате',
         inputName: 'display_name',
         inputType: 'text',
-        inputPlaceHolder:'Витто',
+        inputPlaceHolder:'Виктор',
         ariaDescribedby: 'display_name-error',
         validPattern: '',
         errorMessage: '',
@@ -203,60 +62,170 @@ export const profileChangeData = [
         disabled: true,
         required: true,
     },
-    {
-        inputId: 'input__phone',
-        labelText: 'Телефон',
-        inputName: 'phone',
-        inputType: 'tel',
-        inputPlaceHolder:'8 800 555 35 35',
-        ariaDescribedby: 'phone-error',
-        validPattern: '',
-        errorMessage: '',
+    email: {
+        inputId: "input__email",
+        inputName: "email",
+        inputType: "email",
+        inputPlaceHolder: "vit.klassen@yandex.ru",
+        ariaDescribedby: "email-error",
+        validPattern: "[a-zA-Z]{2,30}$", //добавить нормальное регулярное выражение
+        errorMessage: "Неверный формат почты",
+        errorClassname: "input__email-error",
         minLength: 0,
-        maxLength: 10000,
-        disabled: true,
+        maxLength: 100,
         required: true,
-    }
-];
-
-export const passwordChangeData = [
-    {
+    },
+    phone: {
+        inputId: "input__phone",
+        inputName: "phone",
+        inputType: "tel",
+        inputPlaceHolder: "+7-(800)-555-35-35",
+        ariaDescribedby: "phone-error",
+        validPattern: "[0-9]{10,15}$", //добавить нормальное регулярное выражение
+        errorMessage: "Неверный формат телефона",
+        errorClassname: "input__phone-error",
+        minLength: 10,
+        maxLength: 15,
+        required: true,
+    },
+    oldPassword: {
         inputId: 'input__oldPassword',
         labelText: 'Старый пароль',
         inputName: 'oldPassword',
         inputType: 'password',
         ariaDescribedby: 'oldPassword-error',
-        validPattern: '',
-        errorMessage: '',
-        minLength: 0,
-        maxLength: 10000,
-        disabled: false,
+        validPattern: "[a-zA-Z]{8,40}$", //добавить нормальное регулярное выражение
+        errorMessage: "Неверный формат пароля",
+        minLength: 8,
+        maxLength: 40,
         required: true,
     },
+    newPassword: {
+        inputName: 'newPassword',
+        inputType: 'password',
+        validPattern: "[a-zA-Z]{8,40}$", //добавить нормальное регулярное выражение
+        errorMessage: "Неверный формат пароля",
+        minLength: 8,
+        maxLength: 40,
+        required: true,
+    },
+    message: {
+
+    },
+
+};
+
+export const signInFormLabelsInfo = [
     {
+        ...formElementsDescription.login,
+        labelClassName: "form__label_type_login",
+        spanHint: "Логин",
+    },
+    {
+        ...formElementsDescription.password,
+        labelClassName: "form__label_type_login",
+        spanHint: "Пароль",
+        inputId: "input__password",
+        ariaDescribedby: "password-error",
+        errorClassname: "input__password-error",
+    }
+];
+
+export const signUpFormLabelsInfo = [
+    {
+        ...formElementsDescription.email,
+        labelClassName: "form__label_type_register",
+        spanHint: "Почта",
+    },
+    {
+        ...formElementsDescription.login,
+        labelClassName: "form__label_type_register",
+        spanHint: "Логин",
+    },
+    {
+        ...formElementsDescription.firstName,
+        labelClassName: "form__label_type_register",
+        spanHint: "Имя",
+    },
+    {
+        ...formElementsDescription.secondName,
+        labelClassName: "form__label_type_register",
+        spanHint: "Фамилия",
+    },
+    {
+        ...formElementsDescription.phone,
+        labelClassName: "form__label_type_register",
+        spanHint: "Телефон",
+    },
+    {
+        ...formElementsDescription.password,
+        labelClassName: "form__label_type_login",
+        spanHint: "Пароль",
+        inputId: "input__password_1",
+        ariaDescribedby: "password_1-error",
+        errorClassname: "input__password_1-error",
+    },
+    {
+        ...formElementsDescription.password,
+        labelClassName: "form__label_type_login",
+        spanHint: "Пароль (еще раз)",
+        inputId: "input__password_2",
+        inputPlaceHolder: "Пароль",
+        ariaDescribedby: "password_2-error",
+        errorClassname: "input__password_2-error",
+    },
+];
+
+export const profileChangeData = [
+    {
+        ...formElementsDescription.email,
+        labelText: 'Почта',
+        disabled: true,
+    },
+    {
+        ...formElementsDescription.login,
+        labelText: 'Логин',
+        disabled: true,
+    },
+    {
+        ...formElementsDescription.firstName,
+        labelText: 'Имя',
+        disabled: true,
+    },
+    {
+        ...formElementsDescription.secondName,
+        labelText: 'Фамилия',
+        disabled: true,
+    },
+    {
+        ...formElementsDescription.displayName,
+    },
+    {
+        ...formElementsDescription.phone,
+        labelText: 'Телефон',
+        disabled: true,
+    }
+];
+
+export const passwordChangeData = [
+    {
+        ...formElementsDescription.oldPassword,
+        disabled: false,
+    },
+    {
+        ...formElementsDescription.newPassword,
         inputId: 'input__newPassword_1',
         labelText: 'Новый пароль',
-        inputName: 'newPassword',
-        inputType: 'password',
         ariaDescribedby: 'newPassword_1-error',
-        validPattern: '',
         errorMessage: '',
-        minLength: 0,
-        maxLength: 10000,
         disabled: false,
-        required: true,
     },
     {
+        ...formElementsDescription.newPassword,
         inputId: 'input__newPassword_2',
         labelText: 'Повторите новый пароль',
-        inputName: 'newPassword',
-        inputType: 'password',
         ariaDescribedby: 'newPassword_2-error',
-        validPattern: '',
         errorMessage: '',
-        minLength: 0,
-        maxLength: 10000,
         disabled: false,
-        required: true,
     }
-]
+];
