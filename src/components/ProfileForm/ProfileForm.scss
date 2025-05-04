@@ -22,9 +22,11 @@
         display: flex;
         flex-direction: column;
         border: none;
+        border-bottom: 1px solid $gray_color_type_2;
         margin: 0;
         margin-bottom: 10px;
         padding: 0;
+        padding-bottom: 10px;
         width: 100%;
         box-sizing: border-box;
         &:last-of-type {
@@ -37,10 +39,8 @@
     &__label-wrapper {
         display: flex;
         justify-content: space-between;
-        border-bottom: 1px solid $gray_color_type_2;
         margin: 0;
         padding: 0;
-        padding-bottom: 10px;
         width: 100%;
         box-sizing: border-box;
     }
@@ -64,7 +64,7 @@
         margin: 0;
         padding: 0;
         border: none;
-
+        background-color: $white_color;
         &:focus {
             outline: none;
         }
@@ -76,6 +76,10 @@
         line-height: 9px;
         color: $red_color_type_2;
         display: none;
+
+        &_type_active {
+            display: block;
+        }
     }
 
     &__avatar-wrapper {

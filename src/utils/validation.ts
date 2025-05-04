@@ -29,14 +29,15 @@ export function toggleInputError(inputElement: HTMLInputElement) {
 }
 
 function toggleErrorSpan(inputElement: HTMLInputElement, errorMessage?: string){
+    const inputClassname = inputElement.className.split('__')[0]; 
     const errorElement = document.querySelector(`.${inputElement.id}-error`);
     if(errorElement !== null) {
         if (errorMessage) {
             errorElement.textContent = errorMessage;
-            errorElement.classList.add('error_type_active');
+            errorElement.classList.add(`${inputClassname}__error_type_active`);
           } else {
             errorElement.textContent = '';
-            errorElement.classList.remove('error_type_active');
+            errorElement.classList.remove(`${inputClassname}__error_type_active`);
           }
     }
 }

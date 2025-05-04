@@ -1,10 +1,12 @@
-const template = `<li class="message-box">
-    <div class="message-box__avatar"></div>
+const template = `
+<li class="message-box">
+    <img class="message-box__avatar" src="../../../image/message-box__avatar-image.png"></img>
     <div class="message-box__info">
         <h2 class="message-box__chat">{{chatName}}</h2>
-        <p class="message-box__text">{{lastMessage}}</p>
         <p class="message-box__time">{{time}}</p>
-        <div class="message-box__unread-messages">{{unreadMessages}}</div>
+        <p class="message-box__text">{{lastMessage}}</p>
     </div>
-</li>`;
+</li>
+`;
+
 export default template;

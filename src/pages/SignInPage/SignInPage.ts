@@ -14,7 +14,7 @@ const formElement = new Form({
     labels: [...signInFormLabelsInfo.map(item => 
         new FormLabel({...item})
     )],
-    href: "#",
+    href: "signup",
     linkText: "Нет аккаунта?",
     SubmitButton: submitButton,
 });

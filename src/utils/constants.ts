@@ -5,7 +5,7 @@ const formElementsDescription = {
         inputType: "text",
         inputPlaceHolder: "vitklassen",
         ariaDescribedby: "login-error",
-        validPattern: "[a-zA-Z]{2,30}$", //добавить нормальное регулярное выражение
+        validPattern: "^[A-Za-z][A-Za-z0-9\\-_]{2,30}$",
         errorMessage: "Неверный логин",
         errorClassname: "input__login-error",
         minLength: 3,
@@ -28,7 +28,7 @@ const formElementsDescription = {
         inputType: "text",
         inputPlaceHolder: "Виктор",
         ariaDescribedby: "first_name-error",
-        validPattern: "[a-zA-Z]{2,30}$", //добавить нормальное регулярное выражение
+        validPattern: "^[А-ЯЁA-Z][А-ЯЁA-Zа-яёa-z\\-]{2,30}$",
         errorMessage: "Неверный формат имени",
         errorClassname: "input__first_name-error",
         minLength: 0,
@@ -41,7 +41,7 @@ const formElementsDescription = {
         inputType: "text",
         inputPlaceHolder: "Классен",
         ariaDescribedby: "second_name-error",
-        validPattern: "[a-zA-Z]{2,30}$", //добавить нормальное регулярное выражение
+        validPattern: "^[А-ЯA-Z][А-ЯA-Zа-яa-z\\-]{2,30}$",
         errorMessage: "Неверный формат фамилии",
         errorClassname: "input__second_name-error",
         minLength: 0,
@@ -55,10 +55,10 @@ const formElementsDescription = {
         inputType: 'text',
         inputPlaceHolder:'Виктор',
         ariaDescribedby: 'display_name-error',
-        validPattern: '',
-        errorMessage: '',
+        validPattern: "^[А-ЯЁA-Z][А-ЯЁA-Zа-яёa-z\\-]{2,30}$",
+        errorMessage: "Неверный формат имени",
         minLength: 0,
-        maxLength: 10000,
+        maxLength: 100,
         disabled: true,
         required: true,
     },
@@ -68,7 +68,7 @@ const formElementsDescription = {
         inputType: "email",
         inputPlaceHolder: "vit.klassen@yandex.ru",
         ariaDescribedby: "email-error",
-        validPattern: "[a-zA-Z]{2,30}$", //добавить нормальное регулярное выражение
+        validPattern: "[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$",
         errorMessage: "Неверный формат почты",
         errorClassname: "input__email-error",
         minLength: 0,
@@ -81,7 +81,7 @@ const formElementsDescription = {
         inputType: "tel",
         inputPlaceHolder: "+7-(800)-555-35-35",
         ariaDescribedby: "phone-error",
-        validPattern: "[0-9]{10,15}$", //добавить нормальное регулярное выражение
+        validPattern: "^((\\+7|7|8)+([0-9]){10})$",
         errorMessage: "Неверный формат телефона",
         errorClassname: "input__phone-error",
         minLength: 10,
@@ -109,10 +109,7 @@ const formElementsDescription = {
         maxLength: 40,
         required: true,
     },
-    message: {
-
-    },
-
+    message: {},
 };
 
 export const signInFormLabelsInfo = [

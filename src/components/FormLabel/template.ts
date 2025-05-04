@@ -16,7 +16,7 @@ const template = `
             required
         {{/if}}
     />
-    <span class="form__error {{errorClassname}}" id={{ariaDescribedby}}></span>
+    <span class="form__error {{ errorClassname }}" id={{ariaDescribedby}}></span>
 </label>
 `;
 export default template;
