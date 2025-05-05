@@ -62,7 +62,6 @@ export default class Component {
         
         return { props, children, lists };
     }
-    //ИСПРАВИТЬ ANY
     private _makePropsProxy(props: ComponentProps) {
             return new Proxy(props, {
                 get(target: ComponentProps, prop: string) {
@@ -148,7 +147,8 @@ export default class Component {
     }
 
     private _createDocumentElement(tagName: string): HTMLElement {
-        return document.createElement(tagName);
+        const element = document.createElement(tagName);
+        return element;
     }
 
     public addEvents(): void {

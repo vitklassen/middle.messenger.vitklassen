@@ -4,11 +4,12 @@ import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import Sidebar from "./components/Sidebar/Sidebar";
 import MessageBox from "./components/MessageBox/MessageBox";
+
 export default class App {
     private currentPage: string;
     private appElement: HTMLElement | null;
     constructor() {
-        this.currentPage = "profile";
+        this.currentPage = "chat";
         this.appElement = document.getElementById('app');
     }
     public render(): void {
@@ -21,14 +22,11 @@ export default class App {
             this.appElement?.replaceChildren(signUpPage.getContent());
         }
         else if(this.currentPage === "profile") {
-            const sideBar = new Sidebar({
-                messages: [new MessageBox({
-                    avatarLink: "../",
-                    chatName: "Telegram",
-                    lastMessage: "Всем привет!",
-                    time: "15:12",
-                })]
-            });
+            const profilePage = new ProfilePage();
+            this.appElement?.replaceChildren(profilePage.getContent());
+        }
+        else if(this.currentPage === "chat") {
+            const sideBar = new Sidebar({});
             this.appElement?.replaceChildren(sideBar.getContent());
         }
         this._attachLinkEvents();
