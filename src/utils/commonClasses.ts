@@ -1,54 +1,55 @@
 import Component, {ComponentProps} from "../services/Component";
 import { checkInputValidity, toggleInputError, hasInvalidInput } from "./validation";
 
-export default class FormComponent extends Component {
-    constructor(props: ComponentProps) {
-        super({...props, 
-            events: {
-                submit: (evt: Event) => {
-                    evt.preventDefault();
-                    const inputList = Array.from(this.getContent().querySelectorAll("input"));
-                    if(!hasInvalidInput(inputList)) {
-                        const request: Record<string, string | number> = {};
-                        inputList.forEach(input => {
-                            request[input.name] = input.value;
-                        });
-                        console.log(request);
-                    }
-                    else {
-                        console.log("not valid");
-                    }
-                },
-                blur: (evt: Event) => {
-                    const inputElement = evt.target as HTMLInputElement;
-                    checkInputValidity(inputElement);
-                    toggleInputError(inputElement);
-                }
-            }
-        })
-    }
-    override addEvents(): void {
-        const {events = {}} = this._props;
-        Object.entries(events).forEach(([eventName, eventCallback]) => {
-            if(eventName === "blur") {
-                const inputList = this.getContent().querySelectorAll("input");
-                inputList?.forEach(input => {
-                    input.addEventListener(eventName, eventCallback);
-                });
-            }
-            else {
-                this.getContent().addEventListener(eventName, eventCallback);
-            }
-        });
-    }
-}
+// export default class FormComponent extends Component {
+//     constructor(props: ComponentProps) {
+//         super({...props, 
+//             events: {
+//                 submit: (evt: Event) => {
+//                     evt.preventDefault();
+//                     const inputList = Array.from(this.getContent().querySelectorAll("input"));
+//                     if(!hasInvalidInput(inputList)) {
+//                         const request: Record<string, string | number> = {};
+//                         inputList.forEach(input => {
+//                             request[input.name] = input.value;
+//                         });
+//                         console.log(request);
+//                     }
+//                     else {
+//                         console.log("not valid");
+//                     }
+//                 },
+//                 blur: (evt: Event) => {
+//                     const inputElement = evt.target as HTMLInputElement;
+//                     checkInputValidity(inputElement);
+//                     toggleInputError(inputElement);
+//                 }
+//             }
+//         })
+//     }
+//     override addEvents(): void {
+//         const {events = {}} = this._props;
+//         Object.entries(events).forEach(([eventName, eventCallback]) => {
+//             if(eventName === "blur") {
+//                 const inputList = this.getContent().querySelectorAll("input");
+//                 inputList?.forEach(input => {
+//                     input.addEventListener(eventName, eventCallback);
+//                 });
+//             }
+//             else {
+//                 this.getContent().addEventListener(eventName, eventCallback);
+//             }
+//         });
+//     }
+// }
 
-class FormComponentV2 extends Component {
+export default class FormComponentV2 extends Component {
     constructor(props: ComponentProps) {
         super({...props,
             events: {
                 submit: (evt: Event) => {
                     evt.preventDefault();
+                    //if()
                     const inputList = Array.from(this.getContent().querySelectorAll("input"));
                     const request: Record<string, string | number> = {};
                         inputList.forEach(input => {
@@ -60,7 +61,7 @@ class FormComponentV2 extends Component {
                     const inputElement = evt.target as HTMLInputElement;
                     this._checkInputValidity(inputElement);
                     this._toggleInputError(inputElement);
-                    this._toggleButton(inputElement, props.SubmitButton as Component);
+                    this._toggleButton();
                 }
             }
         });
@@ -79,9 +80,8 @@ class FormComponentV2 extends Component {
             }
         });
     }
-    public enableValidation(submitButton: Component) {
-        const inputList = Array.from(this.getContent().querySelectorAll("input"));
-        this._toggleButton(inputList, submitButton);
+    public enableValidation() {
+        this._toggleButton();
     }
     private _checkInputValidity(inputElement: HTMLInputElement): void {
         if (inputElement.validity.patternMismatch) {
@@ -121,28 +121,20 @@ class FormComponentV2 extends Component {
             }
         }
     }
-    private _hasInvalidInput(inputList: HTMLInputElement[] | HTMLInputElement) {
-        if(Array.isArray(inputList)) {
-            return (
-                inputList.some(inputElement => !inputElement.validity.valid))
-        }
-        return !inputList.validity.valid;
+    private _hasInvalidInput() {
+        const inputList = Array.from(this.getContent().querySelectorAll("input"));
+        return (inputList.some(inputElement => !inputElement.validity.valid));
     }
-    private _toggleButton(inputList: HTMLInputElement[] | HTMLInputElement, submitButton: Component) {
-        if (this._hasInvalidInput(inputList)) {
-            submitButton.setProps({
-              attr: {
-                  class: "submit-button submit-button_type_disabled",
-                  'aria-disabled': 'true',
-            }
-            });
-        } else {
-            submitButton.setProps({
-                  attr: {
-                      class: "submit-button",
-                      'aria-disabled': 'false',
-                  }
-            });
+    private _toggleButton() {
+        const submitButton = this.getContent().querySelector('button');
+        if(!this._hasInvalidInput()) {
+            submitButton?.classList.add('button-inactive');
+            submitButton?.setAttribute('aria-disabled', 'true')
         }
+        else {
+            submitButton?.classList.remove('button-inactive');
+            submitButton?.setAttribute('aria-disabled', 'false')
+        }
+
     }
 }
