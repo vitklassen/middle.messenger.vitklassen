@@ -9,7 +9,7 @@ export default class App {
     private currentPage: string;
     private appElement: HTMLElement | null;
     constructor() {
-        this.currentPage = "chat";
+        this.currentPage = "signin";
         this.appElement = document.getElementById('app');
     }
     public render(): void {

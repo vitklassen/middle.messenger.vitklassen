@@ -16,13 +16,7 @@ const submitButton = new SubmitButton({
 const profileForm = new ProfileForm({
     fieldsets: [...profileChangeData.map(item => {
         return new ProfileFormFieldset({...item})
-    })],
-    events: {
-        submit: (evt: Event) => {
-            evt.preventDefault()
-            console.log('profileform is sumbit')
-        }
-    }
+    })]
 });
 const profileFooter = new ProfileFooter({
     events: {
