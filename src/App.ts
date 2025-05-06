@@ -2,6 +2,7 @@ import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import SignInPage from "./pages/SignInPage/SignInPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import ChatPage from "./pages/ChatPage/ChatPage";
 import Sidebar from "./components/Sidebar/Sidebar";
 
 export default class App {
@@ -25,8 +26,8 @@ export default class App {
             this.appElement?.replaceChildren(profilePage.getContent());
         }
         else if(this.currentPage === "chat") {
-            const sideBar = new Sidebar({});
-            this.appElement?.replaceChildren(sideBar.getContent());
+            const chatPage = new ChatPage({});
+            this.appElement?.replaceChildren(chatPage.getContent());
         }
         this._attachLinkEvents();
     }

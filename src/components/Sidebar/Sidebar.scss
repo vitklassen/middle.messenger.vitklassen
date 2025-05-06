@@ -5,9 +5,8 @@
     flex-direction: column;
     margin: 0;
     padding: 21px 10px 0px;
-    max-width: 310px;
+    width: 310px;
     max-height: 720px;
-    min-width: 250px;
     box-sizing: border-box;
     background-color: $gray_color_type_5;
     border-right: 1px solid $gray_color_type_2;
@@ -58,7 +57,12 @@
         background-image: url('../../../image/search-form__input-image.svg');
         background-repeat: no-repeat;
         background-position: 10px center;
-
+        &:focus {
+            outline-color: $gray_color_type_4;
+            outline-style: solid;
+            outline-width: 2px;
+            border: none;
+        }
         &:placeholder-shown {
             color: $gray_color_type_4;
             text-align: center;

@@ -1,0 +1,54 @@
+@use '../../styles/utils/constants.scss' as *;
+
+.chat-layout {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0 20px 0 21px;
+    width: 970px;
+    box-sizing: border-box;
+    &__header {
+        display: flex;
+        margin: 0;
+        padding: 10px 0;
+        border-bottom: 1px solid $gray_color_type_2;
+        max-width: 100%;
+    }
+    &__avatar {
+        margin: 0;
+        margin-right: 10px;
+        border: none;
+        border-radius: 50%;
+        width: 47px;
+        height: 47px;
+    }
+    &__info {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        justify-content: space-between;
+        width: 100%;
+    }
+    &__chat-name {
+        margin: auto 0;
+        padding: 0;
+        line-height: 13px;
+        font-size: 13px;
+        color: $gray_color_type_3;
+        max-width: 193px;
+    }
+    &__button {
+        margin: auto 0;
+        padding: 0;
+        border: none;
+        width: 30px;
+        height: 15px;
+        background-color: $white_color;
+        background-image: url('../../../image/chat-layout__button-image.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        &:hover {
+            @include hover_element; 
+        }
+    }
+}

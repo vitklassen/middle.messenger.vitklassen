@@ -1,0 +1,65 @@
+@use '../../styles/utils/constants.scss' as *;
+
+.message-form {
+    display: flex;
+    margin: 0;
+    margin-top: 10px; //убрать !
+    padding: 11px 0;
+    border-top: 1px solid $gray_color_type_2;
+    max-width: 100%;
+    justify-content: space-between;
+    font-family: 'Inter', Helvetica, sans-serif;
+
+    &__attachment-button {
+        margin: 0;
+        padding: 0;
+        border: none;
+        width: 32px;
+        height: 32px;
+        background-color: $white_color;
+        background-image: url('../../../image/message-form__attachment-button-image.svg');
+        background-position: center;
+        &:hover {
+            @include hover_element; 
+        }
+    }
+    &__input {
+        font-family: inherit; 
+        text-align: left;
+        font-size: 12px;
+        line-height: 12px;
+        font-weight: 500;
+        color: $gray_color_type_3;
+        margin: 0;
+        padding: 0 20px;
+        border: none;
+        border-radius: 30px;
+        width: calc(100% * (849 / 929));
+        box-sizing: border-box;
+        background-color: $gray_color_type_1;
+        &:focus {
+            outline-color: $gray_color_type_4;
+            outline-style: solid;
+            outline-width: 2px;
+            border: none;
+        }
+        &:placeholder-shown {
+            color: $gray_color_type_4;
+        }
+    }
+    &__submit-button {
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        background-color: $blue_color_type_1;
+        padding: 0;
+        margin: 0;
+        margin-bottom: 2px;
+        border: none;
+        background-image: url("../../..//image/message-form__submit-button-image.svg");
+        background-position: center;
+        &:hover {
+            @include hover_element; 
+        }
+    }
+}
