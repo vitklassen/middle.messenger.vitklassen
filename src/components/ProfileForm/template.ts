@@ -9,7 +9,9 @@ const template = `
          </div>
         <h2 class="profile__name">{{profileName}}</h2>
         {{{fieldsets}}}
-        {{{SubmitButton}}}
+        {{#if isButton}}
+            <button type="submit" class="profile-form__submit-button {{buttonClassName}}">{{buttonText}}</button>
+        {{/if}}
     </form>
 `;
 

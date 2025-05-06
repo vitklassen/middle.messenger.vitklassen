@@ -1,13 +1,8 @@
 import template from "./template";
 import Component from "../../services/Component";
-import Form from "../../components/FormV2/FormV2";
+import Form from "../../components/Form/Form";
 import FormLabel from "../../components/FormLabel/FormLabel";
-import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import {signInFormLabelsInfo} from "../../utils/constants";
-
-// const submitButton = new SubmitButton({
-//     buttonText: "Войти",
-// });
 
 const formElement = new Form({
     formTitle: "Вход",
@@ -16,9 +11,9 @@ const formElement = new Form({
     )],
     href: "signup",
     linkText: "Нет аккаунта?",
-    //SubmitButton: submitButton,
+    buttonText: "Войти",
+    buttonClassName: "form__submit-button_state_disabled",
 });
-formElement.enableValidation();
 export default class SignInPage extends Component {
     constructor() {
         super({

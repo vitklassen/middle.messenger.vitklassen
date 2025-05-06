@@ -2,12 +2,7 @@ import template from "./template";
 import Component from "../../services/Component";
 import Form from "../../components/Form/Form";
 import FormLabel from "../../components/FormLabel/FormLabel";
-import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import { signUpFormLabelsInfo } from "../../utils/constants";
-
-const submitButton = new SubmitButton({
-    buttonText: "Зарегистрироваться",
-});
 
 const formElement = new Form({
     formTitle: "Регистрация",
@@ -16,7 +11,8 @@ const formElement = new Form({
     )],
     href: "signin",
     linkText: "Войти",
-    SubmitButton: submitButton,
+    buttonText: "Зарегистрироваться",
+    buttonClassName: "form__submit-button_state_disabled",
 });
 export default class SignUpPage extends Component {
     constructor() {

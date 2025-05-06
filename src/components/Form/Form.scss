@@ -90,4 +90,24 @@
             border: none;
         }
     }
+    &__submit-button {
+        border: none;
+        border-radius: 8px;
+        color: $white_color;
+        text-align: center;
+        font-size: 13px;
+        line-height: 13px;
+        background-color: $blue_color_type_1;
+        width: 280px;
+        height: 37px;
+        margin: 0;
+        padding: 0;
+        &:hover {
+            @include hover_element;
+        }
+        &_state_disabled {
+            cursor: not-allowed;
+            background-color: rgb(211 211 211 / 0.6);
+        }
+    }
 }

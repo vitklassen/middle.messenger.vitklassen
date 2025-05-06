@@ -57,6 +57,7 @@ const formElementsDescription = {
         ariaDescribedby: 'display_name-error',
         validPattern: "^[А-ЯЁA-Z][А-ЯЁA-Zа-яёa-z\\-]{2,30}$",
         errorMessage: "Неверный формат имени",
+        errorClassname: "input__display_name-error",
         minLength: 0,
         maxLength: 100,
         disabled: true,
@@ -79,7 +80,7 @@ const formElementsDescription = {
         inputId: "input__phone",
         inputName: "phone",
         inputType: "tel",
-        inputPlaceHolder: "+7-(800)-555-35-35",
+        inputPlaceHolder: "88005553535",
         ariaDescribedby: "phone-error",
         validPattern: "^((\\+7|7|8)+([0-9]){10})$",
         errorMessage: "Неверный формат телефона",
@@ -178,29 +179,35 @@ export const profileChangeData = [
         ...formElementsDescription.email,
         labelText: 'Почта',
         disabled: true,
+        value: 'vit.klassen@yandex.ru'
     },
     {
         ...formElementsDescription.login,
         labelText: 'Логин',
         disabled: true,
+        value: 'vitklassen'
     },
     {
         ...formElementsDescription.firstName,
         labelText: 'Имя',
         disabled: true,
+        value: 'Виктор'
     },
     {
         ...formElementsDescription.secondName,
         labelText: 'Фамилия',
         disabled: true,
+        value: 'Классен'
     },
     {
         ...formElementsDescription.displayName,
+        value: 'Виктор'
     },
     {
         ...formElementsDescription.phone,
         labelText: 'Телефон',
         disabled: true,
+        value: '88005553535'
     }
 ];
 
@@ -208,6 +215,7 @@ export const passwordChangeData = [
     {
         ...formElementsDescription.oldPassword,
         disabled: false,
+        value: 'qwertyqwerty'
     },
     {
         ...formElementsDescription.newPassword,

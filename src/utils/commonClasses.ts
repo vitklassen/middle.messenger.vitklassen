@@ -1,62 +1,23 @@
 import Component, {ComponentProps} from "../services/Component";
-import { checkInputValidity, toggleInputError, hasInvalidInput } from "./validation";
 
-// export default class FormComponent extends Component {
-//     constructor(props: ComponentProps) {
-//         super({...props, 
-//             events: {
-//                 submit: (evt: Event) => {
-//                     evt.preventDefault();
-//                     const inputList = Array.from(this.getContent().querySelectorAll("input"));
-//                     if(!hasInvalidInput(inputList)) {
-//                         const request: Record<string, string | number> = {};
-//                         inputList.forEach(input => {
-//                             request[input.name] = input.value;
-//                         });
-//                         console.log(request);
-//                     }
-//                     else {
-//                         console.log("not valid");
-//                     }
-//                 },
-//                 blur: (evt: Event) => {
-//                     const inputElement = evt.target as HTMLInputElement;
-//                     checkInputValidity(inputElement);
-//                     toggleInputError(inputElement);
-//                 }
-//             }
-//         })
-//     }
-//     override addEvents(): void {
-//         const {events = {}} = this._props;
-//         Object.entries(events).forEach(([eventName, eventCallback]) => {
-//             if(eventName === "blur") {
-//                 const inputList = this.getContent().querySelectorAll("input");
-//                 inputList?.forEach(input => {
-//                     input.addEventListener(eventName, eventCallback);
-//                 });
-//             }
-//             else {
-//                 this.getContent().addEventListener(eventName, eventCallback);
-//             }
-//         });
-//     }
-// }
-
-export default class FormComponentV2 extends Component {
+export default class FormComponent extends Component {
     constructor(props: ComponentProps) {
         super({...props,
             events: {
                 submit: (evt: Event) => {
                     evt.preventDefault();
-                    //if()
-                    const inputList = Array.from(this.getContent().querySelectorAll("input"));
-                    const request: Record<string, string | number> = {};
-                        inputList.forEach(input => {
-                            request[input.name] = input.value;
-                        });
-                        console.log(request);
-                },
+                    if(!this._hasInvalidInput()) {
+                        const inputList = Array.from(this.getContent().querySelectorAll("input"));
+                        const request: Record<string, string | number> = {};
+                            inputList.forEach(input => {
+                                request[input.name] = input.value;
+                            });
+                            console.log(request);
+                    }
+                    else {
+                            console.log("not valid");
+                    }
+                }, 
                 blur: (evt: Event) => {
                     const inputElement = evt.target as HTMLInputElement;
                     this._checkInputValidity(inputElement);
@@ -79,9 +40,6 @@ export default class FormComponentV2 extends Component {
                 this.getContent().addEventListener(eventName, eventCallback);
             }
         });
-    }
-    public enableValidation() {
-        this._toggleButton();
     }
     private _checkInputValidity(inputElement: HTMLInputElement): void {
         if (inputElement.validity.patternMismatch) {
@@ -123,18 +81,38 @@ export default class FormComponentV2 extends Component {
     }
     private _hasInvalidInput() {
         const inputList = Array.from(this.getContent().querySelectorAll("input"));
-        return (inputList.some(inputElement => !inputElement.validity.valid));
+        const isCommonValidity = inputList.some(inputElement => !inputElement.validity.valid);
+        if(isCommonValidity) {
+            return isCommonValidity;
+        }
+        const passwordInput = [...inputList.filter(input => input.type === 'password')];
+        if (passwordInput.length <= 1) {
+            return isCommonValidity
+        } else {
+            const isPasswordValidity = this._checkPasswordValidity(passwordInput);
+            return !isPasswordValidity;
+        }
     }
     private _toggleButton() {
         const submitButton = this.getContent().querySelector('button');
-        if(!this._hasInvalidInput()) {
-            submitButton?.classList.add('button-inactive');
+        const submitButtonClassname = submitButton?.classList[0];
+        if(this._hasInvalidInput()) {
+            submitButton?.classList.add(submitButtonClassname + '_state_disabled');
             submitButton?.setAttribute('aria-disabled', 'true')
         }
         else {
-            submitButton?.classList.remove('button-inactive');
+            submitButton?.classList.remove(submitButtonClassname + '_state_disabled');
             submitButton?.setAttribute('aria-disabled', 'false')
         }
-
+    }
+    private _checkPasswordValidity(inputList: HTMLInputElement[]) {
+        const newPasswords = inputList.filter(input => input.name === "newPassword");
+        if(newPasswords.length === 2) {
+            const oldPassword = inputList.filter(input => input.name === "oldPassword");
+            return (newPasswords[0].value === newPasswords[1].value) && (newPasswords[0].value !== oldPassword[0].value);
+        }
+        else {
+            return inputList[0].value === inputList[1].value;
+        }
     }
 }

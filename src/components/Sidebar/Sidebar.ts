@@ -2,37 +2,49 @@ import Component, { ComponentProps } from "../../services/Component";
 import template from "./template";
 import { messageList } from "../../utils/mock";
 import MessageBox from "../MessageBox/MessageBox";
+import ChatList from "../ChatList/ChatList";
 
-const messages = [...messageList.map(message => new MessageBox({...message, 
-    events: {
-        click: (evt: Event) => {
-            const liElement = evt.currentTarget as HTMLLIElement;
-            const liElementId = liElement.dataset.id;
-            messages.forEach(message => {
-                const currentElement = message.getContent() as HTMLLIElement;
-                const currentElementId = currentElement.dataset.id;
-                let className = "";
-                if(currentElementId !== liElementId) {
-                    className= "message-box";
-                }
-                else {
-                    className= "message-box message-box_type_active";
-                }
-                message.setProps({
-                    attr: {
-                        class: className,
-                    }
-                })
-            })
-        }
-    }
-}))];
+const chatList = new ChatList({
+    messages: [...messageList.map(message => new MessageBox({...message}))],
+});
 
 export default class Sidebar extends Component {
     constructor(props: ComponentProps) {
         super({...props, 
-            messages: messages
+            ChatList: chatList,
+            events: {
+                keyup: (evt: Event) => {
+                    const inputElement = evt.target as HTMLInputElement;
+                    const inputValue = inputElement.value.toUpperCase();
+                    if(inputValue === '') {
+                        chatList.setProps({
+                            messages: [...messageList.map(message => new MessageBox({...message}))]
+                    })
+                    }
+                    else {
+                        const filterMessageList = messageList.filter(message => message.chatName.toUpperCase().includes(inputValue));
+                        chatList.setProps({
+                            messages: [...filterMessageList.map(message => new MessageBox({...message}))]
+                        })
+                    }
+                },
+            }
         });
+    }
+    override addEvents() {
+        const {events = {}} = this._props;
+        if(this._element instanceof HTMLElement) { 
+            Object.entries(events).forEach(([eventName, eventCallback]) => {
+                if(eventName === 'click') {
+                    const ulElement = this.getContent().querySelector('ul') as HTMLUListElement;
+                    ulElement.addEventListener(eventName, eventCallback);
+                }
+                else if(eventName === "keyup") {
+                    const inputElementElement = this.getContent().querySelector('input') as HTMLInputElement;
+                    inputElementElement.addEventListener(eventName, eventCallback);
+                }
+            });
+        }
     }
     override render() {
         return template;

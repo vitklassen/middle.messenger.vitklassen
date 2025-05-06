@@ -4,49 +4,35 @@ import ProfileFormFieldset from "../../components/ProfileFormFieldset/ProfileFor
 import Component from "../../services/Component";
 import template from "./template";
 import { profileChangeData, passwordChangeData } from '../../utils/constants';
-import SubmitButton from "../../components/SubmitButton/SubmitButton";
-
-const submitButton = new SubmitButton({
-    buttonText: "Сохранить",
-    attr: {
-        class: "submit-button submit-button_type_change-data",
-    }
-})
 
 const profileForm = new ProfileForm({
     fieldsets: [...profileChangeData.map(item => {
         return new ProfileFormFieldset({...item})
-    })]
+    })],
+    buttonText: "Сохранить",
+    isButton: false,
 });
 const profileFooter = new ProfileFooter({
     events: {
         click: (evt: Event) => {
             evt.stopPropagation();
             const button = evt.target as HTMLButtonElement;
-            if(button.textContent === "Изменить данные") { 
-                submitButton.setProps({
-                    attr: {
-                        class: "submit-button submit-button_type_change-data",
-                    }
-                });        
+            if(button.textContent === "Изменить данные") {       
                 profileForm.setProps({
                     fieldsets: [...profileChangeData.map(item => {
                         return new ProfileFormFieldset({...item, disabled: false})
                     })],
-                    SubmitButton: submitButton,
+                    buttonClassName: "profile-form__submit-button_type_change-data",
+                    isButton: true,
                 });
             }
             else if(button.textContent === "Изменить пароль") {
-                submitButton.setProps({
-                    attr: {
-                        class: "submit-button submit-button_type_change-password",
-                    }
-                });
                 profileForm.setProps({
                     fieldsets: [...passwordChangeData.map(item => {
                         return new ProfileFormFieldset({...item})
                     })],
-                    SubmitButton: submitButton,
+                    buttonClassName: "profile-form__submit-button_type_change-password profile-form__submit-button_state_disabled",
+                    isButton: true,
                 })
             }
             profileFooter.setProps({

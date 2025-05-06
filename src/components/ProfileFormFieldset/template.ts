@@ -8,6 +8,7 @@ const template = `
             name={{inputName}}
             type={{inputType}}
             placeHolder="{{inputPlaceHolder}}"
+            value="{{value}}"
             aria-describedby={{ariaDescribedby}}
             pattern={{validPattern}}
             data-error-message="{{errorMessage}}"

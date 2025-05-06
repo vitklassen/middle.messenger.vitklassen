@@ -3,13 +3,12 @@ import SignInPage from "./pages/SignInPage/SignInPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import Sidebar from "./components/Sidebar/Sidebar";
-import MessageBox from "./components/MessageBox/MessageBox";
 
 export default class App {
     private currentPage: string;
     private appElement: HTMLElement | null;
     constructor() {
-        this.currentPage = "signin";
+        this.currentPage = "chat";
         this.appElement = document.getElementById('app');
     }
     public render(): void {
