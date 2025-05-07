@@ -1,16 +1,23 @@
 @use '../../styles/utils/constants.scss' as *;
 
-.message-box {
+@mixin message-box-style {
     display: flex;
     margin: 0;
     padding: 12px 0;
     border-top: 1px solid $gray_color_type_2;
-    &_type_active {
-        background-color: $blue_color_type_2;
-    }
+}
+
+.message-box_type_active {
+    @include message-box-style();
+    cursor: auto;
+    background-color: $blue_color_type_2;
+}
+
+.message-box {
+    @include message-box-style();
+    cursor: pointer;
     &:hover {
-        background-color: $gray_color_type_1;
-        cursor: pointer;
+        background-color: $gray_color_type_2;
     }
     &__avatar {
         margin: 0;

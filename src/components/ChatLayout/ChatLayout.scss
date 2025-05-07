@@ -47,8 +47,66 @@
         background-image: url('../../../image/chat-layout__button-image.svg');
         background-position: center;
         background-repeat: no-repeat;
+        
         &:hover {
             @include hover_element; 
         }
+    }
+    &__dialogue {
+        display: flex;
+        background-color: $white_color;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    &__popover-wrapper {
+        width: 210px;
+        height: 90px;
+        border: none;
+        border-radius: 12px;
+        position: absolute;
+        margin: 0;
+        padding: 15px 0 15px 15px;
+        top: 65px;
+        left: 1060px;
+        box-sizing: border-box;
+        background-color: $white_color;
+        filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.14));
+    }
+    &__button-container {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        box-sizing: border-box;
+        max-width: 100%;
+    }
+    &__control-button {
+        margin: 0;
+        padding: 0;
+        border: none;
+        background-color: $white_color;
+        display: flex;
+        &:first-of-type {
+            margin-bottom: 16px;
+        }
+        &:hover {
+            @include hover_element;
+        }
+    }
+    &__control-image {
+        margin: 0;
+        padding: 0;
+        margin-right: 15px;
+        width: 22px;
+        height: 22px;
+    }
+    &__control-span {
+        margin: auto 0;
+        padding: 0;
+        text-align: center;
+        line-height: 14px;
+        font-size: 12px;
+        font-family: 'Inter', Helvetica, sans-serif;
+        color: $gray_color_type_3;
     }
 }

@@ -2,12 +2,14 @@ import EventBus, {EventCallback} from "./EventBus";
 import {v4 as makeUuid} from "uuid";
 import Handlebars from "handlebars";
 
+type TCallback = (id: string) => void;
+
 type TAttr = Record<string, string>;
 type TEvents = Record<string, (evt: Event) => void>;
 type TProps = Record<string, string | number | boolean | TAttr | TEvents>;
 type TChildren = Record<string, Component>;
 type TLists = Record<string, Component[]>; 
-type CommonType = Component | Component[] | string | number | boolean | TAttr | TEvents;
+type CommonType = Component | Component[] | string | number | boolean | TAttr | TEvents | TCallback;
 
 export type ComponentProps = Record<string, CommonType>;
 
@@ -54,6 +56,9 @@ export default class Component {
             }
             else if(Array.isArray(currentValue)) {
                 lists[key] = currentValue;
+            }
+            else if(typeof currentValue === "function") {
+
             }
             else {
                 props[key] = currentValue;
@@ -217,7 +222,6 @@ export default class Component {
     }
 
     public componentDidUpdate(oldProps: ComponentProps, newProps: ComponentProps): boolean {
-        console.log(oldProps, newProps);
         return true;
     }
 

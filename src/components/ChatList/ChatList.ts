@@ -6,6 +6,30 @@ export default class ChatList extends Component {
         super({...props});
     }
     override render(){
+        console.log('chat:ist is render');
         return template;
+    }
+    public onMessageFocus(itemId: string = '') {
+        if(itemId) {
+            Object.entries(this._lists).forEach(([, messageList]) => {
+                messageList.forEach(message => {
+                    const liElement = message.getContent() as HTMLLIElement;
+                    if(liElement.dataset.id === itemId) {
+                        message.setProps({
+                            attr: {
+                                class: "message-box_type_active",
+                            }
+                        })
+                    }
+                    else {
+                        message.setProps({
+                            attr: {
+                                class: "message-box",
+                            }
+                        })
+                    }
+                })
+            })
+        }
     }
 }

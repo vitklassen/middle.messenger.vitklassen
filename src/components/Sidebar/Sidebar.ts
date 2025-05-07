@@ -5,7 +5,14 @@ import MessageBox from "../MessageBox/MessageBox";
 import ChatList from "../ChatList/ChatList";
 
 const chatList = new ChatList({
-    messages: [...messageList.map(message => new MessageBox({...message}))],
+    messages: [...messageList.map(message => new MessageBox({...message,
+        events: {
+            click: (evt: Event) => {
+                const liElement = evt.currentTarget as HTMLLIElement;
+                chatList.onMessageFocus(liElement.dataset.id);
+            }
+        }
+    }))],
 });
 
 export default class Sidebar extends Component {
@@ -18,13 +25,27 @@ export default class Sidebar extends Component {
                     const inputValue = inputElement.value.toUpperCase();
                     if(inputValue === '') {
                         chatList.setProps({
-                            messages: [...messageList.map(message => new MessageBox({...message}))]
+                            messages: [...messageList.map(message => new MessageBox({...message,
+                                events: {
+                                    click: (evt: Event) => {
+                                        const liElement = evt.currentTarget as HTMLLIElement;
+                                        chatList.onMessageFocus(liElement.dataset.id);
+                                    }
+                                }
+                            }))]
                     })
                     }
                     else {
                         const filterMessageList = messageList.filter(message => message.chatName.toUpperCase().includes(inputValue));
                         chatList.setProps({
-                            messages: [...filterMessageList.map(message => new MessageBox({...message}))]
+                            messages: [...filterMessageList.map(message => new MessageBox({...message, 
+                                events: {
+                                    click: (evt: Event) => {
+                                        const liElement = evt.currentTarget as HTMLLIElement;
+                                        chatList.onMessageFocus(liElement.dataset.id);
+                                    }
+                                }
+                            }))]
                         })
                     }
                 },
@@ -35,18 +56,20 @@ export default class Sidebar extends Component {
         const {events = {}} = this._props;
         if(this._element instanceof HTMLElement) { 
             Object.entries(events).forEach(([eventName, eventCallback]) => {
-                if(eventName === 'click') {
-                    const ulElement = this.getContent().querySelector('ul') as HTMLUListElement;
-                    ulElement.addEventListener(eventName, eventCallback);
-                }
-                else if(eventName === "keyup") {
+                if(eventName === "keyup") {
                     const inputElementElement = this.getContent().querySelector('input') as HTMLInputElement;
                     inputElementElement.addEventListener(eventName, eventCallback);
+                }
+                else {
+                    this.getContent().addEventListener(eventName, eventCallback);
                 }
             });
         }
     }
     override render() {
         return template;
+    }
+    public changeColor() {
+        
     }
 }

@@ -1,8 +1,24 @@
 const template = `
 <form class="message-form" novalidate>
-    <button type="button" class="message-form__attachment-button"></button>
+    <button type="button" class="message-form__attachment-button" popovertarget="message-form-popover"></button>
     <input type="text" class="message-form__input" placeholder="Сообщение"/>
     <button type="submit" class="message-form__submit-button"></button>
+    <div id="message-form-popover" popover class="message-form__popover-wrapper">
+        <div class="message-form__button-container">
+            <button class="message-form__control-button">
+                <img class="message-form__control-image" src="../../../image/add_photo.svg"></img>
+                <span class="message-form__control-span">Фото или Видео</span>
+            </button>
+            <button class="message-form__control-button">
+                <img class="message-form__control-image" src="../../../image/upload_file.svg"></img>
+                <span class="message-form__control-span">Файл</span>
+            </button>
+            <button class="message-form__control-button">
+                <img class="message-form__control-image" src="../../../image/location_on.svg"></img>
+                <span class="message-form__control-span">Локация</span>
+            </button>
+        </div>
+    </div>
 </form>
 `;
 

@@ -3,7 +3,6 @@
 .message-form {
     display: flex;
     margin: 0;
-    margin-top: 10px; //убрать !
     padding: 11px 0;
     border-top: 1px solid $gray_color_type_2;
     max-width: 100%;
@@ -61,5 +60,56 @@
         &:hover {
             @include hover_element; 
         }
+    }
+    &__popover-wrapper {
+        width: 168px;
+        height: 128px;
+        border: none;
+        border-radius: 12px;
+        position: absolute;
+        margin: 0;
+        padding: 15px 0 15px 15px;
+        top: 527px;
+        left: 320px;
+        box-sizing: border-box;
+        background-color: $white_color;
+        filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.14));
+    }
+    &__button-container {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        box-sizing: border-box;
+        max-width: 100%;
+    }
+    &__control-button {
+        margin: 0;
+        margin-bottom: 16px;
+        padding: 0;
+        border: none;
+        background-color: $white_color;
+        display: flex;
+        &:last-of-type {
+            margin-bottom: 0px;
+        }
+        &:hover {
+            @include hover_element;
+        }
+    }
+    &__control-image {
+        margin: 0;
+        padding: 0;
+        margin-right: 15px;
+        width: 22px;
+        height: 22px;
+    }
+    &__control-span {
+        margin: auto 0;
+        padding: 0;
+        text-align: center;
+        line-height: 14px;
+        font-size: 12px;
+        font-family: 'Inter', Helvetica, sans-serif;
+        color: $gray_color_type_3;
     }
 }
