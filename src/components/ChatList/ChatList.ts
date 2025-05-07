@@ -9,7 +9,7 @@ export default class ChatList extends Component {
         console.log('chat:ist is render');
         return template;
     }
-    public onMessageFocus(itemId: string = '') {
+    public onFocusMessage(itemId: string = '') {
         if(itemId) {
             Object.entries(this._lists).forEach(([, messageList]) => {
                 messageList.forEach(message => {

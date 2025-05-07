@@ -5,7 +5,8 @@
     flex-direction: column;
     margin: 0;
     padding: 0 20px 0 21px;
-    width: 970px;
+    width: calc(100% * (97 / 128));
+    max-height: 100%;
     box-sizing: border-box;
     &__header {
         display: flex;
@@ -108,5 +109,23 @@
         font-size: 12px;
         font-family: 'Inter', Helvetica, sans-serif;
         color: $gray_color_type_3;
+    }
+    &__empty-chat {
+        max-height: 100%;
+        width: 100%;
+        display: flex;
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+    }
+    &__hint {
+        font-family: 'Inter', Helvetica, sans-serif;
+        font-size: 12px;
+        line-height: 12px;
+        font-weight: 500;
+        color: $gray_color_type_4;
+        margin: 0;
+        padding: 0;
+        margin-top: 360px;
     }
 }

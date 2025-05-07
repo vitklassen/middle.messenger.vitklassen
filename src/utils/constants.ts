@@ -110,7 +110,6 @@ const formElementsDescription = {
         maxLength: 40,
         required: true,
     },
-    message: {},
 };
 
 export const signInFormLabelsInfo = [
