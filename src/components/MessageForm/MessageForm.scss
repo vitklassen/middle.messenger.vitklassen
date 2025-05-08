@@ -11,7 +11,7 @@
 
     &__attachment-button {
         background-color: $white_color;
-        background-image: url('../../../image/message-form__attachment-button-image.svg');
+        background-image: url('../../../public/message-form__attachment-button-image.svg');
         background-position: center;
         border: none;
         height: 32px;
@@ -51,7 +51,7 @@
 
     &__submit-button {
         background-color: $blue_color_type_1;
-        background-image: url("../../..//image/message-form__submit-button-image.svg");
+        background-image: url("../../..//public/message-form__submit-button-image.svg");
         background-position: center;
         border: none;
         border-radius: 50%;

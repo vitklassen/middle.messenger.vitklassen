@@ -1,6 +1,6 @@
 const template = `
 <li class="message-box" data-id={{_id}}>
-    <img class="message-box__avatar" src="../../../image/message-box__avatar-image.png"></img>
+    <img class="message-box__avatar" src="/message-box__avatar-image.png"></img>
     <div class="message-box__info">
         <div class="message-box__info-part">
             <h2 class="message-box__chat">{{chatName}}</h2>

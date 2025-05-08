@@ -6,15 +6,15 @@ const template = `
     <div id="message-form-popover" popover class="message-form__popover-wrapper">
         <div class="message-form__button-container">
             <button class="message-form__control-button">
-                <img class="message-form__control-image" src="../../../image/add_photo.svg"></img>
+                <img class="message-form__control-image" src="/add_photo.svg"></img>
                 <span class="message-form__control-span">Фото или Видео</span>
             </button>
             <button class="message-form__control-button">
-                <img class="message-form__control-image" src="../../../image/upload_file.svg"></img>
+                <img class="message-form__control-image" src="/upload_file.svg"></img>
                 <span class="message-form__control-span">Файл</span>
             </button>
             <button class="message-form__control-button">
-                <img class="message-form__control-image" src="../../../image/location_on.svg"></img>
+                <img class="message-form__control-image" src="/location_on.svg"></img>
                 <span class="message-form__control-span">Локация</span>
             </button>
         </div>

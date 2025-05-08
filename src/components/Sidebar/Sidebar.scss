@@ -13,7 +13,7 @@
     width: 310px;
 
     &__link {
-        background-image: url('../../../image/sidebar__link-image.svg');
+        background-image: url('../../../public/sidebar__link-image.svg');
         background-position: right;
         background-repeat: no-repeat;
         background-size: 14px;
@@ -42,7 +42,7 @@
 
     &__input {
         background-color: $gray_color_type_1;
-        background-image: url('../../../image/search-form__input-image.svg');
+        background-image: url('../../../public/search-form__input-image.svg');
         background-position: 10px center;
         background-repeat: no-repeat;
         border: none;
