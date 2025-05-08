@@ -24,5 +24,4 @@ const template = `
       </nav>
 </main>
 `;
-
 export default template;

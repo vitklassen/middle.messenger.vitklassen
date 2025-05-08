@@ -7,5 +7,4 @@ const template = `
     {{{ChatList}}}
 </section>
 `;
-
 export default template;

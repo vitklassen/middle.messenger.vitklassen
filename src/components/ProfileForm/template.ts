@@ -14,5 +14,4 @@ const template = `
         {{/if}}
     </form>
 `;
-
 export default template;

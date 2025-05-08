@@ -7,5 +7,4 @@ const template = `
     {{{PopupChatDelete}}}
 </main>
 `;
-
 export default template;

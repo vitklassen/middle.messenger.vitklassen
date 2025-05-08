@@ -12,4 +12,3 @@ export default class Form extends FormComponent {
     return template;
   }
 }
-

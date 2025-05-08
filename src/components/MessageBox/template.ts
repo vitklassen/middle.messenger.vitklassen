@@ -15,5 +15,4 @@ const template = `
     </div>
 </li>
 `;
-
 export default template;

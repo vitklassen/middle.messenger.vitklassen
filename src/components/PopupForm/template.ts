@@ -21,5 +21,4 @@ const template = `
     <button type="submit" class="popup-form__submit-button {{buttonClassName}}">{{buttonText}}</button>
 <form>
 `;
-
 export default template;

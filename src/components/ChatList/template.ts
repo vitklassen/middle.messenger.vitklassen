@@ -3,5 +3,4 @@ const template = `
     {{{messages}}}
 </ul>
 `;
-
 export default template;

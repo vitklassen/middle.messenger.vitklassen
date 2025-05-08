@@ -21,5 +21,4 @@ const template = `
     </div>
 </form>
 `;
-
 export default template;

@@ -9,5 +9,4 @@ const template = `
     </div>
 </main>
 `;
-
 export default template;

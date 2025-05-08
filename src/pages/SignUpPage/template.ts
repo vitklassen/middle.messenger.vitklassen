@@ -3,5 +3,4 @@ const template = `
       {{{Form}}}
 </main>
 `;
-
 export default template;

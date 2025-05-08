@@ -6,5 +6,4 @@ const template = `
     <a href={{href}} data-ref={{href}} class="form__link">{{linkText}}</a>
 </form>
 `;
-
 export default template;

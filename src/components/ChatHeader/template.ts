@@ -23,5 +23,4 @@ const template = `
     </div>
 </section>
 `;
-
 export default template;
