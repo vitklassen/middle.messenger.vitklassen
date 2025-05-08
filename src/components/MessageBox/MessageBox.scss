@@ -1,31 +1,35 @@
 @use '../../styles/utils/constants.scss' as *;
 
 @mixin message-box-style {
+    border-top: 1px solid $gray_color_type_2;
     display: flex;
     margin: 0;
     padding: 12px 0;
-    border-top: 1px solid $gray_color_type_2;
 }
 
 .message-box_type_active {
     @include message-box-style();
-    cursor: auto;
+
     background-color: $blue_color_type_2;
+    cursor: auto;
 }
 
 .message-box {
     @include message-box-style();
+
     cursor: pointer;
+
     &:hover {
         background-color: $gray_color_type_2;
     }
+
     &__avatar {
-        margin: 0;
-        margin-right: 10px;
         border: none;
         border-radius: 50%;
-        width: 47px;
         height: 47px;
+        margin: 0;
+        margin-right: 10px;
+        width: 47px;
     }
 
     &__info {
@@ -39,55 +43,57 @@
     &__info-part {
         display: flex;
         justify-content: space-between;
+
         &:first-of-type {
             margin-bottom: 4px;
         }
     }
 
     &__chat {
+        color: $gray_color_type_3;
+        font-size: 13px;
+        line-height: 13px;
         margin: 0;
         padding: 0;
-        line-height: 13px;
-        font-size: 13px;
-        color: $gray_color_type_3;
     }
 
     &__text {
-        margin: 0;
-        padding: 0;
-        line-height: 15px;
-        font-size: 12px;
+        -webkit-box-orient: vertical;
         color: $gray_color_type_4;
+        display: -webkit-box;
+        font-size: 12px;
+        -webkit-line-clamp: 2;
+        line-height: 15px;
+        margin: 0;
         max-width: 193px;
         overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        text-overflow: ellipsis;
+        padding: 0;
         text-align: left;
+        text-overflow: ellipsis;
     }
+
     &__time {
+        color: $gray_color_type_4;
+        font-size: 9px;
+        line-height: 13px;
         margin: 0;
         padding: 0;
-        line-height: 13px;
-        font-size: 9px;
-        color: $gray_color_type_4;
     }
 
     &__unread-messages {
-        display: flex;
-        justify-content: center;
         align-items: center;
+        background-color: $blue_color_type_1;
+        border-radius: 50%;
+        color: $white_color;
+        display: flex;
+        font-size: 11px;
+        height: 20px;
+        justify-content: center;
+        line-height: 12px;
         margin: 0;
         margin-top: 10px;
         padding: 0;
-        line-height: 12px;
-        font-size: 11px;
-        color: $white_color;
         text-align: center;
-        background-color: $blue_color_type_1;
-        border-radius: 50%;
         width: 20px;
-        height: 20px;
     }
 }

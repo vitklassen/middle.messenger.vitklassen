@@ -1,19 +1,19 @@
 @use './constants.scss' as *;
+
 @import url('../../../vendor/normalize.scss');
 @import url('../../../vendor/fonts/fonts.scss');
 
 
 .body {
-    font-family: 'Inter', Helvetica, sans-serif;
+    font-family: Inter, Helvetica, sans-serif;
 }
 
 .content {
-    max-width: 1280px;
-    max-height: 720px;
-    display: flex;
     background-color: $white_color;
-    font-family: 'Inter'; 
-    text-align: center;
     box-sizing: border-box;
+    display: flex;
+    font-family: Inter, Helvetica, sans-serif;
+    max-height: 720px;
+    max-width: 1280px; 
+    text-align: center;
 }
-

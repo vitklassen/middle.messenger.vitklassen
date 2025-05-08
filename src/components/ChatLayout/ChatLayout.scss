@@ -1,131 +1,39 @@
 @use '../../styles/utils/constants.scss' as *;
 
 .chat-layout {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     margin: 0;
+    max-height: 100%;
     padding: 0 20px 0 21px;
     width: calc(100% * (97 / 128));
-    max-height: 100%;
-    box-sizing: border-box;
-    &__header {
-        display: flex;
-        margin: 0;
-        padding: 10px 0;
-        border-bottom: 1px solid $gray_color_type_2;
-        max-width: 100%;
-    }
-    &__avatar {
-        margin: 0;
-        margin-right: 10px;
-        border: none;
-        border-radius: 50%;
-        width: 47px;
-        height: 47px;
-    }
-    &__info {
-        display: flex;
-        margin: 0;
-        padding: 0;
-        justify-content: space-between;
-        width: 100%;
-    }
-    &__chat-name {
-        margin: auto 0;
-        padding: 0;
-        line-height: 13px;
-        font-size: 13px;
-        color: $gray_color_type_3;
-        max-width: 193px;
-    }
-    &__button {
-        margin: auto 0;
-        padding: 0;
-        border: none;
-        width: 30px;
-        height: 15px;
-        background-color: $white_color;
-        background-image: url('../../../image/chat-layout__button-image.svg');
-        background-position: center;
-        background-repeat: no-repeat;
-        
-        &:hover {
-            @include hover_element; 
-        }
-    }
+
     &__dialogue {
-        display: flex;
         background-color: $white_color;
+        display: flex;
         height: 100%;
         margin: 0;
         padding: 0;
     }
-    &__popover-wrapper {
-        width: 210px;
-        height: 90px;
-        border: none;
-        border-radius: 12px;
-        position: absolute;
-        margin: 0;
-        padding: 15px 0 15px 15px;
-        top: 65px;
-        left: 1060px;
-        box-sizing: border-box;
-        background-color: $white_color;
-        filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.14));
-    }
-    &__button-container {
-        display: flex;
-        flex-direction: column;
-        margin: 0;
-        box-sizing: border-box;
-        max-width: 100%;
-    }
-    &__control-button {
-        margin: 0;
-        padding: 0;
-        border: none;
-        background-color: $white_color;
-        display: flex;
-        &:first-of-type {
-            margin-bottom: 16px;
-        }
-        &:hover {
-            @include hover_element;
-        }
-    }
-    &__control-image {
-        margin: 0;
-        padding: 0;
-        margin-right: 15px;
-        width: 22px;
-        height: 22px;
-    }
-    &__control-span {
-        margin: auto 0;
-        padding: 0;
-        text-align: center;
-        line-height: 14px;
-        font-size: 12px;
-        font-family: 'Inter', Helvetica, sans-serif;
-        color: $gray_color_type_3;
-    }
+
     &__empty-chat {
-        max-height: 100%;
-        width: 100%;
         display: flex;
-        margin: 0;
-        padding: 0;
+        height: 100%;
         justify-content: center;
-    }
-    &__hint {
-        font-family: 'Inter', Helvetica, sans-serif;
-        font-size: 12px;
-        line-height: 12px;
-        font-weight: 500;
-        color: $gray_color_type_4;
         margin: 0;
         padding: 0;
+        width: 100%;
+    }
+
+    &__hint {
+        color: $gray_color_type_4;
+        font-family: Inter, Helvetica, sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 12px;
+        margin: 0;
         margin-top: 360px;
+        padding: 0;
     }
 }

@@ -1,81 +1,83 @@
 @use '../../styles/utils/constants.scss' as *;
 
-@mixin hover-avatar {
-    opacity: 0.5;
-    cursor: pointer; 
+@mixin hover-avatar { 
     background-color: $black_color;
+    cursor: pointer;
+    opacity: 0.5;
 }
 
 .profile-form {
-    display: flex;
-    margin: 0;
-    padding: 0;
-    flex-direction: column;
-    width: 510px;
-    max-height: fit-content;
     background-color: $white_color;
     border: none;
-    font-family: 'Inter', Helvetica, sans-serif;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    font-family: Inter, Helvetica, sans-serif;
+    margin: 0;
+    max-height: fit-content;
+    padding: 0;
+    width: 510px;
 
     &__fieldset {
-        display: flex;
-        flex-direction: column;
         border: none;
         border-bottom: 1px solid $gray_color_type_2;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
         margin: 0;
         margin-bottom: 10px;
         padding: 0;
         padding-bottom: 10px;
         width: 100%;
-        box-sizing: border-box;
+
         &:last-of-type {
             border-bottom: none;
-            margin-bottom: 0px;
-            padding-bottom: 0px;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
     }
 
     &__label-wrapper {
+        box-sizing: border-box;
         display: flex;
         justify-content: space-between;
         margin: 0;
         padding: 0;
         width: 100%;
-        box-sizing: border-box;
     }
 
     &__label {
+        color: $gray_color_type_3;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 13px;
         margin: 0;
         padding: 0;
         text-align: left;
-        font-size: 13px;
-        line-height: 13px;
-        font-weight: 500;
-        color: $gray_color_type_3;
     }
 
     &__input {
-        font-family: inherit; 
-        text-align: right;
-        font-size: 13px;
-        line-height: 13px;
-        font-weight: 500;
-        margin: 0;
-        padding: 0;
-        border: none;
         background-color: $white_color;
+        border: none;
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 13px;
+        margin: 0;
+        padding: 0; 
+        text-align: right;
+
         &:focus {
             outline: none;
         }
     }
 
     &__error {
-        margin: 5px 0 0;
-        font-size: 9px;
-        line-height: 9px;
         color: $red_color_type_2;
         display: none;
+        font-size: 9px;
+        line-height: 9px;
+        margin: 5px 0 0;
 
         &_type_active {
             display: block;
@@ -83,78 +85,89 @@
     }
 
     &__avatar-wrapper {
-        position: relative;
+        align-items: center;
+        background-color: $gray_color_type_1;
+        border-radius: 50%;
+        height: 130px;
+        justify-content: center;
         margin: 0 auto 21px;
         padding: 0;
-        border-radius: 50%;
-        width: 130px;
-        height: 130px;
+        position: relative;
         text-align: center;
-        background-color: $gray_color_type_1;
-        justify-content: center;
-        align-items: center;
+        width: 130px;
         z-index: 2;
 
         &:hover {
             @include hover-avatar;
+
             .profile-form__avatar-label {
                 @include hover-avatar;
+
                 visibility: visible;
             }
         }
     }
+
     &__avatar-input {
         opacity: 0;
-        visibility: hidden;
         position: absolute;
+        visibility: hidden;
     }
+
     &__avatar-image {
-        width: 40px;
         height: 40px;
         margin: 45px;
+        width: 40px;
         z-index: 2;
     }
+
     &__avatar-label {
         background-color: $gray_color_type_1;
         border-radius: 3px;
         cursor: pointer;
-        width: 64px;
-        position: absolute;
         left: 33px;
-        top: 51px;
         opacity: 0;
+        position: absolute;
+        top: 51px;
         visibility: hidden;
+        width: 64px;
     }
+
     &__avatar-span {
         color: $white_color;
-        line-height: 14px;
         font-size: 13px;
         font-weight: 500;
+        line-height: 14px;
     }
+
     &__submit-button {
+        background-color: $blue_color_type_1;
         border: none;
         border-radius: 8px;
         color: $white_color;
-        text-align: center;
         font-size: 13px;
-        line-height: 13px;
-        background-color: $blue_color_type_1;
-        width: 280px;
         height: 37px;
+        line-height: 13px;
         margin: 0;
         padding: 0;
+        text-align: center;
+        width: 280px;
+
         &:hover {
             @include hover_element;
         }
+
         &_type_change-data {
             margin: 60px auto 0;
         }
+
         &_type_change-password {
             margin: 162px auto 0;
         }
+
         &_state_disabled {
+            background-color: rgb(211 211 211 / 60%);
             cursor: not-allowed;
-            background-color: rgb(211 211 211 / 0.6);
         }
     }
 }

@@ -1,5 +1,5 @@
-import App from "./App";
+import App from './App';
 document.addEventListener('DOMContentLoaded', () => {
-    const app = new App();
-    app.render();
+  const app = new App();
+  app.render();
 });

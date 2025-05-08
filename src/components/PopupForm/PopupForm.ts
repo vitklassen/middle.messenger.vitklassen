@@ -1,9 +1,8 @@
-import template from './template';
 import { ComponentProps } from '../../services/Component';
 import FormComponent from '../../utils/commonClasses';
+import template from './template';
 
-
-export default class Form extends FormComponent {
+export default class PopupForm extends FormComponent {
   constructor(props: ComponentProps) {
     super({ ...props });
   }
@@ -12,4 +11,3 @@ export default class Form extends FormComponent {
     return template;
   }
 }
-

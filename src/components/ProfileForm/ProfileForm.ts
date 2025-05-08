@@ -1,14 +1,14 @@
-import  { ComponentProps } from "../../services/Component"
-import template from "./template";
-import FormComponent from "../../utils/commonClasses";
+import  { ComponentProps } from '../../services/Component';
+import template from './template';
+import FormComponent from '../../utils/commonClasses';
 
 export default class ProfileForm extends FormComponent {
-    constructor(props: ComponentProps){
-        super({...props})
-    }
+  constructor(props: ComponentProps) {
+    super({ ...props });
+  }
 
-    override render() {
-        console.log('profileForm is render');
-        return template;
-    }
+  override render() {
+    console.log('profileForm is render');
+    return template;
+  }
 }

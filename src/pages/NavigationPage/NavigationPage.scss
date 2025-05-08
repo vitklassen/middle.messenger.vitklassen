@@ -1,0 +1,27 @@
+@use '../../styles/utils/constants.scss' as *;
+
+.navigation__list {
+    align-items: space-between;
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    max-width: fit-content;
+}
+
+.navigation__item {
+    margin-bottom: 20px;
+    padding: 0;
+}
+
+.navigation__link {
+    color: $blue_color_type_1;
+    font-family: Inter, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 20px;
+    text-decoration: none;
+
+    &:hover {
+        @include hover_element;
+    }
+}

@@ -1,41 +1,43 @@
 @use '../../styles/utils/constants.scss' as *;
 
-@mixin hover-avatar {
-    opacity: 0.5;
-    cursor: pointer; 
+@mixin hover-avatar { 
     background-color: $black_color;
+    cursor: pointer;
+    opacity: 0.5;
 }
 
 
 .content_type_profile {
     flex-direction: row;
-    padding: 0;
-    margin: 0;
     justify-content: space-between;
+    margin: 0;
+    padding: 0;
 }
 
 .back-button-container {
-    display: flex;
     align-items: center;
-    width: 64px;
+    background-color: $white_color;
+    border-right: 1px solid $gray_color_type_2;
+    box-sizing: border-box;
+    display: flex;
     height: 100vh;
     justify-content: center;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    background-color: $white_color;
-    border-right: 1px solid $gray_color_type_2;
+    width: 64px;
 }
+
 .back-button {
-    border-radius: 50%;
-    width: 28px;
-    height: 28px;
     background-color: $blue_color_type_1;
-    padding: 0;
-    margin: 0;
-    border: none;
     background-image: url("../../../image/back-button-image.svg");
     background-position: center;
+    border: none;
+    border-radius: 50%;
+    height: 28px;
+    margin: 0;
+    padding: 0;
+    width: 28px;
+
     &:hover {
         @include hover_element; 
     }
@@ -44,17 +46,17 @@
 .profile {
     display: flex;
     flex-direction: column;
-    margin: 60px auto 0px;
-    max-width: 95%;
+    margin: 60px auto 0;
     max-height: 100vh;
+    max-width: 95%;
     padding:0;
 
     &__name {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 16px;
         margin: 0 auto 60px;
         padding: 0;
-        font-size: 16px;
-        line-height: 16px;
-        font-weight: 600;
 
         &_type_change {
             color: $white_color;
@@ -65,35 +67,37 @@
         display: flex;
         flex-direction: column;
         margin: 52px 0 0;
-        padding: 0;
         max-width: 100%;
+        padding: 0;
+
         &_display_none {
             display: none;
         }
     }
+
     &__footer-button {
+        background-color: $white_color;
         border: none;
         border-bottom: 1px solid $gray_color_type_2;
+        color: $blue_color_type_1;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 13px;
         margin: 0;
         margin-bottom: 10px;
         padding: 0;
         padding-bottom: 10px;
         text-align: left;
-        background-color: $white_color;
-        color: $blue_color_type_1;
-        font-size: 13px;
-        line-height: 13px;
-        font-weight: 500;
 
         &:hover {
             @include hover_element; 
         }
 
         &:last-of-type {
-            color: $red_color_type_1;
             border-bottom: none;
-            padding-bottom: 0;
+            color: $red_color_type_1;
             margin-bottom: 0;
+            padding-bottom: 0;
         }
     }
 }
