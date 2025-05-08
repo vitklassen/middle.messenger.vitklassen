@@ -1,0 +1,17 @@
+$white_color: #fff;
+$black_color: #000;
+$blue_color_type_1: #3369f3;
+$blue_color_type_2: #e4edfd;
+$gray_color_type_1: #efefef;
+$gray_color_type_2: #EAEAEA;
+$gray_color_type_3: #1e1e1e;
+$gray_color_type_4: #999;
+$gray_color_type_5: #fbfbfb;
+$red_color_type_1: #f00;
+$red_color_type_2: #ff2f2f;
+
+@mixin hover_element {
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s linear;
+}

@@ -1,0 +1,14 @@
+@use '../../styles/utils/constants.scss' as *;
+
+
+.chat-list {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    list-style: none;
+    margin: 0;
+    max-width: 100%;
+    overflow: auto;
+    padding: 0;
+}

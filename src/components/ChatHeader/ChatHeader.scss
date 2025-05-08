@@ -1,0 +1,109 @@
+@use '../../styles/utils/constants.scss' as *;
+
+.chat-header {
+    border-bottom: 1px solid $gray_color_type_2;
+    display: flex;
+    margin: 0;
+    max-width: 100%;
+    padding: 10px 0;
+
+    &__avatar {
+        border: none;
+        border-radius: 50%;
+        height: 47px;
+        margin: 0;
+        margin-right: 10px;
+        width: 47px;
+    }
+
+    &__info {
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    &__chat-name {
+        color: $gray_color_type_3;
+        font-size: 13px;
+        line-height: 13px;
+        margin: auto 0;
+        max-width: 193px;
+        padding: 0;
+    }
+
+    &__button {
+        background-color: $white_color;
+        background-image: url('../../../public/chat-layout__button-image.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        border: none;
+        height: 15px;
+        margin: auto 0;
+        padding: 0;
+        width: 30px;
+        
+        &:hover {
+            @include hover_element; 
+        }
+    }
+
+    &__popover-wrapper {
+        background-color: $white_color;
+        border: none;
+        border-radius: 12px;
+        box-sizing: border-box;
+        filter: drop-shadow(0 0 6px rgb(0 0 0 / 14%));
+        left: 1060px;
+        margin: 0;
+        max-height: fit-content;
+        padding: 15px 0 15px 15px;
+        position: absolute;
+        top: 65px;
+        width: 210px;
+    }
+
+    &__button-container {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        max-width: 100%;
+    }
+
+    &__control-button {
+        background-color: $white_color;
+        border: none;
+        display: flex;
+        margin: 0;
+        margin-bottom: 16px;
+        padding: 0;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+
+        &:hover {
+            @include hover_element;
+        }
+    }
+
+    &__control-image {
+        height: 22px;
+        margin: 0;
+        margin-right: 15px;
+        padding: 0;
+        width: 22px;
+    }
+
+    &__control-span {
+        color: $gray_color_type_3;
+        font-family: Inter, Helvetica, sans-serif;
+        font-size: 12px;
+        line-height: 14px;
+        margin: auto 0;
+        padding: 0;
+        text-align: center;
+    }
+}

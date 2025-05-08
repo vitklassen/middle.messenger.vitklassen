@@ -1,0 +1,126 @@
+@use '../../styles/utils/constants.scss' as *;
+
+.message-form {
+    border-top: 1px solid $gray_color_type_2;
+    display: flex;
+    font-family: Inter, Helvetica, sans-serif;
+    justify-content: space-between;
+    margin: 0;
+    max-width: 100%;
+    padding: 11px 0;
+
+    &__attachment-button {
+        background-color: $white_color;
+        background-image: url('../../../public/message-form__attachment-button-image.svg');
+        background-position: center;
+        border: none;
+        height: 32px;
+        margin: 0;
+        padding: 0;
+        width: 32px;
+
+        &:hover {
+            @include hover_element; 
+        }
+    }
+
+    &__input {
+        background-color: $gray_color_type_1;
+        border: none;
+        border-radius: 30px;
+        box-sizing: border-box;
+        color: $gray_color_type_3;
+        font-family: inherit;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 12px;
+        margin: 0;
+        padding: 0 20px; 
+        text-align: left;
+        width: calc(100% * (849 / 929));
+
+        &:focus {
+            border: none;
+            outline: $gray_color_type_4 solid 2px;
+        }
+
+        &:placeholder-shown {
+            color: $gray_color_type_4;
+        }
+    }
+
+    &__submit-button {
+        background-color: $blue_color_type_1;
+        background-image: url("../../..//public/message-form__submit-button-image.svg");
+        background-position: center;
+        border: none;
+        border-radius: 50%;
+        height: 28px;
+        margin: 0;
+        margin-bottom: 2px;
+        padding: 0;
+        width: 28px;
+
+        &:hover {
+            @include hover_element; 
+        }
+    }
+
+    &__popover-wrapper {
+        background-color: $white_color;
+        border: none;
+        border-radius: 12px;
+        box-sizing: border-box;
+        filter: drop-shadow(0 0 6px rgb(0 0 0 / 14%));
+        height: 128px;
+        left: 320px;
+        margin: 0;
+        padding: 15px 0 15px 15px;
+        position: absolute;
+        top: 527px;
+        width: 168px;
+    }
+
+    &__button-container {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        max-width: 100%;
+    }
+
+    &__control-button {
+        background-color: $white_color;
+        border: none;
+        display: flex;
+        margin: 0;
+        margin-bottom: 16px;
+        padding: 0;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+
+        &:hover {
+            @include hover_element;
+        }
+    }
+
+    &__control-image {
+        height: 22px;
+        margin: 0;
+        margin-right: 15px;
+        padding: 0;
+        width: 22px;
+    }
+
+    &__control-span {
+        color: $gray_color_type_3;
+        font-family: Inter, Helvetica, sans-serif;
+        font-size: 12px;
+        line-height: 14px;
+        margin: auto 0;
+        padding: 0;
+        text-align: center;
+    }
+}
