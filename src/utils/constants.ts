@@ -16,7 +16,7 @@ const formElementsDescription = {
     inputName: 'password',
     inputType: 'password',
     inputPlaceHolder: 'Пароль',
-    validPattern: '[a-zA-Z]{8,40}$', //добавить нормальное регулярное выражение
+    validPattern: '^(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9\d]{8,40}$',
     errorMessage: 'Неверный формат пароля',
     minLength: 8,
     maxLength: 40,
@@ -41,7 +41,7 @@ const formElementsDescription = {
     inputType: 'text',
     inputPlaceHolder: 'Классен',
     ariaDescribedby: 'second_name-error',
-    validPattern: '^[А-ЯA-Z][А-ЯA-Zа-яa-z\\-]{2,30}$',
+    validPattern: '^[А-ЯЁA-Z][А-ЯЁA-Zа-яёa-z\\-]{2,30}$',
     errorMessage: 'Неверный формат фамилии',
     errorClassname: 'input__second_name-error',
     minLength: 0,
@@ -95,7 +95,7 @@ const formElementsDescription = {
     inputName: 'oldPassword',
     inputType: 'password',
     ariaDescribedby: 'oldPassword-error',
-    validPattern: '[a-zA-Z]{8,40}$', //добавить нормальное регулярное выражение
+    validPattern: '^(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9\d]{8,40}$',
     errorMessage: 'Неверный формат пароля',
     minLength: 8,
     maxLength: 40,
@@ -104,7 +104,7 @@ const formElementsDescription = {
   newPassword: {
     inputName: 'newPassword',
     inputType: 'password',
-    validPattern: '[a-zA-Z]{8,40}$', //добавить нормальное регулярное выражение
+    validPattern: '^(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9\d]{8,40}$',
     errorMessage: 'Неверный формат пароля',
     minLength: 8,
     maxLength: 40,

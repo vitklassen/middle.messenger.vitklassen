@@ -19,29 +19,28 @@ function queryStringify(data: object & { [key: string]: string | number | boolea
   
   const keys = Object.keys(data);
   return keys.reduce((result, key, index) => {
-    return `${result}${key}=${data[key]}${index < keys.length - 1 ? '&' : ''}`;
+    return `${result}${encodeURIComponent(key)}=${encodeURIComponent(data[key])}${index < keys.length - 1 ? '&' : ''}`;
   }, '?');
 }
   
 export default class HTTPTransport {
-  get = (url: string, options = { timeout: 5000 }): Promise<unknown> => {
-  
+  get = (url: string, options: IOptions = {}): Promise<unknown> => {
     return this.request(url, { ...options, method: METHODS.GET });
   };
   
-  post = (url: string, options = { timeout: 5000 }) => {
+  post = (url: string, options: IOptions = {}): Promise<unknown>  => {
     return this.request(url, { ...options, method: METHODS.POST });
   };
   
-  put = (url: string, options = { timeout: 5000 }) => {
+  put = (url: string, options: IOptions = {}): Promise<unknown>  => {
     return this.request(url, { ...options, method: METHODS.PUT });
   };
   
-  delete = (url: string, options = { timeout: 5000 }) => { 
+  delete = (url: string, options: IOptions = {}): Promise<unknown>  => { 
     return this.request(url, { ...options, method: METHODS.DELETE });
   };
   
-  request = (url: string, options: IOptions = {}, timeout = 5000) => {
+  request = (url: string, options: IOptions = {}): Promise<unknown>  => {
     const { headers = {}, method, data } = options;
   
     return new Promise(function (resolve, reject) {
@@ -71,7 +70,7 @@ export default class HTTPTransport {
       xhr.onabort = reject;
       xhr.onerror = reject;
   
-      xhr.timeout = timeout || 5000;
+      xhr.timeout = options.timeout || 5000;
       xhr.ontimeout = reject;
   
       if (isGet || !data) {
