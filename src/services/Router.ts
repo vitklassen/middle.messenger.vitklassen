@@ -1,0 +1,78 @@
+import Component from './Component';
+import Route from './Route';
+
+class Router {
+  static __instance: Router | null;
+
+  protected _routes!: Route[];
+
+  protected _history!: Window['history'];
+
+  protected _currentRoute!: Route | null;
+
+  protected _rootQuery!: string;
+
+  constructor(rootQuery: string) {
+    if (Router.__instance) {
+      return Router.__instance;
+    }
+    this._routes = [];
+    this._history = window.history;
+    this._currentRoute = null;
+    this._rootQuery = rootQuery;
+    Router.__instance = this;
+  }
+
+  public use(pathName: string, view: typeof Component): Router {
+    const route = new Route({ pathName: pathName, view: view, rootQuery: this._rootQuery });
+    this._routes.push(route);
+    return this;
+  }
+
+  public start(): void {
+    window.onpopstate = (event: PopStateEvent) => {
+      if (event.currentTarget instanceof Window) {
+        this._onRoute(event.currentTarget.location.pathname);
+      }
+    };
+    this._onRoute(window.location.pathname);
+  }
+
+  public go(pathName: string): void {
+    this._history.pushState({}, '', pathName);
+    this._onRoute(pathName);
+  }
+
+  public back(): void {
+    this._history.back();
+  }
+
+  public forward(): void {
+    this._history.forward();
+  }
+
+  private _onRoute(pathName: string): void {
+    const route = this._getRoute(pathName);
+
+    if (this._currentRoute) {
+      this._currentRoute.leave();
+    }
+
+    this._currentRoute = route;
+    route.render(route, pathName);
+  }
+
+  private _getRoute(pathName: string): Route {
+    const currentRoute = this._routes.find(route => route.matchPath(pathName));
+    if (!currentRoute) {
+      const notFoundErrorRoute = this._routes.find(route => route.matchPath('/not-found'));
+      if (!notFoundErrorRoute) {
+        throw new Error('');
+      }
+      return notFoundErrorRoute;
+    }
+    return currentRoute;
+  }
+}
+
+export default Router;
