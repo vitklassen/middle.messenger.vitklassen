@@ -9,7 +9,7 @@ const formElement = new Form({
   labels: [...signInFormLabelsInfo.map(item => 
     new FormLabel({ ...item }),
   )],
-  href: 'signup',
+  href: '/sign-up',
   linkText: 'Нет аккаунта?',
   buttonText: 'Войти',
   buttonClassName: 'form__submit-button_state_disabled',

@@ -1,4 +1,4 @@
-import Component from './Component';
+import Component, { ComponentProps } from './Component';
 import Route from './Route';
 
 class Router {
@@ -23,8 +23,8 @@ class Router {
     Router.__instance = this;
   }
 
-  public use(pathName: string, view: typeof Component): Router {
-    const route = new Route({ pathName: pathName, view: view, rootQuery: this._rootQuery });
+  public use(pathName: string, view: typeof Component, componentProps?: ComponentProps): Router {
+    const route = new Route({ pathName: pathName, view: view, rootQuery: this._rootQuery, componentProps: componentProps });
     this._routes.push(route);
     return this;
   }
@@ -53,13 +53,9 @@ class Router {
 
   private _onRoute(pathName: string): void {
     const route = this._getRoute(pathName);
-
-    if (this._currentRoute) {
-      this._currentRoute.leave();
-    }
-
+    console.log(route);
     this._currentRoute = route;
-    route.render(route, pathName);
+    route.render();
   }
 
   private _getRoute(pathName: string): Route {
