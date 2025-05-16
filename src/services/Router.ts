@@ -38,7 +38,7 @@ class Router {
     this._onRoute(window.location.pathname);
   }
 
-  public go(pathName: string): void {
+  public go(pathName: string = ''): void {
     this._history.pushState({}, '', pathName);
     this._onRoute(pathName);
   }
@@ -52,10 +52,11 @@ class Router {
   }
 
   private _onRoute(pathName: string): void {
+    this._deleteLinkEventListener();
     const route = this._getRoute(pathName);
-    console.log(route);
     this._currentRoute = route;
     route.render();
+    this._attachLinkEventListener();
   }
 
   private _getRoute(pathName: string): Route {
@@ -68,6 +69,26 @@ class Router {
       return notFoundErrorRoute;
     }
     return currentRoute;
+  }
+
+  private _attachLinkEventListener(): void {
+    const linksList = document.querySelectorAll('#app [href^="/"]');
+    linksList.forEach(link => {
+      link.addEventListener('click', this._handleNavigateLinkClick.bind(this));
+    });
+  }
+
+  private _deleteLinkEventListener(): void {
+    const linksList = document.querySelectorAll('#app [href^="/"]');
+    linksList.forEach(link => {
+      link.removeEventListener('click', this._handleNavigateLinkClick.bind(this));
+    });
+  }
+
+  private _handleNavigateLinkClick(evt: Event): void {
+    evt.preventDefault();
+    const linkElement = evt.target as HTMLLinkElement;
+    this.go(linkElement.dataset.ref);
   }
 }
 

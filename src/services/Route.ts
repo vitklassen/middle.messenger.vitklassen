@@ -27,9 +27,9 @@ export default class Route {
   }
 
   public render(): void {
-    this._component = this._componentProps ? new this._componentClass(this._componentProps): new this._componentClass();
+    this._component = this._componentProps ? new this._componentClass(this._componentProps) : new this._componentClass();
     const root = document.getElementById(this._rootQuery);
-    if(root instanceof Element) {
+    if (root instanceof Element) {
       root.replaceChildren(this._component.getContent());
     } 
   }
