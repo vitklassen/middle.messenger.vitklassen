@@ -72,23 +72,27 @@ class Router {
   }
 
   private _attachLinkEventListener(): void {
-    const linksList = document.querySelectorAll('#app [href^="/"]');
-    linksList.forEach(link => {
-      link.addEventListener('click', this._handleNavigateLinkClick.bind(this));
+    const navigateLinksList = document.querySelectorAll('#app [href^="/"]');
+    const navigateButtonsList = document.querySelectorAll('#app [id^="navigate-button"]');
+    const navigateElementsArray = [...navigateLinksList, ...navigateButtonsList];
+    navigateElementsArray.forEach(navigateElement => {
+      navigateElement.addEventListener('click', this._handleNavigateElementClick.bind(this));
     });
   }
 
   private _deleteLinkEventListener(): void {
-    const linksList = document.querySelectorAll('#app [href^="/"]');
-    linksList.forEach(link => {
-      link.removeEventListener('click', this._handleNavigateLinkClick.bind(this));
+    const navigateLinksList = document.querySelectorAll('#app [href^="/"]');
+    const navigateButtonsList = document.querySelectorAll('#app [id^="navigate-button"]');
+    const navigateElementsArray = [...navigateLinksList, ...navigateButtonsList];
+    navigateElementsArray.forEach(navigateElement => {
+      navigateElement.removeEventListener('click', this._handleNavigateElementClick.bind(this));
     });
   }
 
-  private _handleNavigateLinkClick(evt: Event): void {
+  private _handleNavigateElementClick(evt: Event): void {
     evt.preventDefault();
-    const linkElement = evt.target as HTMLLinkElement;
-    this.go(linkElement.dataset.ref);
+    const navigateElement = evt.target as HTMLLinkElement | HTMLButtonElement;
+    this.go(navigateElement.dataset.ref);
   }
 }
 
