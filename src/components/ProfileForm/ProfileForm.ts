@@ -1,6 +1,6 @@
 import  { ComponentProps } from '../../services/Component';
 import template from './template';
-import FormComponent from '../../utils/commonClasses';
+import FormComponent from '../../abstract/FormComponent';
 
 export default class ProfileForm extends FormComponent {
   constructor(props: ComponentProps) {

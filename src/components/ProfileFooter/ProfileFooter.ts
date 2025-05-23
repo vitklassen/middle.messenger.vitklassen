@@ -21,7 +21,6 @@ export default class ProfileFooter extends Component {
   }
 
   override render() {
-    console.log('profileFooter is render');
     return template;
   }
 }

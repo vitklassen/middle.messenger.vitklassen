@@ -1,6 +1,6 @@
 import template from './template';
 import { ComponentProps } from '../../services/Component';
-import FormComponent from '../../utils/commonClasses';
+import FormComponent from '../../abstract/FormComponent';
 
 
 export default class Form extends FormComponent {

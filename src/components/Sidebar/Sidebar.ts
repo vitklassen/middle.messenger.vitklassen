@@ -1,5 +1,6 @@
 import Component, { ComponentProps, CallbackTuple } from '../../services/Component';
 import template from './template';
+
 export default class Sidebar extends Component {
   constructor(props: ComponentProps) {
     super({ ...props });
@@ -12,6 +13,9 @@ export default class Sidebar extends Component {
         if (eventName === 'keyup') {
           const inputElementElement = this.getContent().querySelector('input') as HTMLInputElement;
           inputElementElement.addEventListener(eventName, eventCallback);
+        } else if (eventName === 'click') {
+          const linkElement = this.getContent().querySelector('[href^="/"]') as HTMLLinkElement;
+          linkElement?.addEventListener(eventName, eventCallback);
         } else {
           this.getContent().addEventListener(eventName, eventCallback);
         }
@@ -21,9 +25,5 @@ export default class Sidebar extends Component {
 
   override render() {
     return template;
-  }
-
-  public changeColor() {
-        
   }
 }

@@ -52,11 +52,9 @@ class Router {
   }
 
   private _onRoute(pathName: string): void {
-    this._deleteLinkEventListener();
     const route = this._getRoute(pathName);
     this._currentRoute = route;
     route.render();
-    this._attachLinkEventListener();
   }
 
   private _getRoute(pathName: string): Route {
@@ -70,30 +68,7 @@ class Router {
     }
     return currentRoute;
   }
-
-  private _attachLinkEventListener(): void {
-    const navigateLinksList = document.querySelectorAll('#app [href^="/"]');
-    const navigateButtonsList = document.querySelectorAll('#app [id^="navigate-button"]');
-    const navigateElementsArray = [...navigateLinksList, ...navigateButtonsList];
-    navigateElementsArray.forEach(navigateElement => {
-      navigateElement.addEventListener('click', this._handleNavigateElementClick.bind(this));
-    });
-  }
-
-  private _deleteLinkEventListener(): void {
-    const navigateLinksList = document.querySelectorAll('#app [href^="/"]');
-    const navigateButtonsList = document.querySelectorAll('#app [id^="navigate-button"]');
-    const navigateElementsArray = [...navigateLinksList, ...navigateButtonsList];
-    navigateElementsArray.forEach(navigateElement => {
-      navigateElement.removeEventListener('click', this._handleNavigateElementClick.bind(this));
-    });
-  }
-
-  private _handleNavigateElementClick(evt: Event): void {
-    evt.preventDefault();
-    const navigateElement = evt.target as HTMLLinkElement | HTMLButtonElement;
-    this.go(navigateElement.dataset.ref);
-  }
 }
+const router = new Router('app');
 
-export default Router;
+export default router;

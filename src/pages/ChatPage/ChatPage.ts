@@ -7,6 +7,7 @@ import Popup from '../../components/Popup/Popup';
 import PopupForm from '../../components/PopupForm/PopupForm';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Component from '../../services/Component';
+import router from '../../services/Router';
 import { messageList } from '../../utils/mock';
 import template from './template';
 
@@ -88,6 +89,11 @@ const sideBar = new Sidebar({
           }))],
         });
       }
+    },
+    click: (evt: Event) => {
+      evt.preventDefault();
+      const linkElement = evt.target as HTMLLinkElement;
+      router.go(linkElement.dataset.ref);
     },
   },
 });

@@ -1,4 +1,5 @@
 import Component, { CallbackTuple, ComponentProps } from '../services/Component';
+import router from '../services/Router';
 
 export default class FormComponent extends Component {
   constructor(props: ComponentProps) {
@@ -23,6 +24,11 @@ export default class FormComponent extends Component {
           this._toggleInputError(inputElement);
           this._toggleButton();
         },
+        click: (evt: Event) => {
+          evt.preventDefault();
+          const linkElement = evt.target as HTMLLinkElement;
+          router.go(linkElement.dataset.ref);
+        }
       },
     });
   }
@@ -35,7 +41,11 @@ export default class FormComponent extends Component {
         inputList?.forEach(input => {
           input.addEventListener(eventName, eventCallback);
         });
-      } else {
+      } 
+      else if (eventName === 'click') {
+        const linkElement = this.getContent().querySelector('[href^="/"]') as HTMLLinkElement;
+        linkElement?.addEventListener(eventName, eventCallback); }
+      else {
         this.getContent().addEventListener(eventName, eventCallback);
       }
     });
