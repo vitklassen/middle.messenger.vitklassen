@@ -1,5 +1,5 @@
 export abstract class BaseAPI {
-  create() { throw new Error('Not implemented'); }
+  create(params: unknown) { throw new Error('Not implemented'); }
 
   request() { throw new Error('Not implemented'); }
 

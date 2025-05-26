@@ -5,7 +5,6 @@ import ProfilePage from './pages/ProfilePage/ProfilePage';
 import ChatPage from './pages/ChatPage/ChatPage';
 import router from './services/Router';
 
-
 export default class App {
 
   constructor() {

@@ -5,7 +5,7 @@ enum METHODS {
   DELETE = 'DELETE',
 }
 
-interface IOptions {
+export interface IOptions {
   headers?: Record<string, string>;
   method?: METHODS;
   timeout?: number;

@@ -14,7 +14,7 @@
     padding: 0;
 }
 
-.back-button-container {
+.back-link-container {
     align-items: center;
     background-color: $white_color;
     border-right: 1px solid $gray_color_type_2;
@@ -27,7 +27,7 @@
     width: 64px;
 }
 
-.back-button {
+.back-link {
     background-color: $blue_color_type_1;
     background-image: url("../../../public/back-button-image.svg");
     background-position: center;
@@ -37,7 +37,7 @@
     margin: 0;
     padding: 0;
     width: 28px;
-
+    text-decoration: none;
     &:hover {
         @include hover_element; 
     }

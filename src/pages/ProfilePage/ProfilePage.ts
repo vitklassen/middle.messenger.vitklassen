@@ -1,9 +1,10 @@
 import ProfileFooter from '../../components/ProfileFooter/ProfileFooter';
 import ProfileForm from '../../components/ProfileForm/ProfileForm';
 import ProfileFormFieldset from '../../components/ProfileFormFieldset/ProfileFormFieldset';
-import Component from '../../services/Component';
+import Component, { CallbackTuple } from '../../services/Component';
 import template from './template';
 import { profileChangeData, passwordChangeData } from '../../utils/constants';
+import router from '../../services/Router';
 
 const profileForm = new ProfileForm({
   fieldsets: [...profileChangeData.map(item => {
@@ -48,12 +49,29 @@ export default class ProfilePage extends Component {
     super({
       ProfileForm: profileForm,
       ProfileFooter: profileFooter,
-
+      events: {
+        click: (evt: Event) => {
+          evt.preventDefault();
+          evt.stopPropagation();
+          const linkElement = evt.target as HTMLLinkElement;
+          router.go(linkElement.dataset.ref);
+        }
+      }
     });
   }
 
+  override addEvents(): void {
+    const { events = {} } = this._props;
+        Object.entries(events).forEach(([eventName, eventCallback]: CallbackTuple) => {
+          if (eventName === 'click') {
+            const linkElement = this.getContent().querySelector('[href^="/"]') as HTMLLinkElement;
+            linkElement?.addEventListener(eventName, eventCallback); }
+          else {
+            this.getContent().addEventListener(eventName, eventCallback);
+          }
+        });
+  }
   override render() {
-    console.log('profilePage is render');
     return template;
   }
 }

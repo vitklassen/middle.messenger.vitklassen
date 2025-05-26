@@ -1,7 +1,7 @@
 const template = `
 <main class="content content_type_profile"> 
-    <div class="back-button-container">
-        <button class="back-button" id="navigate-button_to_messenger" data-ref="/messenger"></button>
+    <div class="back-link-container">
+        <a class="back-link" href="/messenger" data-ref="/messenger"></a>
     </div>
     <div class="profile">
         {{{ProfileForm}}}
