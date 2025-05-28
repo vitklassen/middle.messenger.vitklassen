@@ -4,7 +4,8 @@ type TRouteProps = {
   pathName: string, 
   view: typeof Component,
   rootQuery: string,
-  componentProps?: ComponentProps
+  componentProps?: ComponentProps,
+  isProtected: boolean
 };
 export default class Route {
   private _pathName: string;
@@ -17,13 +18,16 @@ export default class Route {
 
   private _componentProps: ComponentProps | undefined;
 
+  public isProtected: boolean
+
   constructor(props: TRouteProps) {
-    const { pathName, view, rootQuery, componentProps } = props;
+    const { pathName, view, rootQuery, componentProps, isProtected } = props;
     this._pathName = pathName;
     this._componentClass = view;
     this._component = null;
     this._rootQuery = rootQuery;
     this._componentProps = componentProps;
+    this.isProtected = isProtected;
   }
 
   public render(): void {

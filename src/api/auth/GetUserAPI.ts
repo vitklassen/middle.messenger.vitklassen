@@ -1,8 +1,9 @@
-import { BaseAPI } from "../../services/BaseAPI";
-import authAPIInstance from "./AuthAPIInstance";
+import TUserResponse from '../../models/auth/UserModel';
+import authAPIInstance from './AuthAPIInstance';
 
-export default class GetUserAPI extends BaseAPI {
-    public request(): Promise<unknown> {
-        return authAPIInstance.get('/user');
-    }
+export default class UserAPI {
+  async request() {
+    return authAPIInstance.get<TUserResponse>('/user')
+    .then(response => response);
+  }
 }

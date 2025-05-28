@@ -33,23 +33,23 @@ export default class HTTPTransport {
     this.endpoint += url;
   }
 
-  get = (urlPart: string, options: IOptions = {}): Promise<unknown> => {
+  get<TResponse>(urlPart: string, options: IOptions = {}): Promise<TResponse> {
     return this.request(urlPart, { ...options, method: METHODS.GET });
-  };
+  }
   
-  post = (urlPart: string, options: IOptions = {}): Promise<unknown>  => {
+  post<TResponse>(urlPart: string, options: IOptions = {}): Promise<TResponse> {
     return this.request(urlPart, { ...options, method: METHODS.POST });
-  };
+  }
   
-  put = (urlPart: string, options: IOptions = {}): Promise<unknown>  => {
+  put<TResponse>(urlPart: string, options: IOptions = {}): Promise<TResponse> {
     return this.request(urlPart, { ...options, method: METHODS.PUT });
-  };
+  }
   
-  delete = (urlPart: string, options: IOptions = {}): Promise<unknown>  => { 
+  delete<TResponse>(urlPart: string, options: IOptions = {}): Promise<TResponse> { 
     return this.request(urlPart, { ...options, method: METHODS.DELETE });
-  };
+  }
   
-  request = (urlPart: string, options: IOptions = {}): Promise<unknown>  => {
+  request<TResponse>(urlPart: string, options: IOptions = {}): Promise<TResponse> {
     const { headers = {}, method, data, signal, responseType = 'json', withCredentials = true } = options;
     const baseUrl = this.endpoint;
     return new Promise(function (resolve, reject) {
@@ -102,5 +102,5 @@ export default class HTTPTransport {
         xhr.send(JSON.stringify(data));
       }
     });
-  };
+  }
 }

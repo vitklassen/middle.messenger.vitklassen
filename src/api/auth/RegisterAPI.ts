@@ -1,16 +1,15 @@
-import { BaseAPI } from "../../services/BaseAPI";
-import { IOptions } from "../../services/HTTPTransport";
-import authAPIInstance from "./AuthAPIInstance";
-import TRegisterFormModel from "../../models/auth/RegisterFormModel";
+import { IOptions } from '../../services/HTTPTransport';
+import authAPIInstance from './AuthAPIInstance';
+import TRegisterModel from '../../models/auth/RegisterModel';
 
-export default class RegisterAPI extends BaseAPI {
-    public create(userData: TRegisterFormModel): Promise<unknown> {
-        const options: IOptions = {
-            headers: {
-                'content-type': 'application/json',
-            },
-            data: userData,
-        }
-        return authAPIInstance.post('/signup', options);
-    }
+export default class RegisterAPI {
+  public create(userData: TRegisterModel) {
+    const options: IOptions = {
+      headers: {
+        'content-type': 'application/json',
+      },
+      data: userData,
+    };
+    return authAPIInstance.post<{id: string}>('/signup', options).then(response => response.id);
+  }
 }

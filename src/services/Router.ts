@@ -1,5 +1,7 @@
+import userDataController from '../controllers/auth/UserDataController';
 import Component, { ComponentProps } from './Component';
 import Route from './Route';
+import store from './Store';
 
 class Router {
   static __instance: Router | null;
@@ -23,8 +25,8 @@ class Router {
     Router.__instance = this;
   }
 
-  public use(pathName: string, view: typeof Component, componentProps?: ComponentProps): Router {
-    const route = new Route({ pathName: pathName, view: view, rootQuery: this._rootQuery, componentProps: componentProps });
+  public use(pathName: string, view: typeof Component, isProtected: boolean, componentProps?: ComponentProps): Router {
+    const route = new Route({ pathName: pathName, view: view, rootQuery: this._rootQuery, componentProps: componentProps, isProtected: isProtected });
     this._routes.push(route);
     return this;
   }
@@ -53,6 +55,17 @@ class Router {
 
   private _onRoute(pathName: string): void {
     const route = this._getRoute(pathName);
+    if(route.isProtected) {
+      if(!('currentUser' in store.getState())) {
+        userDataController.getUserData()
+        .then(response => {
+          
+        })
+        .catch(err => {
+          this.go('/');
+        });
+      }
+    }
     this._currentRoute = route;
     route.render();
   }

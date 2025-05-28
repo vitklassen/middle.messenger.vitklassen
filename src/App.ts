@@ -16,10 +16,10 @@ export default class App {
   }
 
   private _initializeRoutes() {
-    router.use('/not-found', ErrorPage, { errorCode: 404, errorMessage: 'Не туда попали' });
-    router.use('/', SignInPage);
-    router.use('/sign-up', SignUpPage);
-    router.use('/messenger', ChatPage);
-    router.use('/settings', ProfilePage);
+    router.use('/not-found', ErrorPage, false, { errorCode: 404, errorMessage: 'Не туда попали' });
+    router.use('/', SignInPage, false);
+    router.use('/sign-up', SignUpPage, false);
+    router.use('/messenger', ChatPage, true);
+    router.use('/settings', ProfilePage, true);
   }
 }
