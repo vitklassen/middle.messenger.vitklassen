@@ -1,7 +1,6 @@
 import userDataController from '../controllers/auth/UserDataController';
 import Component, { ComponentProps } from './Component';
 import Route from './Route';
-import store from './Store';
 
 class Router {
   static __instance: Router | null;
@@ -54,14 +53,25 @@ class Router {
   }
 
   private _onRoute(pathName: string): void {
-    const route = this._getRoute(pathName);
-    if (route.isProtected) {
-      if (!(store.getState().currentUser)) {
-        userDataController.getUserData();
+    let route;
+    userDataController.checkAuth().then(res => {
+      if (pathName === '/' || pathName === '/sign-up') {
+        route = this._getRoute('/messenger');
+      } else {
+        route = this._getRoute(pathName);
       }
-    }
-    this._currentRoute = route;
-    route.render();
+      this._currentRoute = route;
+      route.render(); 
+    })
+      .catch(err => {
+        route = this._getRoute(pathName);
+        if (route.isProtected) {
+          this.go('/');
+        } else {
+          this._currentRoute = route;
+          route.render(); 
+        }
+      });
   }
 
   private _getRoute(pathName: string): Route {

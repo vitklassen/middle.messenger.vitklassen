@@ -1,6 +1,7 @@
 import EventBus, { EventCallback } from './EventBus';
 import { v4 as makeUuid } from 'uuid';
 import Handlebars from 'handlebars';
+import { isEqual } from '../utils/utils';
 
 type TCallback = (strArg: string) => void;
 type TEventCallback = (evt: Event) => void;
@@ -227,7 +228,7 @@ export default class Component {
   }
 
   public componentDidUpdate(oldProps: ComponentProps, newProps: ComponentProps): boolean {
-    if (oldProps === newProps) {
+    if (isEqual(oldProps, newProps)) {
       return false;
     }
     return true;

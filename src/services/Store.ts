@@ -5,6 +5,10 @@ export type Indexed<T = any> = {
   [key in string]: T;
 };
 
+export enum StoreEvents {
+  Updated = 'updated',
+}
+
 class Store extends EventBus {
   private state: Indexed = {};
 
@@ -14,6 +18,7 @@ class Store extends EventBus {
 
   public set(path: string, value: unknown) {
     set(this.state, path, value);
+    this.notify(StoreEvents.Updated);
   }
 }
 

@@ -1,19 +1,17 @@
-import LogoutAPI from '../../api/auth/LogoutAPI';
+import authAPI from '../../api/auth/AuthAPI';
 import router from '../../services/Router';
 import store from '../../services/Store';
 
-const logoutAPI = new LogoutAPI();
-
 class UserLogoutController {
-  public async logout() {
+  public async logout(): Promise<void> {
     try {
-      const isLogout = await logoutAPI.logoutUser();
+      const isLogout = await authAPI.logoutUser();
       if (isLogout) {
         store.set('currentUser', null);
         router.go('/');
       }
     } catch (error) {
-      console.log(error);
+      router.go('/server-error');
     }
   }
 }

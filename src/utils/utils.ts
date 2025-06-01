@@ -1,4 +1,6 @@
-import { type Indexed } from '../services/Store';
+import Component, { ComponentProps } from '../services/Component';
+import { StoreEvents, type Indexed } from '../services/Store';
+import store from '../services/Store';
 
 export function set(object: Indexed | unknown, path: string, value: unknown): Indexed | unknown {
   if (typeof object !== 'object' || object === null) {
@@ -13,6 +15,37 @@ export function set(object: Indexed | unknown, path: string, value: unknown): In
     [key]: acc,
   }), value as any);
   return merge(object as Indexed, result);
+}
+
+export function connect(Block: typeof Component, mapStateToProps: (state: Indexed) => Indexed) {
+  return class extends Block {
+    constructor(props: ComponentProps) {
+      super({ ...props, ...mapStateToProps(store.getState()) });
+      store.on(StoreEvents.Updated, () => {
+        this.setProps({ ...mapStateToProps(store.getState()) });
+      });
+    }
+  };
+}
+
+export function isEqual(lhs: Indexed, rhs: Indexed): boolean {
+  if (Object.keys(lhs).length !== Object.keys(rhs).length) {
+    return false;
+  }
+
+  for (const [key, value] of Object.entries(lhs)) {
+    const rightValue = rhs[key];
+    if (isArrayOrObject(value) && isArrayOrObject(rightValue)) {
+      if (isEqual(value, rightValue)) {
+        continue;
+      }
+      return false;
+    }
+    if (value !== rightValue) {
+      return false;
+    }
+  }
+  return true;
 }
 
 function merge(lhs: Indexed, rhs: Indexed): Indexed {
@@ -31,6 +64,20 @@ function merge(lhs: Indexed, rhs: Indexed): Indexed {
       lhs[p] = rhs[p];
     }
   }
-
   return lhs;
+}
+
+function isPlainObject(value: unknown): value is Indexed {
+  return typeof value === 'object'
+        && value !== null
+        && value.constructor === Object
+        && Object.prototype.toString.call(value) === '[object Object]';
+}
+
+function isArray(value: unknown): value is [] {
+  return Array.isArray(value);
+}
+
+function isArrayOrObject(value: unknown): value is [] | Indexed {
+  return isPlainObject(value) || isArray(value);
 }

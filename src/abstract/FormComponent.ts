@@ -18,11 +18,10 @@ export default class FormComponent extends Component {
               request[input.name] = input.value;
             });
             //console.log(request);
-            if(props.formType === 'login') {
-              userLoginController.login(request as TLoginModel);
-            }
-            else if(props.formType === 'register') {
-              userRegisterController.register(request as TRegisterModel);
+            if (props.formType === 'login') {
+              userLoginController.login(request as TLoginModel).catch(err => console.log(err));
+            } else if (props.formType === 'register') {
+              userRegisterController.register(request as TRegisterModel).catch(err => console.log(err));
             }
           } else {
             console.log('not valid');

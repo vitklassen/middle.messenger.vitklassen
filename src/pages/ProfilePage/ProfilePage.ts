@@ -45,7 +45,7 @@ const profileFooter = new ProfileFooter({
     submit: (evt: Event) => {
       evt.preventDefault();
       userLogoutController.logout();
-    }
+    },
   },
 });
 

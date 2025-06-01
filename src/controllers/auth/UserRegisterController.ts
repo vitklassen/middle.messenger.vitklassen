@@ -1,17 +1,12 @@
 import TRegisterModel from '../../models/auth/RegisterModel';
-import RegisterAPI from '../../api/auth/RegisterAPI';
+import authAPI from '../../api/auth/AuthAPI';
 import router from '../../services/Router';
 
-const registerAPI = new RegisterAPI();
-
 class UserRegisterController {
-  public async register(data: TRegisterModel) {
-    try {
-      const userId = await registerAPI.createUser(data);
-      router.go('/messenger');
-    } catch (error) {
-      console.log(error);
-    }
+  public async register(data: TRegisterModel): Promise<void> {
+    // добавить валидацию ?
+    await authAPI.createUser(data);
+    router.go('/messenger');
   }
 }
 

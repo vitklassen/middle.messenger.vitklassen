@@ -17,6 +17,7 @@ export default class App {
 
   private _initializeRoutes() {
     router.use('/not-found', ErrorPage, false, { errorCode: 404, errorMessage: 'Не туда попали' });
+    router.use('/server-error', ErrorPage, false, { errorCode: 500, errorMessage: 'Уже фиксим' });
     router.use('/', SignInPage, false);
     router.use('/sign-up', SignUpPage, false);
     router.use('/messenger', ChatPage, true);

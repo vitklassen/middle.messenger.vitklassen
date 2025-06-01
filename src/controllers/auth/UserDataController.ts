@@ -1,17 +1,14 @@
-import router from '../../services/Router';
-import UserAPI from '../../api/auth/GetUserAPI';
+import authAPI from '../../api/auth/AuthAPI';
 import store from '../../services/Store';
 
-const userAPI = new UserAPI();
-
 class UserDataController {
-  public async getUserData() {
-    try {
-      const userData = await userAPI.request();
-      store.set('currentUser', userData);
-    } catch (error) {
-      router.go('/');
-    }
+  public async checkAuth(): Promise<boolean> {
+    if (store.getState().currentUser) {
+      return true;
+    } 
+    const userData = await authAPI.getUserData();
+    store.set('currentUser', userData);
+    return true;
   }
 }
 
