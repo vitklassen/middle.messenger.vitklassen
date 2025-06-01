@@ -13,6 +13,7 @@ const formElement = new Form({
   linkText: 'Нет аккаунта?',
   buttonText: 'Войти',
   buttonClassName: 'form__submit-button_state_disabled',
+  formType: 'login',
 });
 export default class SignInPage extends Component {
   constructor() {

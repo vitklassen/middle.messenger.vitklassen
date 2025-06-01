@@ -1,11 +1,11 @@
-import TLoginRequest from '../../models/auth/LoginModel';
+import TLoginModel from '../../models/auth/LoginModel';
 import LoginAPI from '../../api/auth/LoginAPI';
 import router from '../../services/Router';
 
 const loginAPI = new LoginAPI();
 
 class UserLoginController {
-  public async login(data: TLoginRequest) {
+  public async login(data: TLoginModel) {
     try {
       const isLogin = await loginAPI.create(data);
       if (isLogin) {

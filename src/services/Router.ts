@@ -55,15 +55,9 @@ class Router {
 
   private _onRoute(pathName: string): void {
     const route = this._getRoute(pathName);
-    if(route.isProtected) {
-      if(!('currentUser' in store.getState())) {
-        userDataController.getUserData()
-        .then(response => {
-          
-        })
-        .catch(err => {
-          this.go('/');
-        });
+    if (route.isProtected) {
+      if (!(store.getState().currentUser)) {
+        userDataController.getUserData();
       }
     }
     this._currentRoute = route;

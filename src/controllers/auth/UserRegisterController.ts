@@ -7,9 +7,7 @@ const registerAPI = new RegisterAPI();
 class UserRegisterController {
   public async register(data: TRegisterModel) {
     try {
-      const userId = await registerAPI.create(data);
-      
-      console.log(userId);
+      const userId = await registerAPI.createUser(data);
       router.go('/messenger');
     } catch (error) {
       console.log(error);

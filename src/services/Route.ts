@@ -18,7 +18,7 @@ export default class Route {
 
   private _componentProps: ComponentProps | undefined;
 
-  public isProtected: boolean
+  public isProtected: boolean;
 
   constructor(props: TRouteProps) {
     const { pathName, view, rootQuery, componentProps, isProtected } = props;

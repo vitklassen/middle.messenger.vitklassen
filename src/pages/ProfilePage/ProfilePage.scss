@@ -75,6 +75,12 @@
         }
     }
 
+    &__footer-form {
+        background-color: $white_color;
+        border: none;
+        text-align: left;
+    }
+
     &__footer-button {
         background-color: $white_color;
         border: none;
@@ -93,7 +99,7 @@
             @include hover_element; 
         }
 
-        &:last-of-type {
+        &_type_submit {
             border-bottom: none;
             color: $red_color_type_1;
             margin-bottom: 0;

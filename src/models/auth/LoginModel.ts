@@ -1,5 +1,5 @@
-type TLoginRequest = {
+type TLoginModel = {
   login: string;
   email: string;
 };
-export default TLoginRequest;
+export default TLoginModel;

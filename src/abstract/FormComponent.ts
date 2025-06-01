@@ -1,3 +1,7 @@
+import userLoginController from '../controllers/auth/UserLoginController';
+import userRegisterController from '../controllers/auth/UserRegisterController';
+import TLoginModel from '../models/auth/LoginModel';
+import TRegisterModel from '../models/auth/RegisterModel';
 import Component, { CallbackTuple, ComponentProps } from '../services/Component';
 import router from '../services/Router';
 
@@ -13,7 +17,13 @@ export default class FormComponent extends Component {
             inputList.forEach(input => {
               request[input.name] = input.value;
             });
-            console.log(request);
+            //console.log(request);
+            if(props.formType === 'login') {
+              userLoginController.login(request as TLoginModel);
+            }
+            else if(props.formType === 'register') {
+              userRegisterController.register(request as TRegisterModel);
+            }
           } else {
             console.log('not valid');
           }

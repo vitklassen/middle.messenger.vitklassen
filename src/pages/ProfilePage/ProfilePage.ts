@@ -5,6 +5,7 @@ import Component, { CallbackTuple } from '../../services/Component';
 import template from './template';
 import { profileChangeData, passwordChangeData } from '../../utils/constants';
 import router from '../../services/Router';
+import userLogoutController from '../../controllers/auth/UserLogoutController';
 
 const profileForm = new ProfileForm({
   fieldsets: [...profileChangeData.map(item => {
@@ -41,6 +42,10 @@ const profileFooter = new ProfileFooter({
         },
       });
     },
+    submit: (evt: Event) => {
+      evt.preventDefault();
+      userLogoutController.logout();
+    }
   },
 });
 

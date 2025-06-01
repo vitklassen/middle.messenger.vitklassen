@@ -1,20 +1,20 @@
-import TUserResponse from "../models/auth/UserModel"
-import EventBus from "./EventBus"
+import { set } from '../utils/utils';
+import EventBus from './EventBus';
 
-type TState = {
-    currentUser?: TUserResponse,
-}
+export type Indexed<T = any> = {
+  [key in string]: T;
+};
 
 class Store extends EventBus {
-    private state: TState = {};
+  private state: Indexed = {};
 
-    public getState() {
-        return this.state;
-    }
+  public getState() {
+    return this.state;
+  }
 
-    public set() {
-
-    }
+  public set(path: string, value: unknown) {
+    set(this.state, path, value);
+  }
 }
 
 const store = new Store();

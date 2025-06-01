@@ -13,6 +13,7 @@ const formElement = new Form({
   linkText: 'Войти',
   buttonText: 'Зарегистрироваться',
   buttonClassName: 'form__submit-button_state_disabled',
+  formType: 'register',
 });
 export default class SignUpPage extends Component {
   constructor() {
