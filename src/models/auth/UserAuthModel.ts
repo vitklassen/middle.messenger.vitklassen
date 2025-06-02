@@ -1,4 +1,4 @@
-type TUserModel = {
+type TUserAuthModel = {
   id: number;
   first_name: string;
   second_name: string;
@@ -8,4 +8,4 @@ type TUserModel = {
   avatar: string;
   email: string;
 };
-export default TUserModel;
+export default TUserAuthModel;

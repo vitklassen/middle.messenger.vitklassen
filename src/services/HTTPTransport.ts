@@ -9,7 +9,7 @@ export interface IOptions {
   headers?: Record<string, string>;
   method?: METHODS;
   timeout?: number;
-  data?: Record<string, string>;
+  data?: Record<string, string | number>;
   signal?: AbortSignal;
   responseType?: XMLHttpRequestResponseType;
   withCredentials?: boolean;

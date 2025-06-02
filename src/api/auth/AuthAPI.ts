@@ -1,5 +1,5 @@
 import authAPIInstance from './AuthAPIInstance';
-import TUserModel from '../../models/auth/UserModel';
+import TUserAuthModel from '../../models/auth/UserAuthModel';
 import TLoginModel from '../../models/auth/LoginModel';
 import { IOptions } from '../../services/HTTPTransport';
 import TRegisterModel from '../../models/auth/RegisterModel';
@@ -26,7 +26,7 @@ class AuthAPI {
   }
 
   public async getUserData() {
-    return authAPIInstance.get<TUserModel>('/user')
+    return authAPIInstance.get<TUserAuthModel>('/user')
       .then(response => response);
   }
 }
