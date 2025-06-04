@@ -54,7 +54,7 @@ class Router {
 
   private _onRoute(pathName: string): void {
     let route;
-    userDataController.checkAuth().then(res => {
+    userDataController.checkAuth().then(() => {
       if (pathName === '/' || pathName === '/sign-up') {
         route = this._getRoute('/messenger');
       } else {
@@ -63,7 +63,7 @@ class Router {
       this._currentRoute = route;
       route.render(); 
     })
-      .catch(err => {
+      .catch(() => {
         route = this._getRoute(pathName);
         if (route.isProtected) {
           this.go('/');

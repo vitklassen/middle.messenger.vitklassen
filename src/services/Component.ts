@@ -2,15 +2,16 @@ import EventBus, { EventCallback } from './EventBus';
 import { v4 as makeUuid } from 'uuid';
 import Handlebars from 'handlebars';
 import { isEqual } from '../utils/utils';
+import { Indexed } from './Store';
 
 type TCallback = (strArg: string) => void;
 type TEventCallback = (evt: Event) => void;
 type TAttr = Record<string, string>;
 type TEvents = Record<string, TEventCallback>;
-type TProps = Record<string, string | number | boolean | TAttr | TEvents>;
+type TProps = Record<string, string | number | boolean | TAttr | TEvents | Indexed[]>;
 type TChildren = Record<string, Component>;
 type TLists = Record<string, Component[]>; 
-type CommonType = Component | Component[] | string | number | boolean | TAttr | TEvents | TCallback;
+type CommonType = Component | Component[] | string | number | boolean | TAttr | TEvents | TCallback | Indexed[];
 
 export type CallbackTuple = [string, TEventCallback];
 export type ComponentProps = Record<string, CommonType>;
@@ -63,9 +64,15 @@ export default class Component {
       if (currentValue instanceof Component) {
         children[key] = currentValue;
       } else if (Array.isArray(currentValue)) {
-        lists[key] = currentValue;
+        if (currentValue.length > 0) {
+          if (currentValue[0] instanceof Component) {
+            lists[key] = currentValue as Component[];
+          } else {
+            props[key] = currentValue;
+          }
+        }
       } else if (typeof currentValue === 'function') {
-
+        return;
       } else {
         props[key] = currentValue;
       }

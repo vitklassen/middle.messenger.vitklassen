@@ -8,7 +8,6 @@ export default class ProfileForm extends FormComponent {
   }
 
   override render() {
-    console.log('profileForm is render');
     return template;
   }
 }

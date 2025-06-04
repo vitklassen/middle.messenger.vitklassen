@@ -1,4 +1,4 @@
 type TUserSearchModel = {
-    login: string;
+  login: string;
 };
 export default TUserSearchModel;

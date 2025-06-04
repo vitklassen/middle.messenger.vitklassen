@@ -69,8 +69,11 @@ export default class ProfilePage extends Component {
     const { events = {} } = this._props;
     Object.entries(events).forEach(([eventName, eventCallback]: CallbackTuple) => {
       if (eventName === 'click') {
-        const linkElement = this.getContent().querySelector('[href^="/"]') as HTMLLinkElement;
-        linkElement?.addEventListener(eventName, eventCallback); 
+        const linkElements = this.getContent().querySelectorAll('[href^="/"]');
+        console.log(linkElements);
+        linkElements.forEach(link => {
+          link.addEventListener(eventName, eventCallback);
+        })
       } else {
         this.getContent().addEventListener(eventName, eventCallback);
       }
