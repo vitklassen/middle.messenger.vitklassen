@@ -7,7 +7,7 @@ import { Indexed } from './Store';
 type TCallback = (strArg: string) => void;
 type TEventCallback = (evt: Event) => void;
 type TAttr = Record<string, string>;
-type TEvents = Record<string, TEventCallback>;
+export type TEvents = Record<string, TEventCallback>;
 type TProps = Record<string, string | number | boolean | TAttr | TEvents | Indexed[]>;
 type TChildren = Record<string, Component>;
 type TLists = Record<string, Component[]>; 

@@ -73,7 +73,7 @@ export default class ProfilePage extends Component {
         console.log(linkElements);
         linkElements.forEach(link => {
           link.addEventListener(eventName, eventCallback);
-        })
+        });
       } else {
         this.getContent().addEventListener(eventName, eventCallback);
       }

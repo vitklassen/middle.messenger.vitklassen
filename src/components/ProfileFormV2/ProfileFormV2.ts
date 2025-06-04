@@ -1,11 +1,11 @@
 import  { ComponentProps } from '../../services/Component';
 import template from './template';
-import FormComponent from '../../abstract/FormComponent';
 import { connect } from '../../utils/utils';
 import { Indexed } from '../../services/Store';
 import { formElementsDescription } from '../../utils/constantsv2';
+import Form from '../Form/Form';
 
-class ProfileFormV2 extends FormComponent {
+class ProfileFormV2 extends Form {
   constructor(props: ComponentProps) {
     super({ ...props });
   }
@@ -24,36 +24,36 @@ function mapUserToProps(state: Indexed) {
           ...formElementsDescription.email,
           labelText: 'Почта',
           value: state.currentUser.email,
-          disabled: true
+          disabled: true,
         },
         {
           ...formElementsDescription.login,
           labelText: 'Логин',
           value: state.currentUser.login,
-          disabled: true
+          disabled: true,
         },
         {
           ...formElementsDescription.firstName,
           labelText: 'Имя',
           value: state.currentUser.first_name,
-          disabled: true
+          disabled: true,
         },
         {
           ...formElementsDescription.secondName,
           labelText: 'Фамилия',
           value: state.currentUser.second_name,
-          disabled: true
+          disabled: true,
         },
         {
           ...formElementsDescription.displayName,
           value: state.currentUser.first_name,
-          disabled: true
+          disabled: true,
         },
         {
           ...formElementsDescription.phone,
           labelText: 'Телефон',
           value: state.currentUser.phone,
-          disabled: true
+          disabled: true,
         },
       ],
     };
