@@ -4,14 +4,13 @@ import router from '../services/Router';
 export default class ProfilePageComponent extends Component {
   constructor(props: ComponentProps) {
     super({ ...props,
-      events: {
+      events: Object.assign(props.events ? props.events : {}, {
         click: (evt: Event) => {
           evt.preventDefault();
-          evt.stopPropagation();
           const linkElement = evt.target as HTMLLinkElement;
           router.go(linkElement.dataset.ref);
         },
-      },
+      }),
     });
   }
 

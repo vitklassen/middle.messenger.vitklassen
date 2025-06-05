@@ -1,3 +1,4 @@
+import Form from '../abstract/Form';
 import Component, { ComponentProps } from '../services/Component';
 import { StoreEvents, type Indexed } from '../services/Store';
 import store from '../services/Store';

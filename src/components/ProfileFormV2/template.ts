@@ -7,9 +7,7 @@ const template = `
                <span class="profile-form__avatar-span">Поменять аватар</span>
             </label>
          </div>
-        {{#if isActiveName}}
-            <h2 class="profile__name">{{profileName}}</h2>
-        {{/if}}
+        <h2 class="profile__name">{{profileName}}</h2>
         {{#each fieldsets}}
             <fieldset class="profile-form__fieldset" form="profile-form"> 
                 <div class="profile-form__label-wrapper">

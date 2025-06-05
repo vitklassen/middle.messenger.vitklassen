@@ -63,7 +63,8 @@ class Router {
       this._currentRoute = route;
       route.render(); 
     })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         route = this._getRoute(pathName);
         if (route.isProtected) {
           this.go('/');

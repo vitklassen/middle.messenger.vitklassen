@@ -81,7 +81,7 @@
         text-align: left;
     }
 
-    &__footer-button {
+    &__footer-link {
         background-color: $white_color;
         border: none;
         border-bottom: 1px solid $gray_color_type_2;
@@ -94,16 +94,25 @@
         padding: 0;
         padding-bottom: 10px;
         text-align: left;
-
+        text-decoration: none;
         &:hover {
             @include hover_element; 
         }
+    }
 
-        &_type_submit {
-            border-bottom: none;
-            color: $red_color_type_1;
-            margin-bottom: 0;
-            padding-bottom: 0;
+    &__footer-button {
+        background-color: $white_color;
+        border: none;
+        color: $red_color_type_1;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 13px;
+        margin: 0;
+        padding: 0;
+        text-align: left;
+
+        &:hover {
+            @include hover_element; 
         }
     }
 }

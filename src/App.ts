@@ -1,10 +1,10 @@
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import SignInPage from './pages/SignInPage/SignInPage';
 import SignUpPage from './pages/SignUpPage/SignUpPage';
-import ProfilePage from './pages/ProfilePage/ProfilePage';
 import ChatPage from './pages/ChatPage/ChatPage';
 import router from './services/Router';
 import ProfilePreviewPage from './pages/ProfilePreviewPage/ProfilePreviewPage';
+import ProfileGeneralPage from './pages/ProfileGeneralPage/ProfileGeneralPage';
 
 export default class App {
 
@@ -22,7 +22,7 @@ export default class App {
     router.use('/', SignInPage, false);
     router.use('/sign-up', SignUpPage, false);
     router.use('/messenger', ChatPage, true);
-    //router.use('/settings', ProfilePage, true);
     router.use('/settings', ProfilePreviewPage, true);
+    router.use('/settings/general', ProfileGeneralPage, true);
   }
 }
