@@ -1,44 +1,25 @@
-import userLoginController from '../controllers/auth/UserLoginController';
-import userRegisterController from '../controllers/auth/UserRegisterController';
-import TLoginModel from '../models/auth/LoginModel';
-import TRegisterModel from '../models/auth/RegisterModel';
 import Component, { CallbackTuple, ComponentProps } from '../services/Component';
 import router from '../services/Router';
 
 export default class FormComponent extends Component {
   constructor(props: ComponentProps) {
     super({ ...props,
-      events: {
-        submit: (evt: Event) => {
-          evt.preventDefault();
-          if (!this._hasInvalidInput()) {
-            const inputList = Array.from(this.getContent().querySelectorAll('input'));
-            const request: Record<string, string | number> = {};
-            inputList.forEach(input => {
-              request[input.name] = input.value;
-            });
-            //console.log(request);
-            if (props.formType === 'login') {
-              userLoginController.login(request as TLoginModel).catch(err => console.log(err));
-            } else if (props.formType === 'register') {
-              userRegisterController.register(request as TRegisterModel).catch(err => console.log(err));
-            }
-          } else {
-            console.log('not valid');
-          }
-        }, 
-        blur: (evt: Event) => {
-          const inputElement = evt.target as HTMLInputElement;
-          this._checkInputValidity(inputElement);
-          this._toggleInputError(inputElement);
-          this._toggleButton();
+      events: Object.assign(props.events ? props.events : {}, 
+        {
+          blur: (evt: Event) => {
+            const inputElement = evt.target as HTMLInputElement;
+            this._checkInputValidity(inputElement);
+            this._toggleInputError(inputElement);
+            this._toggleButton(); 
+          },
+          
+          click: (evt: Event) => {
+            evt.preventDefault();
+            const linkElement = evt.target as HTMLLinkElement;
+            router.go(linkElement.dataset.ref);
+          },
         },
-        click: (evt: Event) => {
-          evt.preventDefault();
-          const linkElement = evt.target as HTMLLinkElement;
-          router.go(linkElement.dataset.ref);
-        },
-      },
+      ),
     });
   }
 
@@ -58,7 +39,7 @@ export default class FormComponent extends Component {
       }
     });
   }
-
+  
   private _checkInputValidity(inputElement: HTMLInputElement): void {
     if (inputElement.validity.patternMismatch) {
       const errorMessage = inputElement.dataset.errorMessage;
@@ -67,7 +48,7 @@ export default class FormComponent extends Component {
       inputElement.setCustomValidity(this._checkLengthMismatch(inputElement));
     }
   }
-
+  
   private _checkLengthMismatch(inputElement: HTMLInputElement) {
     if (inputElement.type !== 'text' && inputElement.type !== 'password') {
       return '';
@@ -78,7 +59,7 @@ export default class FormComponent extends Component {
     }
     return '';
   }
-
+  
   private _toggleInputError(inputElement: HTMLInputElement) {
     if (!inputElement.validity.valid) {
       this._toggleErrorSpan(inputElement, inputElement.validationMessage);
@@ -86,7 +67,7 @@ export default class FormComponent extends Component {
       this._toggleErrorSpan(inputElement);
     }
   }
-
+  
   private _toggleErrorSpan(inputElement: HTMLInputElement, errorMessage?: string) {
     const inputClassname = inputElement.className.split('__')[0]; 
     const errorElement = document.querySelector(`.${inputElement.id}-error`);
@@ -100,8 +81,8 @@ export default class FormComponent extends Component {
       }
     }
   }
-
-  private _hasInvalidInput() {
+  
+  public hasInvalidInput() {
     const inputList = Array.from(this.getContent().querySelectorAll('input'));
     const isCommonValidity = inputList.some(inputElement => !inputElement.validity.valid);
     if (isCommonValidity) {
@@ -115,11 +96,11 @@ export default class FormComponent extends Component {
       return !isPasswordValidity;
     }
   }
-
+  
   private _toggleButton() {
     const submitButton = this.getContent().querySelector('button');
     const submitButtonClassname = submitButton?.classList[0];
-    if (this._hasInvalidInput()) {
+    if (this.hasInvalidInput()) {
       submitButton?.classList.add(submitButtonClassname + '_state_disabled');
       submitButton?.setAttribute('aria-disabled', 'true');
     } else {
@@ -127,7 +108,7 @@ export default class FormComponent extends Component {
       submitButton?.setAttribute('aria-disabled', 'false');
     }
   }
-
+  
   private _checkPasswordValidity(inputList: HTMLInputElement[]) {
     const newPasswords = inputList.filter(input => input.name === 'newPassword');
     if (newPasswords.length === 2) {

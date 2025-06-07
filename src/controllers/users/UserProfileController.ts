@@ -1,5 +1,6 @@
 import userAPI from '../../api/users/UserAPI';
 import TUserProfileModel from '../../models/users/UserProfileModel';
+import router from '../../services/Router';
 import store from '../../services/Store';
 
 class UserProfileController {
@@ -7,8 +8,8 @@ class UserProfileController {
     // добавить валидацию ?
     const newUserData = await userAPI.changeUserData(data);
     store.set('currentUser', newUserData);
+    router.go('/settings');
   }
-
 }
 
 const userProfileController = new UserProfileController();

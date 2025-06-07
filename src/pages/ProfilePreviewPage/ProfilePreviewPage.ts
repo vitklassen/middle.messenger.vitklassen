@@ -1,5 +1,5 @@
 import ProfilePageComponent from '../../abstract/ProfilePageComponent';
-import { ProfilePreviewForm } from '../../components/ProfileFormV2/ProfileFormV2';
+import { ProfilePreviewForm } from '../../components/ProfileForm/ProfileForm';
 import userLogoutController from '../../controllers/auth/UserLogoutController';
 import { ComponentProps } from '../../services/Component';
 import template from './template';

@@ -1,24 +1,24 @@
 import ProfilePageComponent from '../../abstract/ProfilePageComponent';
-import { ProfileGeneralForm } from '../../components/ProfileForm/ProfileForm';
-import userProfileController from '../../controllers/users/UserProfileController';
-import TUserProfileModel from '../../models/users/UserProfileModel';
+import { ProfilePasswordForm } from '../../components/ProfileForm/ProfileForm';
+import userPasswordController from '../../controllers/users/UserPasswordController';
+import TUserPasswordModel from '../../models/users/UserPasswordModel';
 import { ComponentProps } from '../../services/Component';
 import template from './template';
 
-const profileForm = new ProfileGeneralForm({
+const profileForm = new ProfilePasswordForm({
   isActiveForm: true,
   buttonText: 'Сохранить',
-  buttonClassName: 'profile-form__submit-button_type_change-data',
+  buttonClassName: 'profile-form__submit-button_type_change-password',
   events: {
     submit: (evt: Event) => {
       evt.preventDefault();
       if(!profileForm.hasInvalidInput()) {
-        const inputList = Array.from(profileForm.getContent().querySelectorAll('input'));
+        const inputList = Array.from(profileForm.getContent().querySelectorAll('input'))
         const request: Record<string, string> = {};
         inputList.forEach(input => {
           request[input.name] = input.value;
         });
-        userProfileController.changeUserData(request as TUserProfileModel)
+        userPasswordController.changeUserPassword(request as TUserPasswordModel)
         .catch(err => console.log(err));
       }
     },
@@ -26,7 +26,7 @@ const profileForm = new ProfileGeneralForm({
 })
 
 
-export default class ProfileGeneralPage extends ProfilePageComponent {
+export default class ProfilePasswordPage extends ProfilePageComponent {
   constructor(props: ComponentProps) {
     super({ ...props,
       ProfileForm: profileForm,

@@ -1,4 +1,3 @@
-import Form from '../abstract/Form';
 import Component, { ComponentProps } from '../services/Component';
 import { StoreEvents, type Indexed } from '../services/Store';
 import store from '../services/Store';
@@ -18,15 +17,15 @@ export function set(object: Indexed | unknown, path: string, value: unknown): In
   return merge(object as Indexed, result);
 }
 
-export function connect(Block: typeof Component, mapStateToProps: (state: Indexed) => Indexed) {
+export function connect<T extends typeof Component>(Block: typeof Component, mapStateToProps: (state: Indexed) => Indexed): T {
   return class extends Block {
     constructor(props: ComponentProps) {
       super({ ...props, ...mapStateToProps(store.getState()) });
       store.on(StoreEvents.Updated, () => {
         this.setProps({ ...mapStateToProps(store.getState()) });
-      });
+      }) 
     }
-  };
+  } as T;
 }
 
 export function isEqual(lhs: Indexed, rhs: Indexed): boolean {

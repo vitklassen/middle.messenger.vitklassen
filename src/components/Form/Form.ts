@@ -1,10 +1,9 @@
-import template from './template';
-import { ComponentProps } from '../../services/Component';
-import FormComponent from '../../abstract/FormComponent';
-
+import FormComponent from "../../abstract/FormComponent";
+import { ComponentProps } from "../../services/Component";
+import template from "./template";
 
 export default class Form extends FormComponent {
-  constructor(props: ComponentProps) {
+    constructor(props: ComponentProps) {
     super({ ...props });
   }
 
