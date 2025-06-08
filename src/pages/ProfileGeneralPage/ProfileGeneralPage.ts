@@ -1,5 +1,9 @@
 import ProfilePageComponent from '../../abstract/ProfilePageComponent';
+import Popup from '../../components/Popup/Popup';
+import PopupForm from '../../components/PopupForm/PopupForm';
 import { ProfileGeneralForm } from '../../components/ProfileForm/ProfileForm';
+import { ProfileHeaderComponent } from '../../components/ProfileHeader/ProfileHeader';
+import userAvatarController from '../../controllers/users/UserAvatarController';
 import userProfileController from '../../controllers/users/UserProfileController';
 import TUserProfileModel from '../../models/users/UserProfileModel';
 import { ComponentProps } from '../../services/Component';
@@ -12,7 +16,7 @@ const profileForm = new ProfileGeneralForm({
   events: {
     submit: (evt: Event) => {
       evt.preventDefault();
-      if(!profileForm.hasInvalidInput()) {
+      if (!profileForm.hasInvalidInput()) {
         const inputList = Array.from(profileForm.getContent().querySelectorAll('input'));
         const request: Record<string, string> = {};
         inputList.forEach(input => {
@@ -22,15 +26,43 @@ const profileForm = new ProfileGeneralForm({
         .catch(err => console.log(err));
       }
     },
-  }
-})
+  },
+});
 
+const avatarForm = new PopupForm({
+  buttonText: "Поменять",
+  events: {
+    submit: (evt: Event) => {
+      evt.preventDefault();
+      const form = new FormData(avatarForm.getContent() as HTMLFormElement);
+      userAvatarController.changeUserAvatar(form)
+      .then(() => avatarPopup.close())
+      .catch(err => console.log(err));
+    }
+  }
+});
+
+const avatarPopup = new Popup({
+  Form: avatarForm,
+  popupTitle: 'Загрузить файл',
+});
+
+const profileHeader = new ProfileHeaderComponent({
+  headerClassname: 'profile-header__user-name_type_change',
+  AvatarPopup: avatarPopup,
+  events: {
+    click: () => {
+      avatarPopup.open();
+    }
+  }
+});
 
 export default class ProfileGeneralPage extends ProfilePageComponent {
   constructor(props: ComponentProps) {
     super({ ...props,
+      ProfileHeader: profileHeader,
       ProfileForm: profileForm,
-     });
+    });
   }
 
   override render() {

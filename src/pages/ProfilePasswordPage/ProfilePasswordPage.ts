@@ -1,5 +1,6 @@
 import ProfilePageComponent from '../../abstract/ProfilePageComponent';
 import { ProfilePasswordForm } from '../../components/ProfileForm/ProfileForm';
+import { ProfileHeaderComponent } from '../../components/ProfileHeader/ProfileHeader';
 import userPasswordController from '../../controllers/users/UserPasswordController';
 import TUserPasswordModel from '../../models/users/UserPasswordModel';
 import { ComponentProps } from '../../services/Component';
@@ -12,25 +13,29 @@ const profileForm = new ProfilePasswordForm({
   events: {
     submit: (evt: Event) => {
       evt.preventDefault();
-      if(!profileForm.hasInvalidInput()) {
-        const inputList = Array.from(profileForm.getContent().querySelectorAll('input'))
+      if (!profileForm.hasInvalidInput()) {
+        const inputList = Array.from(profileForm.getContent().querySelectorAll('input'));
         const request: Record<string, string> = {};
         inputList.forEach(input => {
           request[input.name] = input.value;
         });
         userPasswordController.changeUserPassword(request as TUserPasswordModel)
-        .catch(err => console.log(err));
+          .catch(err => console.log(err));
       }
     },
-  }
-})
+  },
+});
 
+const profileHeader = new ProfileHeaderComponent({
+  headerClassname: 'profile-header__user-name_type_change',
+});
 
 export default class ProfilePasswordPage extends ProfilePageComponent {
   constructor(props: ComponentProps) {
     super({ ...props,
+      ProfileHeader: profileHeader,
       ProfileForm: profileForm,
-     });
+    });
   }
 
   override render() {

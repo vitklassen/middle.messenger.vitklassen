@@ -4,6 +4,7 @@ const template = `
         <a class="back-link" href="/messenger" data-ref="/messenger"></a>
     </div>
     <div class="profile">
+        {{{ProfileHeader}}}
         {{{ProfileForm}}}
         <footer class="profile__footer">
             <a class="profile__footer-link" href="/settings/general" data-ref="/settings/general">Изменить данные</a>

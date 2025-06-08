@@ -15,7 +15,7 @@ const formElement = new FormV2({
   events: {
     submit: (evt: Event) => {
       evt.preventDefault();
-      if(!formElement.hasInvalidInput()) {
+      if (!formElement.hasInvalidInput()) {
         const inputList = Array.from(formElement.getContent().querySelectorAll('input'));
         const request: Record<string, string | number> = {};
         inputList.forEach(input => {
@@ -23,8 +23,8 @@ const formElement = new FormV2({
         });
         userLoginController.login(request as TLoginModel).catch(err => console.log(err));
       }
-    }
-  }
+    },
+  },
 });
 export default class SignInPage extends Component {
   constructor() {

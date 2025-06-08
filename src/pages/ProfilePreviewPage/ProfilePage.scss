@@ -51,28 +51,12 @@
     max-width: 95%;
     padding:0;
 
-    &__name {
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 16px;
-        margin: 0 auto 60px;
-        padding: 0;
-
-        &_type_change {
-            color: $white_color;
-        }
-    }
-
     &__footer {
         display: flex;
         flex-direction: column;
         margin: 52px 0 0;
         max-width: 100%;
         padding: 0;
-
-        &_display_none {
-            display: none;
-        }
     }
 
     &__footer-form {

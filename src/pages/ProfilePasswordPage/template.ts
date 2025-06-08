@@ -4,6 +4,7 @@ const template = `
         <a class="back-link" href="/settings" data-ref="/settings"></a>
     </div>
     <div class="profile">
+        {{{ProfileHeader}}}
         {{{ProfileForm}}}
     </div>
 </main>

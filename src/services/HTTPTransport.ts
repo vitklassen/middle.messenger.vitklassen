@@ -1,3 +1,5 @@
+import ENV from "../utils/env";
+
 enum METHODS {
   GET = 'GET',
   POST = 'POST',
@@ -9,7 +11,7 @@ export interface IOptions {
   headers?: Record<string, string>;
   method?: METHODS;
   timeout?: number;
-  data?: Record<string, string | number>;
+  data?: Record<string, string | number> | FormData;
   signal?: AbortSignal;
   responseType?: XMLHttpRequestResponseType;
   withCredentials?: boolean;
@@ -27,10 +29,10 @@ function queryStringify(data: object & { [key: string]: string | number | boolea
 }
   
 export default class HTTPTransport {
-  endpoint: string = 'https://ya-praktikum.tech/api/v2';
+  endpoint: string;
 
   constructor(url: string) {
-    this.endpoint += url;
+    this.endpoint = ENV.HOST + url;
   }
 
   get<TResponse>(urlPart: string, options: IOptions = {}): Promise<TResponse> {
@@ -63,7 +65,7 @@ export default class HTTPTransport {
   
       xhr.open(
         method, 
-        isGet && !!data
+        isGet && !!data && !(data instanceof FormData)
           ? `${baseUrl + urlPart}${queryStringify(data)}`
           : baseUrl + urlPart,
       );

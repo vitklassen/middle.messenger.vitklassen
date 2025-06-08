@@ -13,8 +13,11 @@ class UserAPI {
     return userAPIInstance.put<TUserAuthModel>('/profile', options).then(response => response);
   }
 
-  public async changeUserAvatar() {
-
+  public async changeUserAvatar(newAvatar: FormData) {
+    const options: IOptions = {
+      data: newAvatar,
+    };
+    return userAPIInstance.put<TUserAuthModel>('/profile/avatar', options).then(response => response);
   }
 
   public async changeUserPassword(passwordData: TUserPasswordModel) {

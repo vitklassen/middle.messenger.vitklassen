@@ -23,7 +23,7 @@ export function connect<T extends typeof Component>(Block: typeof Component, map
       super({ ...props, ...mapStateToProps(store.getState()) });
       store.on(StoreEvents.Updated, () => {
         this.setProps({ ...mapStateToProps(store.getState()) });
-      }) 
+      }); 
     }
   } as T;
 }

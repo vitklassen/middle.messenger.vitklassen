@@ -19,11 +19,19 @@
         font-weight: 500;
         line-height: 14px;
         background-color: $gray_color_type_1;
-        background-image: url('../../../public/add_photo.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url('../../../public/profile__avatar-button-image.svg');
+        background-size: contain;
+
+        &:hover {
+            background-color: $black_color;
+            opacity: 0.5;
+            cursor: pointer;
+        }
 
         &:hover::before {
             content: "Поменять аватар";
-            opacity: 50%;
         }
     }
 

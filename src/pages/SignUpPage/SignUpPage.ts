@@ -15,7 +15,7 @@ const formElement = new Form({
   events: {
     submit: (evt: Event) => {
       evt.preventDefault();
-      if(!formElement.hasInvalidInput()) {
+      if (!formElement.hasInvalidInput()) {
         const inputList = Array.from(formElement.getContent().querySelectorAll('input'));
         const request: Record<string, string | number> = {};
         inputList.forEach(input => {
@@ -23,8 +23,8 @@ const formElement = new Form({
         });
         userRegisterController.register(request as TRegisterModel).catch(err => console.log(err));
       }
-    }
-  }
+    },
+  },
 });
 export default class SignUpPage extends Component {
   constructor() {
