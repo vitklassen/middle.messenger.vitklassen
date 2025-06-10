@@ -1,12 +1,14 @@
 import authAPIInstance from './AuthAPIInstance';
-import TUserAuthModel from '../../models/auth/UserAuthModel';
-import TLoginModel from '../../models/auth/LoginModel';
+import TSignInRequest from '../../models/auth/SignInRequest';
+import TSignUpRequest from '../../models/auth/SignUpRequest';
+import TSignUpResponse from '../../models/auth/SignUpResponse';
+import TUserResponse from '../../models/auth/UserResponse';
 import { IOptions } from '../../services/HTTPTransport';
-import TRegisterModel from '../../models/auth/RegisterModel';
+
 
 class AuthAPI {
 
-  public async login(userData: TLoginModel) {
+  public async login(userData: TSignInRequest) {
     const options: IOptions = {
       data: userData,
     };
@@ -14,11 +16,11 @@ class AuthAPI {
       .then(() => true);
   }
 
-  public async createUser(userData: TRegisterModel) {
+  public async createUser(userData: TSignUpRequest) {
     const options: IOptions = {
       data: userData,
     };
-    return authAPIInstance.post('/signup', options).then(() => true);
+    return authAPIInstance.post<TSignUpResponse>('/signup', options).then(() => true);
   }
 
   public async logoutUser() {
@@ -26,7 +28,7 @@ class AuthAPI {
   }
 
   public async getUserData() {
-    return authAPIInstance.get<TUserAuthModel>('/user')
+    return authAPIInstance.get<TUserResponse>('/user')
       .then(response => response);
   }
 }

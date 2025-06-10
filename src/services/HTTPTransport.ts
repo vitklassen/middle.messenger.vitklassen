@@ -1,4 +1,4 @@
-import ENV from "../utils/env";
+import ENV from '../utils/env';
 
 enum METHODS {
   GET = 'GET',

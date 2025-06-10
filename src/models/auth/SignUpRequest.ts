@@ -1,4 +1,4 @@
-type TRegisterModel = {
+type TSignUpRequest = {
   first_name: string;
   second_name: string;
   login: string;
@@ -6,4 +6,5 @@ type TRegisterModel = {
   password: string;
   phone: string;
 };
-export default TRegisterModel;
+export default TSignUpRequest;
+  

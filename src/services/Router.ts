@@ -1,4 +1,5 @@
 import userDataController from '../controllers/auth/UserDataController';
+import chatsController from '../controllers/chats/ChatsController';
 import Component, { ComponentProps } from './Component';
 import Route from './Route';
 
@@ -55,8 +56,9 @@ class Router {
   private _onRoute(pathName: string): void {
     let route;
     userDataController.checkAuth().then(() => {
-      if (pathName === '/' || pathName === '/sign-up') {
+      if (pathName === '/' || pathName === '/sign-up' || pathName === '/messenger') {
         route = this._getRoute('/messenger');
+        chatsController.getChats().catch(err => console.log(err));
       } else {
         route = this._getRoute(pathName);
       }

@@ -1,7 +1,7 @@
 import { ComponentProps } from '../../services/Component';
 import template from './template';
 import { connect } from '../../utils/utils';
-import { Indexed } from '../../services/Store';
+import { TStore } from '../../services/Store';
 import { formElementsDescription } from '../../utils/constantsv2';
 import Form from '../../abstract/FormComponent';
 
@@ -15,7 +15,7 @@ class ProfileForm extends Form {
   }
 }
 
-function mapUserToProps(state: Indexed) {
+function mapUserToProps(state: TStore) {
   if (state.currentUser) {
     return {
       profileName: state.currentUser.first_name,
@@ -62,7 +62,7 @@ function mapUserToProps(state: Indexed) {
   }
 }
 
-function mapUserToChangeData(state: Indexed) {
+function mapUserToChangeData(state: TStore) {
   if (state.currentUser) {
     return {
       fieldsets: [
@@ -108,13 +108,12 @@ function mapUserToChangeData(state: Indexed) {
   }
 }
 
-function mapUserToChangePassword(state: Indexed) {
+function mapUserToChangePassword(state: TStore) {
   if (state.currentUser) {
     return {
       fieldsets: [
         {
           ...formElementsDescription.oldPassword,
-          value: state.currentUser.password,
           disabled: false,
         },
         {

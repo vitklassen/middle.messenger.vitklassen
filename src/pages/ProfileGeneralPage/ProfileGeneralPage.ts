@@ -23,23 +23,23 @@ const profileForm = new ProfileGeneralForm({
           request[input.name] = input.value;
         });
         userProfileController.changeUserData(request as TUserProfileModel)
-        .catch(err => console.log(err));
+          .catch(err => console.log(err));
       }
     },
   },
 });
 
 const avatarForm = new PopupForm({
-  buttonText: "Поменять",
+  buttonText: 'Поменять',
   events: {
     submit: (evt: Event) => {
       evt.preventDefault();
       const form = new FormData(avatarForm.getContent() as HTMLFormElement);
       userAvatarController.changeUserAvatar(form)
-      .then(() => avatarPopup.close())
-      .catch(err => console.log(err));
-    }
-  }
+        .then(() => avatarPopup.close())
+        .catch(err => console.log(err));
+    },
+  },
 });
 
 const avatarPopup = new Popup({
@@ -53,8 +53,8 @@ const profileHeader = new ProfileHeaderComponent({
   events: {
     click: () => {
       avatarPopup.open();
-    }
-  }
+    },
+  },
 });
 
 export default class ProfileGeneralPage extends ProfilePageComponent {

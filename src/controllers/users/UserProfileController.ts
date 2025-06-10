@@ -1,10 +1,10 @@
 import userAPI from '../../api/users/UserAPI';
-import TUserProfileModel from '../../models/users/UserProfileModel';
+import TUserRequset from '../../models/users/UserRequest';
 import router from '../../services/Router';
 import store from '../../services/Store';
 
 class UserProfileController {
-  public async changeUserData(data: TUserProfileModel): Promise<void> {
+  public async changeUserData(data: TUserRequset): Promise<void> {
     // добавить валидацию ?
     const newUserData = await userAPI.changeUserData(data);
     store.set('currentUser', newUserData);

@@ -1,11 +1,9 @@
-type TUserAuthModel = {
-  id: number;
+type TUserRequset = {
   first_name: string;
   second_name: string;
   display_name: string;
   phone: string;
   login: string;
-  avatar: string;
   email: string;
 };
-export default TUserAuthModel;
+export default TUserRequset;

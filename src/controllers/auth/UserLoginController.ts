@@ -1,9 +1,9 @@
-import TLoginModel from '../../models/auth/LoginModel';
+import TSignInRequest from '../../models/auth/SignInRequest';
 import authAPI from '../../api/auth/AuthAPI';
 import router from '../../services/Router';
 
 class UserLoginController {
-  public async login(data: TLoginModel): Promise<void> {
+  public async login(data: TSignInRequest): Promise<void> {
     // добавить валидацию ?
     const isLogin = await authAPI.login(data);
     if (isLogin) {

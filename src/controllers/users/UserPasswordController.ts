@@ -1,8 +1,8 @@
 import userAPI from '../../api/users/UserAPI';
-import TUserPasswordModel from '../../models/users/UserPasswordModel';
+import TChangePasswordRequest from '../../models/users/ChangePasswordRequest';
 import router from '../../services/Router';
 class UserPasswordController {
-  public async changeUserPassword(data: TUserPasswordModel): Promise<void> {
+  public async changeUserPassword(data: TChangePasswordRequest): Promise<void> {
     // добавить валидацию ?
     await userAPI.changeUserPassword(data);
     router.go('/settings');
