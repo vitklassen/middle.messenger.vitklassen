@@ -10,12 +10,15 @@ export default class Sidebar extends Component {
     const { events = {} } = this._props;
     if (this._element instanceof HTMLElement) { 
       Object.entries(events).forEach(([eventName, eventCallback]: CallbackTuple) => {
-        if (eventName === 'keyup') {
+        if (eventName === 'input') {
           const inputElementElement = this.getContent().querySelector('input') as HTMLInputElement;
           inputElementElement.addEventListener(eventName, eventCallback);
         } else if (eventName === 'click') {
           const linkElement = this.getContent().querySelector('[href^="/"]') as HTMLLinkElement;
           linkElement?.addEventListener(eventName, eventCallback);
+        } else if (eventName === 'addChat') {
+          const buttonElement = this.getContent().querySelector('button') as HTMLButtonElement;
+          buttonElement.addEventListener('click', eventCallback);
         } else {
           this.getContent().addEventListener(eventName, eventCallback);
         }

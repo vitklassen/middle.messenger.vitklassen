@@ -48,6 +48,14 @@ export function isEqual(lhs: Indexed, rhs: Indexed): boolean {
   return true;
 }
 
+export function debounce<T extends Function>(func: T, delay: number) {
+  let timer: NodeJS.Timeout;
+  return function(...args: any) {
+    clearTimeout(timer);
+    timer = setTimeout(() => func(args), delay);
+  }
+}
+
 function merge(lhs: Indexed, rhs: Indexed): Indexed {
   for (const p in rhs) {
     if (!rhs.hasOwnProperty(p)) {

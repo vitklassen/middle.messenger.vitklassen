@@ -6,6 +6,7 @@ import router from './services/Router';
 import ProfilePreviewPage from './pages/ProfilePreviewPage/ProfilePreviewPage';
 import ProfileGeneralPage from './pages/ProfileGeneralPage/ProfileGeneralPage';
 import ProfilePasswordPage from './pages/ProfilePasswordPage/ProfilePasswordPage';
+import ChatPageV2 from './pages/ChatPageV2/ChatPageV2';
 
 export default class App {
 
@@ -22,7 +23,7 @@ export default class App {
     router.use('/server-error', ErrorPage, false, { errorCode: 500, errorMessage: 'Уже фиксим' });
     router.use('/', SignInPage, false);
     router.use('/sign-up', SignUpPage, false);
-    router.use('/messenger', ChatPage, true);
+    router.use('/messenger', ChatPageV2, true);
     router.use('/settings', ProfilePreviewPage, true);
     router.use('/settings/general', ProfileGeneralPage, true);
     router.use('/settings/password', ProfilePasswordPage, true);

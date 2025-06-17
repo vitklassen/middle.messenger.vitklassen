@@ -14,10 +14,10 @@ class ChatListV2 extends Component {
           const liElements = this.getContent().querySelectorAll('li');
           liElements.forEach(li => {
             if(li.dataset.id === currentId) {
-              li.classList.add('essage-box_type_active');
+              li.classList.add('message-box_type_active');
             }
             else {
-              li.classList.remove('essage-box_type_active');
+              li.classList.remove('message-box_type_active');
             }
           }); 
         }
