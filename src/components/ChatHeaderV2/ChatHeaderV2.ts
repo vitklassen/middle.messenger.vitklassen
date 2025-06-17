@@ -40,7 +40,7 @@ class ChatHeaderV2 extends Component {
 
 function mapChatHeader(state: TStore) {
   if (state.currentChatId) {
-    const currentChat = state.chats?.find(item => item.id === state.currentChatId);
+    const currentChat = state.chats?.find(item => item.id === Number(state.currentChatId));
     return {
         chatName: currentChat?.title,
         avatarLink: currentChat?.avatar ? currentChat.avatar : '/message-box__avatar-image.png',

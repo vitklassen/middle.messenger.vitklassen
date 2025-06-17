@@ -3,7 +3,7 @@ import Component from '../../services/Component';
 import { signInFormLabelsInfo } from '../../utils/constants';
 import FormV2 from '../../components/Form/Form';
 import userLoginController from '../../controllers/auth/UserLoginController';
-import TLoginModel from '../../models/auth/LoginModel';
+import TSignInRequest from '../../models/auth/SignInRequest'
 
 const formElement = new FormV2({
   formTitle: 'Вход',
@@ -21,7 +21,7 @@ const formElement = new FormV2({
         inputList.forEach(input => {
           request[input.name] = input.value;
         });
-        userLoginController.login(request as TLoginModel).catch(err => console.log(err));
+        userLoginController.login(request as TSignInRequest).catch(err => console.log(err));
       }
     },
   },

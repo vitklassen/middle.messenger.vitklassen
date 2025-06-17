@@ -3,7 +3,7 @@ import { TStore } from '../../services/Store';
 import { connect } from '../../utils/utils';
 import template from './template';
 
-export default class ChatLayoutV2 extends Component {
+class ChatLayoutV2 extends Component {
   constructor(props: ComponentProps) {
     super({ ...props });
   }
@@ -17,7 +17,7 @@ function mapChatLayout(state: TStore) {
   if (state.currentChatId) {
     return { isEmptyChat: false }
   } else {
-    return { isEmptyChat: true };
+    return { isEmptyChat: true }
   }
 }
 

@@ -1,39 +1,55 @@
 import { ChatHeader } from '../../components/ChatHeaderV2/ChatHeaderV2';
-import ChatLayout from '../../components/ChatLayout/ChatLayout';
+import { ChatLayout } from '../../components/ChatLayout/ChatLayout';
 import { ChatList } from '../../components/ChatListV2/ChatListV2';
 import MessageForm from '../../components/MessageForm/MessageForm';
 import Popup from '../../components/Popup/Popup';
 import PopupForm from '../../components/PopupForm/PopupForm';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import chatsController from '../../controllers/chats/ChatsController';
+import NewChatRequest from '../../models/chats/NewChatRequest';
 import Component from '../../services/Component';
 import router from '../../services/Router';
 import { debounce } from '../../utils/utils';
 import template from './template';
 
-const handleInput = debounce((evt: Event) => {
+const handleInput = (evt: Event) => {
   const inputElement = evt.target as HTMLInputElement;
   chatsController.getChats({title: inputElement.value}).catch(err => console.log(err));
-}, 500);
+};
 
-const addPopupForm = new PopupForm({
+const debounceInput = debounce(handleInput, 250);
+
+const userAddingForm = new PopupForm({
   buttonText: 'Добавить',
   buttonClassName: 'popup-form__submit-button_state_disabled',
+  isUserAction: true,
 });
-const deletePopupForm = new PopupForm({
+const userRemovalForm = new PopupForm({
   buttonText: 'Удалить',
   buttonClassName: 'popup-form__submit-button_state_disabled',
+  isUserAction: true,
 });
-const addPopup = new Popup({
-  popupTitle: 'Добавить пользователя',
-  Form: addPopupForm,
+const chatAddingForm = new PopupForm({
+  buttonText: 'Добавить',
+  buttonClassName: 'popup-form__submit-button_state_disabled',
+  isChatAdding: true,
+  events: {
+    submit: (evt: Event) => {
+      evt.preventDefault();
+      if (!chatAddingForm.hasInvalidInput()) {
+        const inputElement = chatAddingForm.getContent().querySelector('input') as HTMLInputElement;
+        const request: Record<string, string | number> = {};
+        request[inputElement.name] = inputElement.value;
+        chatsController.createChat(request as NewChatRequest).catch(err => console.log(err));
+        chatAddingPopup.close();
+      }
+    }
+  }
 });
-const deletePopup = new Popup({
-  popupTitle: 'Удалить пользователя',
-  Form: deletePopupForm,
+const chatAddingPopup = new Popup({
+  popupTitle: "Добавить чат",
+  PopupForm: chatAddingForm,
 });
-
-const deleteChatPopup = new Popup({});
 
 const chatList = new ChatList({});
 
@@ -44,13 +60,14 @@ const messageForm = new MessageForm({});
 const chatLayout = new ChatLayout({
   ChatHeader: chatHeader,
   MessageForm: messageForm,
-  isEmptyChat: true
+  isEmptyChat: true,
 });
 
 const sideBar = new Sidebar({
   ChatList: chatList,
+  ChatAddingPopup: chatAddingPopup,
   events: {
-    input: handleInput,
+    input: debounceInput,
     click: (evt: Event) => {
       evt.preventDefault();
       evt.stopPropagation();
@@ -58,7 +75,7 @@ const sideBar = new Sidebar({
       router.go(linkElement.dataset.ref);
     },
     addChat: () => {
-      
+      chatAddingPopup.open();
     }
   },
 });

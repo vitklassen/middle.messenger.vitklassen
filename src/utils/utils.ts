@@ -52,7 +52,7 @@ export function debounce<T extends Function>(func: T, delay: number) {
   let timer: NodeJS.Timeout;
   return function(...args: any) {
     clearTimeout(timer);
-    timer = setTimeout(() => func(args), delay);
+    timer = setTimeout(() => func(...args), delay);
   }
 }
 

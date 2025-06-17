@@ -6,6 +6,7 @@ const template = `
     </form>
     <button class="sidebar__button" type="button">Добавить чат</button>
     {{{ChatList}}}
+    {{{ChatAddingPopup}}}
 </section>
 `;
 export default template;

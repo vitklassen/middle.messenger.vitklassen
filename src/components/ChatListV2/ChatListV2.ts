@@ -49,10 +49,10 @@ function mapChats(state: TStore) {
         return {
           chatId: item.id,
           chatName: item.title,
-          time: item.last_message.time,
+          time: item.last_message ? item.last_message.time: '',
           avatarLink: item.avatar ? item.avatar : '/message-box__avatar-image.png',
-          lastMessage: item.last_message.content,
-          unreadMessages:item.unread_count,
+          lastMessage: item.last_message ? item.last_message.content : '',
+          unreadMessages: item.unread_count,
         };
       })],
     };
