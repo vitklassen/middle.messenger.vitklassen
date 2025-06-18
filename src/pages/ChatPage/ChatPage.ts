@@ -1,115 +1,133 @@
-import ChatHeader from '../../components/ChatHeader/ChatHeader';
-import ChatLayout from '../../components/ChatLayout/ChatLayout';
-import ChatList from '../../components/ChatList/ChatList';
-import MessageBox from '../../components/MessageBox/MessageBox';
+import { ChatHeader } from '../../components/ChatHeader/ChatHeader';
+import { ChatLayout } from '../../components/ChatLayout/ChatLayout';
+import { ChatList } from '../../components/ChatList/ChatList';
 import MessageForm from '../../components/MessageForm/MessageForm';
 import Popup from '../../components/Popup/Popup';
 import PopupForm from '../../components/PopupForm/PopupForm';
 import Sidebar from '../../components/Sidebar/Sidebar';
+import chatsGettingController from '../../controllers/chats/ChatsGettingController';
+import chatCreatingController from '../../controllers/chats/ChatCreatingController';
+import NewChatRequest from '../../models/chats/NewChatRequest';
 import Component from '../../services/Component';
 import router from '../../services/Router';
-import { messageList } from '../../utils/mock';
+import { debounce } from '../../utils/utils';
 import template from './template';
+import store from '../../services/Store';
+import chatRemovalontroller from '../../controllers/chats/ChatRemovalController';
 
-const addPopupForm = new PopupForm({
-  buttonText: 'Добавить',
-  buttonClassName: 'popup-form__submit-button_state_disabled',
-});
-const deletePopupForm = new PopupForm({
-  buttonText: 'Удалить',
-  buttonClassName: 'popup-form__submit-button_state_disabled',
-});
-const addPopup = new Popup({
-  popupTitle: 'Добавить пользователя',
-  Form: addPopupForm,
-});
-const deletePopup = new Popup({
-  popupTitle: 'Удалить пользователя',
-  Form: deletePopupForm,
-});
+const handleInput = (evt: Event) => {
+  const inputElement = evt.target as HTMLInputElement;
+  chatsGettingController.getChats({title: inputElement.value}).catch(err => console.log(err));
+};
 
-const deleteChatPopup = new Popup({});
+const debounceInput = debounce(handleInput, 250);
 
-
-const chatHeader = new ChatHeader({
-  onOpenPopup: onOpenPopup,
-});
-const messageForm = new MessageForm({});
-const chatLayout = new ChatLayout({
-  isEmptyChat: true,
-  ChatHeader: chatHeader,
-  MessageForm: messageForm,
-});
-
-function onChangeChatName(name: string) {
-  chatLayout.openChat();
-  chatHeader.changeChatName(name);
-}
-
-function onOpenPopup(typePopup: string) {
-  if (typePopup === 'add') {
-    addPopup.open();
-  } else if (typePopup === 'delete') {
-    deletePopup.open();
-  } else if (typePopup === 'delete-chat') {
-    deleteChatPopup.open();
+const handleOpenPopup = (typePopup: string) => {
+  // if (typePopup === 'add') {
+  //   addPopup.open();
+  // } else if (typePopup === 'delete') {
+  //   deletePopup.open();
+  // } else 
+  if (typePopup === 'delete-chat') {
+    chatRemovalPopup.open();
   }
 }
 
-const chatList = new ChatList({
-  messages: [...messageList.map(message => new MessageBox({ ...message,
-    onFocusMessage: onFocusMessage,
-    onChangeName: onChangeChatName,
-  }))],
+const userAddingForm = new PopupForm({
+  buttonText: 'Добавить',
+  buttonClassName: 'popup-form__submit-button_state_disabled',
+  isUserAction: true,
+});
+const userRemovalForm = new PopupForm({
+  buttonText: 'Удалить',
+  buttonClassName: 'popup-form__submit-button_state_disabled',
+  isUserAction: true,
+});
+const chatAddingForm = new PopupForm({
+  buttonText: 'Добавить',
+  buttonClassName: 'popup-form__submit-button_state_disabled',
+  isChatAdding: true,
+  events: {
+    submit: (evt: Event) => {
+      evt.preventDefault();
+      if (!chatAddingForm.hasInvalidInput()) {
+        const inputElement = chatAddingForm.getContent().querySelector('input') as HTMLInputElement;
+        const request: Record<string, string | number> = {};
+        request[inputElement.name] = inputElement.value;
+        chatCreatingController.createChat(request as NewChatRequest)
+        .then(() => chatsGettingController.getChats())
+        .catch(err => console.log(err));
+        chatAddingPopup.close();
+      }
+    }
+  }
+});
+const chatRemovalForm = new PopupForm({
+  buttonText: 'Удалить',
+  isChatDeleting: true,
+  events: {
+    submit: (evt: Event) => {
+      evt.preventDefault();
+      const { currentChatId } = store.getState();
+      if(currentChatId){
+        chatRemovalontroller.deleteChat({chatId: currentChatId})
+        .then(() => chatsGettingController.getChats())
+        .catch(err => console.log(err));
+        store.set('currentChatId', undefined);
+        chatRemovalPopup.close();
+      }
+    }
+  }
+})
+const chatAddingPopup = new Popup({
+  popupTitle: "Добавить чат",
+  PopupForm: chatAddingForm,
+});
+const chatRemovalPopup = new Popup({
+  popupTitle: "Удалить чат",
+  PopupForm: chatRemovalForm,
+  isCloseButton: true,
+})
+const chatList = new ChatList({});
+
+const chatHeader = new ChatHeader({
+  onOpenPopup: handleOpenPopup,
 });
 
-function onFocusMessage(id: string) {
-  chatList.onFocusMessage(id);
-}
+const messageForm = new MessageForm({});
+
+const chatLayout = new ChatLayout({
+  ChatHeader: chatHeader,
+  MessageForm: messageForm,
+  isEmptyChat: true,
+});
 
 const sideBar = new Sidebar({
   ChatList: chatList,
   events: {
-    keyup: (evt: Event) => {
-      const inputElement = evt.target as HTMLInputElement;
-      const inputValue = inputElement.value.toUpperCase();
-      if (inputValue === '') {
-        chatList.setProps({
-          messages: [...messageList.map(message => new MessageBox({ ...message,
-            onFocusMessage: onFocusMessage,
-            onChangeName: onChangeChatName,
-          }))],
-        });
-      } else {
-        const filterMessageList = messageList.filter(message => message.chatName.toUpperCase().includes(inputValue));
-        chatList.setProps({
-          messages: [...filterMessageList.map(message => new MessageBox({ ...message, 
-            onFocusMessage: onFocusMessage,
-            onChangeName: onChangeChatName,
-          }))],
-        });
-      }
-    },
+    input: debounceInput,
     click: (evt: Event) => {
       evt.preventDefault();
+      evt.stopPropagation();
       const linkElement = evt.target as HTMLLinkElement;
       router.go(linkElement.dataset.ref);
     },
+    addChat: () => {
+      chatAddingPopup.open();
+    }
   },
 });
 
 export default class ChatPage extends Component {
-  constructor() {
-    super({
-      SideBar: sideBar,
-      ChatLayout: chatLayout,
-      PopupAdd: addPopup,
-      PopupDelete: deletePopup,
-      PopupChatDelete: deleteChatPopup,
-    });
-  }
-
-  override render() {
-    return template;
-  }
+    constructor() {
+      super({
+        SideBar: sideBar,
+        ChatLayout: chatLayout,
+        ChatAddingPopup: chatAddingPopup,
+        ChatRemovalPopup: chatRemovalPopup,
+      })
+    }
+    override render() {
+      return template;
+    }
 }

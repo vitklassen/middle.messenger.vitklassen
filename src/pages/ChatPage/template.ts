@@ -2,9 +2,10 @@ const template = `
 <main class="content">
     {{{SideBar}}}
     {{{ChatLayout}}}
-    {{{PopupAdd}}}
-    {{{PopupDelete}}}
-    {{{PopupChatDelete}}}
+    {{{ChatAddingPopup}}}
+    {{{ChatRemovalPopup}}}
+    {{{ChatUserAddingPopup}}}
+    {{{ChatUserRemovalopup}}}
 </main>
 `;
 export default template;

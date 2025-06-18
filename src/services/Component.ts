@@ -71,6 +71,9 @@ export default class Component {
             props[key] = currentValue;
           }
         }
+        else {
+          props[key] = currentValue;
+        }
       } else if (typeof currentValue === 'function') {
         return;
       } else {
