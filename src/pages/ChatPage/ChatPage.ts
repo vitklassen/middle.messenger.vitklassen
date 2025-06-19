@@ -7,16 +7,15 @@ import PopupForm from '../../components/PopupForm/PopupForm';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import chatsGettingController from '../../controllers/chats/ChatsGettingController';
 import chatCreatingController from '../../controllers/chats/ChatCreatingController';
-import { TCreateChatRequest } from '../../models/chats/types';
 import Component from '../../services/Component';
 import router from '../../services/Router';
 import { debounce } from '../../utils/utils';
 import template from './template';
 import store from '../../services/Store';
 import chatRemovalontroller from '../../controllers/chats/ChatRemovalController';
-import userAPI from '../../api/users/UserAPI';
 import userSearchController from '../../controllers/users/UserSearchController';
 import chatUserGettingController from '../../controllers/chats/ChatUserGettingController';
+import chatUserRemovalController from '../../controllers/chats/ChatUserRemovalController';
 
 const handleInput = (evt: Event) => {
   const inputElement = evt.target as HTMLInputElement;
@@ -29,10 +28,10 @@ const handleOpenPopup = (typePopup: string) => {
   if (typePopup === 'add') {
     chatUserAddingPopup.open()
   }
-  // } else if (typePopup === 'delete') {
-  //   deletePopup.open();
-  // } else 
-  else if (typePopup === 'delete-chat') {
+  else if (typePopup === 'delete') {
+    chatUserRemovalPopup.open();
+  } 
+  else {
     chatRemovalPopup.open();
   }
 };
@@ -48,7 +47,7 @@ const userAddingForm = new PopupForm({
         const inputElement = chatAddingForm.getContent().querySelector('input') as HTMLInputElement;
         userSearchController.findUsers({login: inputElement.value})
         .then(users => {
-          chatUserGettingController.addUser(users);
+          chatUserGettingController.addUsers(users);
         })
         .catch(err => console.log(err));
         chatUserAddingPopup.close();
@@ -60,6 +59,20 @@ const userRemovalForm = new PopupForm({
   buttonText: 'Удалить',
   buttonClassName: 'popup-form__submit-button_state_disabled',
   isUserAction: true,
+  events: {
+    submit: (evt: Event) => {
+      evt.preventDefault();
+      if(!userRemovalForm.hasInvalidInput()) {
+        const inputElement = chatAddingForm.getContent().querySelector('input') as HTMLInputElement;
+        userSearchController.findUsers({login: inputElement.value})
+        .then(users => {
+          chatUserRemovalController.removeUsers(users);
+        })
+        .catch(err => console.log(err));
+        chatUserRemovalPopup.close();
+      }
+    }
+  }
 });
 const chatAddingForm = new PopupForm({
   buttonText: 'Добавить',
@@ -107,6 +120,10 @@ const chatRemovalPopup = new Popup({
 const chatUserAddingPopup = new Popup({
   popupTitle: 'Добавить пользователя',
   PopupForm: userAddingForm,
+});
+const chatUserRemovalPopup = new Popup({
+  popupTitle: 'Удалить пользователя',
+  PopupForm: userRemovalForm,
 })
 const chatList = new ChatList({});
 
@@ -145,7 +162,8 @@ export default class ChatPage extends Component {
       ChatLayout: chatLayout,
       ChatAddingPopup: chatAddingPopup,
       ChatRemovalPopup: chatRemovalPopup,
-      ChatUserAddingPopup: chatUserAddingPopup
+      ChatUserAddingPopup: chatUserAddingPopup,
+      ChatUserRemovalopup: chatUserRemovalPopup,
     });
   }
 

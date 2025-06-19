@@ -2,7 +2,7 @@ import { ComponentProps } from '../../services/Component';
 import template from './template';
 import { connect } from '../../utils/utils';
 import { TStore } from '../../services/Store';
-import { formElementsDescription } from '../../utils/constantsv2';
+import { formElementsDescription } from '../../utils/constants';
 import Form from '../../abstract/FormComponent';
 
 class ProfileForm extends Form {

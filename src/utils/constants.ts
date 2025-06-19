@@ -1,4 +1,4 @@
-const formElementsDescription = {
+export const formElementsDescription = {
   login: {
     inputId: 'input__login',
     inputName: 'login',

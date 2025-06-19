@@ -47,7 +47,7 @@ export type TCreateChatResponse = {
   id: number;
 };
 
-export type TAddNewUserRequest = {
+export type TUserActionRequest = {
   users: number[],
   chatId: number,
 }

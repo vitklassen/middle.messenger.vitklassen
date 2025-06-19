@@ -1,17 +1,20 @@
-import { TAddNewUserRequest } from "../../models/chats/types";
+import { TUserActionRequest } from "../../models/chats/types";
 import { IOptions } from "../../services/HTTPTransport";
 import chatUserAPIInstance from "./ChatUserAPIInstance";
 
 class ChatUserAPI {
-  public async addUser(newUser: TAddNewUserRequest) {
+  public async addUser(users: TUserActionRequest) {
     const options: IOptions = {
-      data: newUser,
+      data: users,
     };
     return chatUserAPIInstance.put('', options);
   }
 
-  public async deleteUser() {
-    
+  public async deleteUsers(users: TUserActionRequest) {
+    const options: IOptions = {
+      data: users,
+    };
+    return chatUserAPIInstance.delete('', options);
   }
   
 }
