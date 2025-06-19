@@ -50,10 +50,10 @@ export function isEqual(lhs: Indexed, rhs: Indexed): boolean {
 
 export function debounce<T extends Function>(func: T, delay: number) {
   let timer: NodeJS.Timeout;
-  return function(...args: any) {
+  return function (...args: any) {
     clearTimeout(timer);
     timer = setTimeout(() => func(...args), delay);
-  }
+  };
 }
 
 function merge(lhs: Indexed, rhs: Indexed): Indexed {

@@ -2,7 +2,7 @@ import ProfilePageComponent from '../../abstract/ProfilePageComponent';
 import { ProfilePasswordForm } from '../../components/ProfileForm/ProfileForm';
 import { ProfileHeaderComponent } from '../../components/ProfileHeader/ProfileHeader';
 import userPasswordController from '../../controllers/users/UserPasswordController';
-import TUserPasswordModel from '../../models/users/UserPasswordModel';
+import { TChangePasswordRequest } from '../../models/users/types';
 import { ComponentProps } from '../../services/Component';
 import template from './template';
 
@@ -19,7 +19,7 @@ const profileForm = new ProfilePasswordForm({
         inputList.forEach(input => {
           request[input.name] = input.value;
         });
-        userPasswordController.changeUserPassword(request as TUserPasswordModel)
+        userPasswordController.changeUserPassword(request as TChangePasswordRequest)
           .catch(err => console.log(err));
       }
     },

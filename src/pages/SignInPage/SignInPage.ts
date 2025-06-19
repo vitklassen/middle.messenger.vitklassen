@@ -3,7 +3,7 @@ import Component from '../../services/Component';
 import { signInFormLabelsInfo } from '../../utils/constants';
 import FormV2 from '../../components/Form/Form';
 import userLoginController from '../../controllers/auth/UserLoginController';
-import TSignInRequest from '../../models/auth/SignInRequest'
+import { TSignInRequest } from '../../models/auth/types';
 
 const formElement = new FormV2({
   formTitle: 'Вход',

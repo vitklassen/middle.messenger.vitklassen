@@ -1,9 +1,8 @@
-
-
 class ChatUserAPI {
   public async getUser() {
-
+    
   }
+
   public async deleteUser() {
     
   }

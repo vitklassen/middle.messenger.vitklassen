@@ -1,4 +1,4 @@
-import TSignInRequest from '../../models/auth/SignInRequest';
+import { TSignInRequest } from '../../models/auth/types';
 import authAPI from '../../api/auth/AuthAPI';
 import router from '../../services/Router';
 

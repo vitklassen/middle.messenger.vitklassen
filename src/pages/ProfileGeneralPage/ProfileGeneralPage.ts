@@ -5,7 +5,7 @@ import { ProfileGeneralForm } from '../../components/ProfileForm/ProfileForm';
 import { ProfileHeaderComponent } from '../../components/ProfileHeader/ProfileHeader';
 import userAvatarController from '../../controllers/users/UserAvatarController';
 import userProfileController from '../../controllers/users/UserProfileController';
-import TUserProfileModel from '../../models/users/UserProfileModel';
+import { TUserRequset } from '../../models/users/types';
 import { ComponentProps } from '../../services/Component';
 import template from './template';
 
@@ -22,7 +22,7 @@ const profileForm = new ProfileGeneralForm({
         inputList.forEach(input => {
           request[input.name] = input.value;
         });
-        userProfileController.changeUserData(request as TUserProfileModel)
+        userProfileController.changeUserData(request as TUserRequset)
           .catch(err => console.log(err));
       }
     },

@@ -7,7 +7,7 @@ import PopupForm from '../../components/PopupForm/PopupForm';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import chatsGettingController from '../../controllers/chats/ChatsGettingController';
 import chatCreatingController from '../../controllers/chats/ChatCreatingController';
-import NewChatRequest from '../../models/chats/NewChatRequest';
+import { TCreateChatRequest } from '../../models/chats/types';
 import Component from '../../services/Component';
 import router from '../../services/Router';
 import { debounce } from '../../utils/utils';
@@ -17,7 +17,7 @@ import chatRemovalontroller from '../../controllers/chats/ChatRemovalController'
 
 const handleInput = (evt: Event) => {
   const inputElement = evt.target as HTMLInputElement;
-  chatsGettingController.getChats({title: inputElement.value}).catch(err => console.log(err));
+  chatsGettingController.getChats({ title: inputElement.value }).catch(err => console.log(err));
 };
 
 const debounceInput = debounce(handleInput, 250);
@@ -31,7 +31,7 @@ const handleOpenPopup = (typePopup: string) => {
   if (typePopup === 'delete-chat') {
     chatRemovalPopup.open();
   }
-}
+};
 
 const userAddingForm = new PopupForm({
   buttonText: 'Добавить',
@@ -54,13 +54,13 @@ const chatAddingForm = new PopupForm({
         const inputElement = chatAddingForm.getContent().querySelector('input') as HTMLInputElement;
         const request: Record<string, string | number> = {};
         request[inputElement.name] = inputElement.value;
-        chatCreatingController.createChat(request as NewChatRequest)
-        .then(() => chatsGettingController.getChats())
-        .catch(err => console.log(err));
+        chatCreatingController.createChat(request as TCreateChatRequest)
+          .then(() => chatsGettingController.getChats())
+          .catch(err => console.log(err));
         chatAddingPopup.close();
       }
-    }
-  }
+    },
+  },
 });
 const chatRemovalForm = new PopupForm({
   buttonText: 'Удалить',
@@ -69,25 +69,25 @@ const chatRemovalForm = new PopupForm({
     submit: (evt: Event) => {
       evt.preventDefault();
       const { currentChatId } = store.getState();
-      if(currentChatId){
-        chatRemovalontroller.deleteChat({chatId: currentChatId})
-        .then(() => chatsGettingController.getChats())
-        .catch(err => console.log(err));
+      if (currentChatId) {
+        chatRemovalontroller.deleteChat({ chatId: currentChatId })
+          .then(() => chatsGettingController.getChats())
+          .catch(err => console.log(err));
         store.set('currentChatId', undefined);
         chatRemovalPopup.close();
       }
-    }
-  }
-})
+    },
+  },
+});
 const chatAddingPopup = new Popup({
-  popupTitle: "Добавить чат",
+  popupTitle: 'Добавить чат',
   PopupForm: chatAddingForm,
 });
 const chatRemovalPopup = new Popup({
-  popupTitle: "Удалить чат",
+  popupTitle: 'Удалить чат',
   PopupForm: chatRemovalForm,
   isCloseButton: true,
-})
+});
 const chatList = new ChatList({});
 
 const chatHeader = new ChatHeader({
@@ -114,20 +114,21 @@ const sideBar = new Sidebar({
     },
     addChat: () => {
       chatAddingPopup.open();
-    }
+    },
   },
 });
 
 export default class ChatPage extends Component {
-    constructor() {
-      super({
-        SideBar: sideBar,
-        ChatLayout: chatLayout,
-        ChatAddingPopup: chatAddingPopup,
-        ChatRemovalPopup: chatRemovalPopup,
-      })
-    }
-    override render() {
-      return template;
-    }
+  constructor() {
+    super({
+      SideBar: sideBar,
+      ChatLayout: chatLayout,
+      ChatAddingPopup: chatAddingPopup,
+      ChatRemovalPopup: chatRemovalPopup,
+    });
+  }
+
+  override render() {
+    return template;
+  }
 }

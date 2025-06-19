@@ -1,8 +1,5 @@
 import authAPIInstance from './AuthAPIInstance';
-import TSignInRequest from '../../models/auth/SignInRequest';
-import TSignUpRequest from '../../models/auth/SignUpRequest';
-import TSignUpResponse from '../../models/auth/SignUpResponse';
-import TUserResponse from '../../models/auth/UserResponse';
+import type { TSignInRequest, TSignUpRequest, TSignUpResponse, TUserInfoResponse } from '../../models/auth/types';
 import { IOptions } from '../../services/HTTPTransport';
 
 
@@ -28,7 +25,7 @@ class AuthAPI {
   }
 
   public async getUserData() {
-    return authAPIInstance.get<TUserResponse>('/user')
+    return authAPIInstance.get<TUserInfoResponse>('/user')
       .then(response => response);
   }
 }

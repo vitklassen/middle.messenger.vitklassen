@@ -13,16 +13,15 @@ class ChatListComponent extends Component {
           store.set('currentChatId', Number(currentId));
           const liElements = this.getContent().querySelectorAll('li');
           liElements.forEach(li => {
-            if(li.dataset.id === currentId) {
+            if (li.dataset.id === currentId) {
               li.classList.add('message-box_type_active');
-            }
-            else {
+            } else {
               li.classList.remove('message-box_type_active');
             }
           }); 
-        }
-      }
-     });
+        },
+      },
+    });
   }
 
   override addEvents(): void {
@@ -49,7 +48,7 @@ function mapChats(state: TStore) {
         return {
           chatId: item.id,
           chatName: item.title,
-          time: item.last_message ? item.last_message.time: '',
+          time: item.last_message ? item.last_message.time : '',
           avatarLink: item.avatar ? item.avatar : '/message-box__avatar-image.png',
           lastMessage: item.last_message ? item.last_message.content : '',
           unreadMessages: item.unread_count,
@@ -57,7 +56,7 @@ function mapChats(state: TStore) {
       })],
     };
   } else {
-    return {messages: []};
+    return { messages: [] };
   }
 }
 

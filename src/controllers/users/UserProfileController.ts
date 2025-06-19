@@ -1,5 +1,5 @@
 import userAPI from '../../api/users/UserAPI';
-import TUserRequset from '../../models/users/UserRequest';
+import { TUserRequset } from '../../models/users/types';
 import router from '../../services/Router';
 import store from '../../services/Store';
 

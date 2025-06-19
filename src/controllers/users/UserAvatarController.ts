@@ -1,5 +1,6 @@
 import userAPI from '../../api/users/UserAPI';
 import store from '../../services/Store';
+
 class UserAvatarController {
   public async changeUserAvatar(data: FormData): Promise<void> {
     // добавить валидацию ?

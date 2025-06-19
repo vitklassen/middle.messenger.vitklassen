@@ -1,9 +1,9 @@
 import chatAPI from '../../api/chats/ChatAPI';
-import TChatRequest from '../../models/chats/ChatRequest';
+import { TGetChatRequest } from '../../models/chats/types';
 import store from '../../services/Store';
 
 class ChatsGettingController {
-  public async getChats(params?: TChatRequest): Promise<void> {
+  public async getChats(params?: TGetChatRequest): Promise<void> {
     const userChats = await chatAPI.getChats(params);
     store.set('chats', userChats);
   }

@@ -3,7 +3,7 @@ import Component from '../../services/Component';
 import { signUpFormLabelsInfo } from '../../utils/constants';
 import Form from '../../components/Form/Form';
 import userRegisterController from '../../controllers/auth/UserRegisterController';
-import TRegisterModel from '../../models/auth/RegisterModel';
+import { TSignUpRequest } from '../../models/auth/types';
 
 const formElement = new Form({
   formTitle: 'Регистрация',
@@ -21,7 +21,7 @@ const formElement = new Form({
         inputList.forEach(input => {
           request[input.name] = input.value;
         });
-        userRegisterController.register(request as TRegisterModel).catch(err => console.log(err));
+        userRegisterController.register(request as TSignUpRequest).catch(err => console.log(err));
       }
     },
   },

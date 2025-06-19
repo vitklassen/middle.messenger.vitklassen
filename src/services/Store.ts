@@ -1,5 +1,5 @@
-import TChatResponse from '../models/chats/ChatResponse';
-import TUserResponse from '../models/users/UserResponse';
+import { TGetChatResponse } from '../models/chats/types';
+import { TUserInfoResponse } from '../models/auth/types';
 import { set } from '../utils/utils';
 import EventBus from './EventBus';
 
@@ -12,8 +12,8 @@ export enum StoreEvents {
 }
 
 export type TStore = {
-  currentUser?: TUserResponse;
-  chats?: TChatResponse[];
+  currentUser?: TUserInfoResponse;
+  chats?: TGetChatResponse[];
   currentChatId?: number;
 };
 

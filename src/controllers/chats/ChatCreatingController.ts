@@ -1,8 +1,8 @@
 import chatAPI from '../../api/chats/ChatAPI';
-import NewChatRequest from '../../models/chats/NewChatRequest';
+import { TCreateChatRequest } from '../../models/chats/types';
 
 class ChatCreatingController {
-  public async createChat(title: NewChatRequest): Promise<void>{
+  public async createChat(title: TCreateChatRequest): Promise<void> {
     await chatAPI.createChat(title);
   }
 }

@@ -1,5 +1,5 @@
 import userAPI from '../../api/users/UserAPI';
-import TChangePasswordRequest from '../../models/users/ChangePasswordRequest';
+import { TChangePasswordRequest } from '../../models/users/types';
 import router from '../../services/Router';
 class UserPasswordController {
   public async changeUserPassword(data: TChangePasswordRequest): Promise<void> {

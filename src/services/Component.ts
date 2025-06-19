@@ -70,8 +70,7 @@ export default class Component {
           } else {
             props[key] = currentValue;
           }
-        }
-        else {
+        } else {
           props[key] = currentValue;
         }
       } else if (typeof currentValue === 'function') {

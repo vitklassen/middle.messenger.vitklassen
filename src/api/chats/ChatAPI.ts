@@ -1,25 +1,21 @@
 import chatAPIInstance from './ChatAPIInstance';
 import { IOptions } from '../../services/HTTPTransport';
-import TChatRequest from '../../models/chats/ChatRequest';
-import TChatResponse from '../../models/chats/ChatResponse';
-import TNewChatRequest from '../../models/chats/NewChatRequest';
-import TNewChatResponse from '../../models/chats/NewChatResponse';
-import TDeleteChatRequest from '../../models/chats/DeleteChatRequest';
-import TDeleteChatResponse from '../../models/chats/DeleteChatResponse';
+import type { TGetChatRequest, TGetChatResponse, TDeleteChatRequest,  
+  TDeleteChatResponse, TCreateChatRequest, TCreateChatResponse } from '../../models/chats/types';
 
 class ChatAPI {
-  public async getChats(chatData?: TChatRequest) {
+  public async getChats(chatData?: TGetChatRequest) {
     const options: IOptions = {
       data: chatData,
     };
-    return chatAPIInstance.get<TChatResponse[]>('', options).then(chats => chats);
+    return chatAPIInstance.get<TGetChatResponse[]>('', options).then(chats => chats);
   }
 
-  public async createChat(chatParams: TNewChatRequest) {
+  public async createChat(chatParams: TCreateChatRequest) {
     const options: IOptions = {
       data: chatParams,
     };
-    return chatAPIInstance.post<TNewChatResponse>('', options).then(chats => chats);
+    return chatAPIInstance.post<TCreateChatResponse>('', options).then(chats => chats);
   }
 
   public deleteChat(chatId: TDeleteChatRequest) {
