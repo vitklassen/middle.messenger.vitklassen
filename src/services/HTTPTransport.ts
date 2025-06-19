@@ -11,13 +11,13 @@ export interface IOptions {
   headers?: Record<string, string>;
   method?: METHODS;
   timeout?: number;
-  data?: Record<string, string | number> | FormData;
+  data?: Record<string, string | number | number []> | FormData;
   signal?: AbortSignal;
   responseType?: XMLHttpRequestResponseType;
   withCredentials?: boolean;
 }
 
-function queryStringify(data: object & { [key: string]: string | number | boolean }) {
+function queryStringify(data: object & { [key: string]: string | number | boolean}) {
   if (typeof data !== 'object') {
     throw new Error('Data must be object');
   }
@@ -62,11 +62,11 @@ export default class HTTPTransport {
   
       const xhr = new XMLHttpRequest();
       const isGet = method === METHODS.GET;
-  
+      const isFormData = data instanceof FormData;
       xhr.open(
         method, 
-        isGet && !!data && !(data instanceof FormData)
-          ? `${baseUrl + urlPart}${queryStringify(data)}`
+        isGet && !!data && !isFormData
+          ? `${baseUrl + urlPart}${queryStringify(data as Record<string, string | number | number>)}`
           : baseUrl + urlPart,
       );
 

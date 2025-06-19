@@ -1,7 +1,4 @@
-import TUserRequset from '../../models/users/UserRequest';
-import TUserResponse from '../../models/users/UserResponse';
-import TUserSearchModel from '../../models/users/UserSearchModel';
-import TChangePasswordRequest from '../../models/users/ChangePasswordRequest';
+import { TUserRequset, TUserResponse, TUserSearchModel, TChangePasswordRequest } from '../../models/users/types';
 import { IOptions } from '../../services/HTTPTransport';
 import userAPIInstance from './UserAPIInstance';
 
@@ -27,7 +24,7 @@ class UserAPI {
     return userAPIInstance.put('/password', options).then(() => true);
   }
 
-  public async findUser(searchData: TUserSearchModel) {
+  public async findUsers(searchData: TUserSearchModel) {
     const options: IOptions = {
       data: searchData,
     };
