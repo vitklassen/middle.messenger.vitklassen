@@ -1,9 +1,9 @@
-import EventBus, { EventEmitter } from './EventBus';
+import EventBus from './EventBus';
 
 type MessageData = string | number | object;
 type TWSCallback = (data?: MessageData) => void;
 
-export class WSTransport extends EventEmitter<TWSCallback, MessageData> {
+export class WSTransport extends EventBus<TWSCallback> {
   static EVENTS = {
     CONNECTED: 'connect',
     CLOSE: 'close',

@@ -43,7 +43,7 @@ const avatarForm = new PopupForm({
 });
 
 const avatarPopup = new Popup({
-  Form: avatarForm,
+  PopupForm: avatarForm,
   popupTitle: 'Загрузить файл',
 });
 
