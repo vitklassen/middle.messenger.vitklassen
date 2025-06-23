@@ -83,7 +83,7 @@ export default class HTTPTransport {
         if (status >= 200 && status < 300) {
           resolve(xhr.response);
         } else {
-          reject({ reason: 'unknown error' });
+          reject({ reason: xhr.response.reason });
         }
       };
   

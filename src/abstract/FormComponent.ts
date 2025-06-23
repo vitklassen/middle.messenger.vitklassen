@@ -26,7 +26,7 @@ export default class FormComponent extends Component {
   override addEvents(): void {
     const { events = {} } = this._props;
     Object.entries(events).forEach(([eventName, eventCallback]: CallbackTuple) => {
-      if (eventName === 'blur') {
+      if (eventName === 'blur' || eventName === 'change') {
         const inputList = this.getContent().querySelectorAll('input');
         inputList?.forEach(input => {
           input.addEventListener(eventName, eventCallback);
