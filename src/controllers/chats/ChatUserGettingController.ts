@@ -1,7 +1,7 @@
-import chatUserAPI from "../../api/chats/ChatUserAPI";
-import { TUserActionRequest } from "../../models/chats/types";
+import chatUserAPI from '../../api/chats/ChatUserAPI';
+import { TUserActionRequest } from '../../models/chats/types';
 import { TUserResponse } from '../../models/users/types';
-import store from "../../services/Store";
+import store from '../../services/Store';
 
 class ChatUserGettingController {
   public async addUsers(usersList: TUserResponse[]): Promise<void> {
@@ -11,7 +11,7 @@ class ChatUserGettingController {
     const requsetBody: TUserActionRequest = {
       users: [...usersList.map(user => user.id)],
       chatId: store.getState().currentChatId as number,
-    }
+    };
     await chatUserAPI.addUser(requsetBody);
   }
 }

@@ -50,4 +50,4 @@ export type TCreateChatResponse = {
 export type TUserActionRequest = {
   users: number[],
   chatId: number,
-}
+};

@@ -26,12 +26,10 @@ const debounceInput = debounce(handleInput, 250);
 
 const handleOpenPopup = (typePopup: string) => {
   if (typePopup === 'add') {
-    chatUserAddingPopup.open()
-  }
-  else if (typePopup === 'delete') {
+    chatUserAddingPopup.open();
+  } else if (typePopup === 'delete') {
     chatUserRemovalPopup.open();
-  } 
-  else {
+  } else {
     chatRemovalPopup.open();
   }
 };
@@ -43,17 +41,17 @@ const userAddingForm = new PopupForm({
   events: {
     submit: (evt: Event) => {
       evt.preventDefault();
-      if(!userAddingForm.hasInvalidInput()) {
+      if (!userAddingForm.hasInvalidInput()) {
         const inputElement = chatAddingForm.getContent().querySelector('input') as HTMLInputElement;
-        userSearchController.findUsers({login: inputElement.value})
-        .then(users => {
-          chatUserGettingController.addUsers(users);
-        })
-        .catch(err => console.log(err));
+        userSearchController.findUsers({ login: inputElement.value })
+          .then(users => {
+            chatUserGettingController.addUsers(users);
+          })
+          .catch(err => console.log(err));
         chatUserAddingPopup.close();
       }
-    }
-  }
+    },
+  },
 });
 const userRemovalForm = new PopupForm({
   buttonText: 'Удалить',
@@ -62,17 +60,17 @@ const userRemovalForm = new PopupForm({
   events: {
     submit: (evt: Event) => {
       evt.preventDefault();
-      if(!userRemovalForm.hasInvalidInput()) {
+      if (!userRemovalForm.hasInvalidInput()) {
         const inputElement = chatAddingForm.getContent().querySelector('input') as HTMLInputElement;
-        userSearchController.findUsers({login: inputElement.value})
-        .then(users => {
-          chatUserRemovalController.removeUsers(users);
-        })
-        .catch(err => console.log(err));
+        userSearchController.findUsers({ login: inputElement.value })
+          .then(users => {
+            chatUserRemovalController.removeUsers(users);
+          })
+          .catch(err => console.log(err));
         chatUserRemovalPopup.close();
       }
-    }
-  }
+    },
+  },
 });
 const chatAddingForm = new PopupForm({
   buttonText: 'Добавить',
@@ -83,7 +81,7 @@ const chatAddingForm = new PopupForm({
       evt.preventDefault();
       if (!chatAddingForm.hasInvalidInput()) {
         const inputElement = chatAddingForm.getContent().querySelector('input') as HTMLInputElement;
-        chatCreatingController.createChat({title: inputElement.value})
+        chatCreatingController.createChat({ title: inputElement.value })
           .then(() => chatsGettingController.getChats())
           .catch(err => console.log(err));
         chatAddingPopup.close();
@@ -124,7 +122,7 @@ const chatUserAddingPopup = new Popup({
 const chatUserRemovalPopup = new Popup({
   popupTitle: 'Удалить пользователя',
   PopupForm: userRemovalForm,
-})
+});
 const chatList = new ChatList({});
 
 const chatHeader = new ChatHeader({

@@ -17,7 +17,7 @@ export interface IOptions {
   withCredentials?: boolean;
 }
 
-function queryStringify(data: object & { [key: string]: string | number | boolean}) {
+function queryStringify(data: object & { [key: string]: string | number | boolean }) {
   if (typeof data !== 'object') {
     throw new Error('Data must be object');
   }
@@ -66,7 +66,7 @@ export default class HTTPTransport {
       xhr.open(
         method, 
         isGet && !!data && !isFormData
-          ? `${baseUrl + urlPart}${queryStringify(data as Record<string, string | number | number>)}`
+          ? `${baseUrl + urlPart}${queryStringify(data as Record<string, string | number  >)}`
           : baseUrl + urlPart,
       );
 

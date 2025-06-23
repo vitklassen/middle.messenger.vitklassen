@@ -1,6 +1,6 @@
-import { TUserActionRequest } from "../../models/chats/types";
-import { IOptions } from "../../services/HTTPTransport";
-import chatUserAPIInstance from "./ChatUserAPIInstance";
+import { TUserActionRequest } from '../../models/chats/types';
+import { IOptions } from '../../services/HTTPTransport';
+import chatUserAPIInstance from './ChatUserAPIInstance';
 
 class ChatUserAPI {
   public async addUser(users: TUserActionRequest) {
