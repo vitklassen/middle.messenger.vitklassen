@@ -43,9 +43,13 @@ const avatarForm = new PopupForm({
       const inputElement = evt.target as HTMLInputElement;
       const file = inputElement.files ? inputElement.files[0] : null;
       if(file) {
-        avatarForm.setProps({
-          avatarFileName: file.name,
-        })
+        if(file.type === "image/png" || file.type === "image/jpeg") {
+          console.log('yep');
+            avatarForm.setProps({
+            avatarFileName: file.name,
+          });
+          return;
+        }
       }
     }
   },

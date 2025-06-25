@@ -13,7 +13,6 @@ export default defineConfig({
     outDir: resolve(__dirname, 'dist'),
     emptyOutDir: true,
   },
-  plugins: [handlebars({helpers: {isEqual: (v1, v2, options) => v1 !== v2 ? options.fn(this) : options.inverse(this)}})],
   server: {
     port: 3000,
   },
