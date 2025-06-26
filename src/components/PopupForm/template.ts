@@ -40,16 +40,12 @@ const template = `
             <span class="form__error input__title-error" id="title-error"></span>
         </label>
     {{else}}
-        {{#isEqual avatarFileName ""}}
-            <span class="popup-form__avatar-file-name">{{avatarFileName}}</span>
-        {{else}}
-            <div class="popup-form__avatar-wrapper">
-                <input name="avatar" type="file" id="avatar" class="popup-form__avatar-input">
-                <label for="avatar" class="popup-form__avatar-label">
-                    <span class="popup-form__avatar-span">Выбрать файл на компьютере</span>
-                </label>
-            </div>
-        {{/isEqual}}
+        <div class="popup-form__avatar-wrapper">
+            <input name="avatar" type="file" id="avatar" class="popup-form__avatar-input">
+            <label for="avatar" class="popup-form__avatar-label">
+                <span class="popup-form__avatar-span">Выбрать файл на компьютере</span>
+            </label>
+        </div>
     {{/if}}
     <button type="submit" class="popup-form__submit-button {{buttonClassName}}">{{buttonText}}</button>
 <form>

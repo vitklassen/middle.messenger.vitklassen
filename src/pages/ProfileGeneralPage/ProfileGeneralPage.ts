@@ -35,23 +35,11 @@ const avatarForm = new PopupForm({
     submit: (evt: Event) => {
       evt.preventDefault();
       const form = new FormData(avatarForm.getContent() as HTMLFormElement);
+      console.log(form);
       userAvatarController.changeUserAvatar(form)
         .then(() => avatarPopup.close())
         .catch(err => console.log(err));
     },
-    change: (evt: Event) => {
-      const inputElement = evt.target as HTMLInputElement;
-      const file = inputElement.files ? inputElement.files[0] : null;
-      if(file) {
-        if(file.type === "image/png" || file.type === "image/jpeg") {
-          console.log('yep');
-            avatarForm.setProps({
-            avatarFileName: file.name,
-          });
-          return;
-        }
-      }
-    }
   },
 });
 

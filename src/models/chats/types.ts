@@ -51,3 +51,7 @@ export type TUserActionRequest = {
   users: number[],
   chatId: number,
 };
+
+export type TChatConnectResponse = {
+  token: string,
+}

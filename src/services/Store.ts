@@ -2,6 +2,7 @@ import { TGetChatResponse } from '../models/chats/types';
 import { TUserInfoResponse } from '../models/auth/types';
 import { set } from '../utils/utils';
 import EventBus from './EventBus';
+import { WSTransport } from './WSTransport';
 
 type TStoreCallback = () => void;
 
@@ -17,6 +18,7 @@ export type TStore = {
   currentUser?: TUserInfoResponse;
   chats?: TGetChatResponse[];
   currentChatId?: number;
+  currentWS?: WSTransport
 };
 
 class Store extends EventBus<TStoreCallback> {
