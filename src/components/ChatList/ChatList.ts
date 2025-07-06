@@ -1,4 +1,6 @@
 import chatConnectController from '../../controllers/chats/ChatConnectController';
+import chatGettingOldMessagesController from '../../controllers/chats/ChatGettingOldMessagesController';
+import { TUnreadMessagesList } from '../../models/chats/types';
 import Component, { CallbackTuple, ComponentProps } from '../../services/Component';
 import store, { TStore } from '../../services/Store';
 import { WSTransport } from '../../services/WSTransport';
@@ -13,18 +15,35 @@ class ChatListComponent extends Component {
           const liElement = evt.currentTarget as HTMLLIElement;
           const newChatId = liElement.dataset.id;
           const { currentChatId, currentWS, currentUser } = store.getState();
-          if(currentChatId && currentWS) {
+          if (currentChatId && currentWS) {
             const oldLiElement = this.getContent().querySelector(`[data-id="${currentChatId}"]`);
             oldLiElement?.classList.remove('message-box_type_active');
             currentWS.close();
           }
-          if(newChatId && currentUser) {
+          if (newChatId && currentUser) {
             const newLiElement = this.getContent().querySelector(`[data-id="${newChatId}"]`);
             newLiElement?.classList.add('message-box_type_active');
             const token = await chatConnectController.connectToChat(newChatId);
+            const oldMessagesCount = await chatGettingOldMessagesController.getOldMessages(newChatId);
+            const oldMessagesList: TUnreadMessagesList[] = [];
             const queryString = `/${currentUser.id}/${newChatId}/${token}`;
             const newWS = new WSTransport(queryString);
-            newWS.connect();
+            newWS.connect()
+            .then(() => {
+              newWS.on(WSTransport.EVENTS.MESSAGE, (data) => {
+                if(Array.isArray(data)) {
+                  if(data.length === 0) {
+                    store.set('currentMessages', oldMessagesList);
+                    return;
+                  }
+                  else {
+                    oldMessagesList.push(data);
+                    newWS.send({content: '0', type: 'get old'});
+                  }
+                }
+              });
+              newWS.send({content: '0', type: 'get old'});
+            });
             store.set('currentChatId', Number(newChatId));
             store.set('currentWS', newWS);
           }

@@ -129,7 +129,18 @@ const chatHeader = new ChatHeader({
   onOpenPopup: handleOpenPopup,
 });
 
-const messageForm = new MessageForm({});
+const messageForm = new MessageForm({
+  events: {
+    submit: (evt: Event) => {
+      evt.preventDefault();
+      const inputElement = messageForm.getContent().querySelector('input') as HTMLInputElement;
+      const { currentWS } = store.getState();
+      currentWS?.send({content: inputElement.value, type: 'message'});
+      const formElement = messageForm.getContent() as HTMLFormElement;
+      formElement.reset();
+    }
+  }
+});
 
 const chatLayout = new ChatLayout({
   ChatHeader: chatHeader,

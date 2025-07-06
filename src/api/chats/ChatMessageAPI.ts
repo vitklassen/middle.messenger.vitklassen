@@ -1,9 +1,12 @@
 import chatMessageAPIInstance from './ChatMessageAPIInstance';
-import type { TChatConnectResponse } from '../../models/chats/types';
+import { TUnreadMessageCount, type TChatConnectResponse } from '../../models/chats/types';
 
 class ChatMessageAPI {
   public async connectToChat(chatId: string) {
     return chatMessageAPIInstance.post<TChatConnectResponse>(`/token/${chatId}`).then(response => response.token);
+  }
+  public async getOldMessagesCount(chatId: string) {
+    return chatMessageAPIInstance.get<TUnreadMessageCount>(`/new/${chatId}`).then(response => response.unread_count);
   }
 }
 

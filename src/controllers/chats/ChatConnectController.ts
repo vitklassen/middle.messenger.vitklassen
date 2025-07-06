@@ -5,8 +5,7 @@ class ChatConnectController {
     try {
       const token = await chatMesssageAPI.connectToChat(chatId);
       return token;
-    }
-    catch(err) {
+    } catch (err) {
       console.log(err);
     }
   }

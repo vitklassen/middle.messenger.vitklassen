@@ -19,6 +19,6 @@ export default class EventBus<T extends Function> {
     if (!this.listeners[eventName]) {
       throw new Error(`Нет события: ${eventName}`);
     }
-    this.listeners[eventName].forEach(listener => {listener(...arg)});
+    this.listeners[eventName].forEach(listener => {listener(...arg);});
   }
 }

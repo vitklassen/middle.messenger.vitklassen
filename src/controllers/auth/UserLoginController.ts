@@ -10,8 +10,7 @@ class UserLoginController {
       if (isLogin) {
         router.go('/messenger');
       }
-    }
-    catch(err) {
+    } catch (err) {
       console.log(err);
     }
   }

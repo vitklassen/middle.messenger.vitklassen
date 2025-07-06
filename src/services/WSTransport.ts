@@ -1,6 +1,7 @@
 import EventBus from './EventBus';
+import ENV from '../utils/env';
 
-type MessageData = string | number | object;
+type MessageData = Record<string, string | number | object>;
 type TWSCallback = (data?: MessageData) => void;
 
 export class WSTransport extends EventBus<TWSCallback> {
@@ -21,7 +22,7 @@ export class WSTransport extends EventBus<TWSCallback> {
 
   constructor(url: string) {
     super();
-    this.url = url;
+    this.url = ENV.WSHOST + url;
   }
 
   public send(data: MessageData) {
@@ -37,11 +38,11 @@ export class WSTransport extends EventBus<TWSCallback> {
     }
     this.socket = new WebSocket(this.url);
     this.subscribe(this.socket);
-    this.setupPing();
     return new Promise((resolve, reject) => {
       this.on(WSTransport.EVENTS.ERROR, reject);
       this.on(WSTransport.EVENTS.CONNECTED, () => {
         this.off(WSTransport.EVENTS.ERROR, reject);
+        this.setupPing();
         resolve();
       });
     })

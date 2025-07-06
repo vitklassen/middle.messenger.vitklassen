@@ -6,7 +6,11 @@ const template = `
         </section>
     {{else}}
         {{{ChatHeader}}}
-        <section class="chat-layout__dialogue"></section>
+        <section class="chat-layout__dialogue">
+            {{#each messages}}
+                <p>{{content}}</p>
+            {{/each}}
+        </section>
         {{{MessageForm}}}
     {{/if}}
 </div>
