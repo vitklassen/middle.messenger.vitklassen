@@ -56,11 +56,12 @@ export type TChatConnectResponse = {
   token: string,
 };
 
-type TUnreadMessageInfo = {
+export type TUnreadMessageResponse = {
+  id: number,
   chat_id: number,
   time: string,
   type: string,
-  user_id: string,
+  user_id: number,
   content: string,
   file?: {
     id: number,
@@ -73,8 +74,21 @@ type TUnreadMessageInfo = {
   }           
 };
 
-export type TUnreadMessagesList = TUnreadMessageInfo[];
-
 export type TUnreadMessageCount = {
   unread_count: number,
 };
+
+export type TNewMessageResponse = {
+  id: number,
+  time: string,
+  user_id: number,
+  content: string,
+  type: string,
+}
+
+export type TChatMessageInfo = {
+  id: number,
+  time: string,
+  isCurrentUser?: boolean,
+  content: string,
+}

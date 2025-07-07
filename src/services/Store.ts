@@ -1,4 +1,4 @@
-import { TGetChatResponse, TUnreadMessagesList } from '../models/chats/types';
+import { TChatMessageInfo, TGetChatResponse } from '../models/chats/types';
 import { TUserInfoResponse } from '../models/auth/types';
 import { set } from '../utils/utils';
 import EventBus from './EventBus';
@@ -19,11 +19,13 @@ export type TStore = {
   chats?: TGetChatResponse[];
   currentChatId?: number;
   currentWS?: WSTransport;
-  currentMessages?: TUnreadMessagesList[];
+  currentMessages?: TChatMessageInfo[];
 };
 
 class Store extends EventBus<TStoreCallback> {
-  private state: TStore = {};
+  private state: TStore = {
+
+  };
 
   public getState() {
     return this.state;

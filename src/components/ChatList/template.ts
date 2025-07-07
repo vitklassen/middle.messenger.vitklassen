@@ -1,6 +1,6 @@
 const template = `
 <ul class="chat-list">
-    {{#each messages}}
+    {{#each chats}}
         <li class="message-box" data-id={{chatId}}>
             <img class="message-box__avatar" src={{avatarLink}}></img>
             <div class="message-box__info">

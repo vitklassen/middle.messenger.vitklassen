@@ -6,7 +6,7 @@ class ChatMessageAPI {
     return chatMessageAPIInstance.post<TChatConnectResponse>(`/token/${chatId}`).then(response => response.token);
   }
   public async getOldMessagesCount(chatId: string) {
-    return chatMessageAPIInstance.get<TUnreadMessageCount>(`/new/${chatId}`).then(response => response.unread_count);
+    return chatMessageAPIInstance.get<TUnreadMessageCount>(`/${chatId}/new`).then(response => response.unread_count);
   }
 }
 

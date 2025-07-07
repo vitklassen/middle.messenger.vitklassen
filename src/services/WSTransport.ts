@@ -1,7 +1,8 @@
 import EventBus from './EventBus';
 import ENV from '../utils/env';
+import { TUnreadMessageResponse, TNewMessageResponse } from '../models/chats/types';
 
-type MessageData = Record<string, string | number | object>;
+type MessageData = TUnreadMessageResponse | TNewMessageResponse | Record<string, string | number>;
 type TWSCallback = (data?: MessageData) => void;
 
 export class WSTransport extends EventBus<TWSCallback> {

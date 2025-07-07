@@ -1,6 +1,5 @@
 import chatConnectController from '../../controllers/chats/ChatConnectController';
-import chatGettingOldMessagesController from '../../controllers/chats/ChatGettingOldMessagesController';
-import { TUnreadMessagesList } from '../../models/chats/types';
+import { TNewMessageResponse, TUnreadMessageResponse, TChatMessageInfo } from '../../models/chats/types';
 import Component, { CallbackTuple, ComponentProps } from '../../services/Component';
 import store, { TStore } from '../../services/Store';
 import { WSTransport } from '../../services/WSTransport';
@@ -24,8 +23,7 @@ class ChatListComponent extends Component {
             const newLiElement = this.getContent().querySelector(`[data-id="${newChatId}"]`);
             newLiElement?.classList.add('message-box_type_active');
             const token = await chatConnectController.connectToChat(newChatId);
-            const oldMessagesCount = await chatGettingOldMessagesController.getOldMessages(newChatId);
-            const oldMessagesList: TUnreadMessagesList[] = [];
+            let messagesList: TChatMessageInfo[] = [];
             const queryString = `/${currentUser.id}/${newChatId}/${token}`;
             const newWS = new WSTransport(queryString);
             newWS.connect()
@@ -33,13 +31,20 @@ class ChatListComponent extends Component {
               newWS.on(WSTransport.EVENTS.MESSAGE, (data) => {
                 if(Array.isArray(data)) {
                   if(data.length === 0) {
-                    store.set('currentMessages', oldMessagesList);
-                    return;
+                    store.set('currentMessages', messagesList);
+                    return
                   }
-                  else {
-                    oldMessagesList.push(data);
-                    newWS.send({content: '0', type: 'get old'});
-                  }
+                  const messagesInfo = data.map(message => this.getMessageInfo(message, currentUser.id));
+                  messagesList = messagesList.concat(messagesInfo);
+                  const lastMessage = messagesInfo[messagesInfo.length - 1] as TChatMessageInfo;
+                  newWS.send({content: String(lastMessage.id), type: 'get old'});
+                }
+              });
+              newWS.on(WSTransport.EVENTS.MESSAGE, (data) => {
+                if(!Array.isArray(data)) {
+                  const {currentMessages} = store.getState();
+                  const newMessage = this.getMessageInfo(data as TNewMessageResponse, currentUser.id);
+                  store.set('currentMessages', currentMessages ? [...currentMessages, newMessage]: [newMessage]);
                 }
               });
               newWS.send({content: '0', type: 'get old'});
@@ -50,6 +55,19 @@ class ChatListComponent extends Component {
         },
       },
     });
+  }
+
+  private getMessageInfo(message: TNewMessageResponse | TUnreadMessageResponse, currentUserId: number): TChatMessageInfo {
+    const { id, time, user_id, content } = message;
+    const chatMessage: TChatMessageInfo = {
+      id: id,
+      time: time,
+      content: content,
+    }
+    if(user_id === currentUserId) {
+      chatMessage.isCurrentUser = true;
+    }
+    return chatMessage;
   }
 
   override addEvents(): void {
@@ -72,7 +90,7 @@ class ChatListComponent extends Component {
 function mapChats(state: TStore) {
   if (state.chats) {
     return {
-      messages: [...state.chats.map(item => {
+      chats: [...state.chats.map(item => {
         return {
           chatId: item.id,
           chatName: item.title,
@@ -84,7 +102,7 @@ function mapChats(state: TStore) {
       })],
     };
   } else {
-    return { messages: [] };
+    return { chats: [] };
   }
 }
 

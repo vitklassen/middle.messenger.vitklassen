@@ -14,8 +14,8 @@ class ChatLayoutV2 extends Component {
 }
 
 function mapChatLayout(state: TStore) {
-  if (state.currentChatId && state.messages) {
-    return { isEmptyChat: false, messages: state.messages };
+  if (state.currentChatId) {
+    return { isEmptyChat: false};
   } else {
     return { isEmptyChat: true };
   }
