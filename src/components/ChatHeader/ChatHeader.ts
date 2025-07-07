@@ -10,7 +10,9 @@ class ChatHeaderComponent extends Component {
         click: (evt: Event) => {
           if (typeof props.onOpenPopup === 'function') {
             const buttonElement = evt.currentTarget as HTMLButtonElement;
-            buttonElement.dataset.function && props.onOpenPopup(buttonElement.dataset.function);
+            if (buttonElement.dataset.function) {
+              props.onOpenPopup(buttonElement.dataset.function);
+            }
           }
         },
       },

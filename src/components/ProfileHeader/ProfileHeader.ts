@@ -1,5 +1,5 @@
 import Component, { CallbackTuple, ComponentProps } from '../../services/Component';
-import { Indexed, TStore } from '../../services/Store';
+import { TStore } from '../../services/Store';
 import ENV from '../../utils/env';
 import { connect } from '../../utils/utils';
 import template from './template';

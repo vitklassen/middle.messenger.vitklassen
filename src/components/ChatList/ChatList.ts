@@ -10,7 +10,7 @@ class ChatListComponent extends Component {
   constructor(props: ComponentProps) {
     super({ ...props,
       events: {
-        click: async (evt: Event) => {
+        click: (evt: Event) => {
           const liElement = evt.currentTarget as HTMLLIElement;
           const newChatId = liElement.dataset.id;
           const { currentChatId, currentWS, currentUser } = store.getState();
@@ -22,35 +22,39 @@ class ChatListComponent extends Component {
           if (newChatId && currentUser) {
             const newLiElement = this.getContent().querySelector(`[data-id="${newChatId}"]`);
             newLiElement?.classList.add('message-box_type_active');
-            const token = await chatConnectController.connectToChat(newChatId);
-            let messagesList: TChatMessageInfo[] = [];
-            const queryString = `/${currentUser.id}/${newChatId}/${token}`;
-            const newWS = new WSTransport(queryString);
-            newWS.connect()
-            .then(() => {
-              newWS.on(WSTransport.EVENTS.MESSAGE, (data) => {
-                if(Array.isArray(data)) {
-                  if(data.length === 0) {
-                    store.set('currentMessages', messagesList);
-                    return
-                  }
-                  const messagesInfo = data.map(message => this.getMessageInfo(message, currentUser.id));
-                  messagesList = messagesList.concat(messagesInfo);
-                  const lastMessage = messagesInfo[messagesInfo.length - 1] as TChatMessageInfo;
-                  newWS.send({content: String(lastMessage.id), type: 'get old'});
-                }
-              });
-              newWS.on(WSTransport.EVENTS.MESSAGE, (data) => {
-                if(!Array.isArray(data)) {
-                  const {currentMessages} = store.getState();
-                  const newMessage = this.getMessageInfo(data as TNewMessageResponse, currentUser.id);
-                  store.set('currentMessages', currentMessages ? [...currentMessages, newMessage]: [newMessage]);
-                }
-              });
-              newWS.send({content: '0', type: 'get old'});
-            });
-            store.set('currentChatId', Number(newChatId));
-            store.set('currentWS', newWS);
+            chatConnectController.connectToChat(newChatId)
+              .then(token => {
+                let messagesList: TChatMessageInfo[] = [];
+                const queryString = `/${currentUser.id}/${newChatId}/${token}`;
+                const newWS = new WSTransport(queryString);
+                newWS.connect()
+                  .then(() => {
+                    newWS.on(WSTransport.EVENTS.MESSAGE, (data) => {
+                      if (Array.isArray(data)) {
+                        if (data.length === 0) {
+                          store.set('currentMessages', messagesList.reverse());
+                          return;
+                        }
+                        const messagesInfo = data.map(message => this.getMessageInfo(message as TUnreadMessageResponse, currentUser.id));
+                        messagesList = messagesList.concat(messagesInfo);
+                        const lastMessage = messagesInfo[messagesInfo.length - 1];
+                        newWS.send({ content: String(lastMessage.id), type: 'get old' });
+                      }
+                    });
+                    newWS.on(WSTransport.EVENTS.MESSAGE, (data) => {
+                      if (!Array.isArray(data)) {
+                        const { currentMessages } = store.getState();
+                        const newMessage = this.getMessageInfo(data as TNewMessageResponse, currentUser.id);
+                        store.set('currentMessages', currentMessages ? [...currentMessages, newMessage] : [newMessage]);
+                      }
+                    });
+                    newWS.send({ content: '0', type: 'get old' });
+                    store.set('currentChatId', Number(newChatId));
+                    store.set('currentWS', newWS);
+                  })
+                  .catch(err => console.log(err));
+              })
+              .catch(err => console.log(err));
           }
         },
       },
@@ -63,8 +67,8 @@ class ChatListComponent extends Component {
       id: id,
       time: time,
       content: content,
-    }
-    if(user_id === currentUserId) {
+    };
+    if (user_id === currentUserId) {
       chatMessage.isCurrentUser = true;
     }
     return chatMessage;

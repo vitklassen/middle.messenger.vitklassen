@@ -42,10 +42,11 @@ const userAddingForm = new PopupForm({
     submit: (evt: Event) => {
       evt.preventDefault();
       if (!userAddingForm.hasInvalidInput()) {
-        const inputElement = chatAddingForm.getContent().querySelector('input') as HTMLInputElement;
+        const inputElement = userAddingForm.getContent().querySelector('input') as HTMLInputElement;
         userSearchController.findUsers({ login: inputElement.value })
           .then(users => {
-            chatUserGettingController.addUsers(users);
+            chatUserGettingController.addUsers(users)
+              .catch(err => console.log(err));
           })
           .catch(err => console.log(err));
         chatUserAddingPopup.close();
@@ -61,10 +62,11 @@ const userRemovalForm = new PopupForm({
     submit: (evt: Event) => {
       evt.preventDefault();
       if (!userRemovalForm.hasInvalidInput()) {
-        const inputElement = chatAddingForm.getContent().querySelector('input') as HTMLInputElement;
+        const inputElement = userRemovalForm.getContent().querySelector('input') as HTMLInputElement;
         userSearchController.findUsers({ login: inputElement.value })
           .then(users => {
-            chatUserRemovalController.removeUsers(users);
+            chatUserRemovalController.removeUsers(users)
+              .catch(err => console.log(err));
           })
           .catch(err => console.log(err));
         chatUserRemovalPopup.close();
@@ -135,11 +137,11 @@ const messageForm = new MessageForm({
       evt.preventDefault();
       const inputElement = messageForm.getContent().querySelector('input') as HTMLInputElement;
       const { currentWS } = store.getState();
-      currentWS?.send({content: inputElement.value, type: 'message'});
+      currentWS?.send({ content: inputElement.value, type: 'message' });
       const formElement = messageForm.getContent() as HTMLFormElement;
       formElement.reset();
-    }
-  }
+    },
+  },
 });
 
 const chatLayout = new ChatLayout({

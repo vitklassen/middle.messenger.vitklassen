@@ -21,7 +21,7 @@ const formElement = new FormV2({
         inputList.forEach(input => {
           request[input.name] = input.value;
         });
-        userLoginController.login(request as TSignInRequest);
+        userLoginController.login(request as TSignInRequest).catch(err => console.log(err));
       }
     },
   },

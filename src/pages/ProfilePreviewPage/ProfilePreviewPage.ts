@@ -20,7 +20,7 @@ export default class ProfilePreviewPage extends ProfilePageComponent {
       events: {
         submit: (evt: Event) => {
           evt.preventDefault();
-          userLogoutController.logout();
+          userLogoutController.logout().catch(err => console.log(err));
         },
       },
     });

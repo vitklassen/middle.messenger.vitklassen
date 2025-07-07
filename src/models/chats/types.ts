@@ -84,11 +84,11 @@ export type TNewMessageResponse = {
   user_id: number,
   content: string,
   type: string,
-}
+};
 
 export type TChatMessageInfo = {
   id: number,
   time: string,
   isCurrentUser?: boolean,
   content: string,
-}
+};

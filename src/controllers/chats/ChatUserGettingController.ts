@@ -5,7 +5,9 @@ import store from '../../services/Store';
 
 class ChatUserGettingController {
   public async addUsers(usersList: TUserResponse[]): Promise<void> {
-    if (!usersList || usersList.length === 0 || !store.getState().currentChatId) {
+    console.log(usersList);
+    console.log(store.getState().currentChatId);
+    if (usersList.length === 0) {
       throw new Error('Произошла ошибка при добавлении пользователей');
     }
     const requsetBody: TUserActionRequest = {

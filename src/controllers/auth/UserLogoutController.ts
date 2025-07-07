@@ -8,6 +8,10 @@ class UserLogoutController {
       const isLogout = await authAPI.logoutUser();
       if (isLogout) {
         store.set('currentUser', null);
+        store.set('chats', null);
+        store.set('currentChatId', null);
+        store.set('currentWS', null);
+        store.set('currentMessages', null);
         router.go('/');
       }
     } catch (error) {

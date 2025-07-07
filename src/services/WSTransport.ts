@@ -27,7 +27,7 @@ export class WSTransport extends EventBus<TWSCallback> {
   }
 
   public send(data: MessageData) {
-    if(!this.socket) {
+    if (!this.socket) {
       throw new Error('Socket is not connected');
     }
     this.socket.send(JSON.stringify(data));
@@ -46,20 +46,22 @@ export class WSTransport extends EventBus<TWSCallback> {
         this.setupPing();
         resolve();
       });
-    })
+    });
   }
+
   public close() {
     this.socket?.close();
     clearInterval(this.pingInterval);
   }
+
   private setupPing() {
     this.pingInterval = setInterval(() => {
-      this.send({type: 'ping'});
+      this.send({ type: 'ping' });
     }, this.pingIntervalTime);
     this.on(WSTransport.EVENTS.CLOSE, () => {
-        clearInterval(this.pingInterval);
-        this.pingInterval = undefined;
-    })
+      clearInterval(this.pingInterval);
+      this.pingInterval = undefined;
+    });
   }
 
   private subscribe(socket: WebSocket) {
@@ -74,8 +76,8 @@ export class WSTransport extends EventBus<TWSCallback> {
     });
     socket.addEventListener('message', (message: MessageEvent) => {
       try {
-        const data = JSON.parse(message.data);
-        if (['pong', 'user connected'].includes(data?.type)) {
+        const data = JSON.parse(message.data as string) as MessageData;
+        if (['pong', 'user connected'].includes(data.type as string)) {
           return;
         }
         this.notify(WSTransport.EVENTS.MESSAGE, data);

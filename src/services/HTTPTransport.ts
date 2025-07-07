@@ -81,9 +81,10 @@ export default class HTTPTransport {
       xhr.onload = function () {
         const status = xhr.status || 0;
         if (status >= 200 && status < 300) {
-          resolve(xhr.response);
+          resolve(xhr.response as TResponse);
         } else {
-          reject({ reason: xhr.response.reason });
+          const errorResponse = xhr.response as { reason: string };
+          reject({ reason: errorResponse.reason });
         }
       };
   
