@@ -7,6 +7,7 @@
 «[Ссылка на приложение](https://vitklassen-messenger.netlify.app/)»
 
 
+
 ## Используемый стек
 
 #TypeScript, Handlebars, HTML, SCSS
