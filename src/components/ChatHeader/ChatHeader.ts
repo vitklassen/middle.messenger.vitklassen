@@ -1,34 +1,24 @@
-import Component, { ComponentProps, CallbackTuple } from '../../services/Component';
+import Component, { CallbackTuple, ComponentProps } from '../../services/Component';
+import { TStore } from '../../services/Store';
+import { connect } from '../../utils/utils';
 import template from './template';
 
-export default class ChatHeader extends Component {
+class ChatHeaderComponent extends Component {
   constructor(props: ComponentProps) {
     super({ ...props, 
       events: {
         click: (evt: Event) => {
           if (typeof props.onOpenPopup === 'function') {
             const buttonElement = evt.currentTarget as HTMLButtonElement;
-            if (buttonElement.classList.contains('chat-header__control-button_type_add')) {
-              props.onOpenPopup('add');
-            } else if (buttonElement.classList.contains('chat-header__control-button_type_delete')) {
-              props.onOpenPopup('delete');
-            } else if (buttonElement.classList.contains('chat-header__control-button_type_delete-chat')) {
-              props.onOpenPopup('delete-chat');
+            if (buttonElement.dataset.function) {
+              props.onOpenPopup(buttonElement.dataset.function);
             }
           }
         },
       },
     });
   }
-
-  public changeChatName(chatName: string) {
-    if (chatName) {
-      this.setProps({
-        chatName: chatName,
-      });
-    }
-  }
-
+    
   override addEvents(): void {
     const { events = {} } = this._props;
     if (this._element instanceof HTMLElement) { 
@@ -44,8 +34,22 @@ export default class ChatHeader extends Component {
       });
     }
   }
-
+  
   override render() {
     return template;
   }
 }
+
+function mapChatHeader(state: TStore) {
+  if (state.currentChatId) {
+    const currentChat = state.chats?.find(item => item.id === state.currentChatId);
+    return {
+      chatName: currentChat?.title,
+      avatarLink: currentChat?.avatar ? currentChat.avatar : '/message-box__avatar-image.png',
+    };
+  } else {
+    return {};
+  }
+}
+
+export const ChatHeader = connect<typeof ChatHeaderComponent>(ChatHeaderComponent, mapChatHeader);

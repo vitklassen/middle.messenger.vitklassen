@@ -1,3 +1,5 @@
+import ENV from '../utils/env';
+
 enum METHODS {
   GET = 'GET',
   POST = 'POST',
@@ -5,11 +7,14 @@ enum METHODS {
   DELETE = 'DELETE',
 }
 
-interface IOptions {
+export interface IOptions {
   headers?: Record<string, string>;
   method?: METHODS;
   timeout?: number;
-  data?: Record<string, string>;
+  data?: Record<string, string | number | number []> | FormData;
+  signal?: AbortSignal;
+  responseType?: XMLHttpRequestResponseType;
+  withCredentials?: boolean;
 }
 
 function queryStringify(data: object & { [key: string]: string | number | boolean }) {
@@ -24,25 +29,31 @@ function queryStringify(data: object & { [key: string]: string | number | boolea
 }
   
 export default class HTTPTransport {
-  get = (url: string, options: IOptions = {}): Promise<unknown> => {
-    return this.request(url, { ...options, method: METHODS.GET });
-  };
+  endpoint: string;
+
+  constructor(url: string) {
+    this.endpoint = ENV.HOST + url;
+  }
+
+  get<TResponse>(urlPart: string, options: IOptions = {}): Promise<TResponse> {
+    return this.request(urlPart, { ...options, method: METHODS.GET });
+  }
   
-  post = (url: string, options: IOptions = {}): Promise<unknown>  => {
-    return this.request(url, { ...options, method: METHODS.POST });
-  };
+  post<TResponse>(urlPart: string, options: IOptions = {}): Promise<TResponse> {
+    return this.request(urlPart, { ...options, method: METHODS.POST });
+  }
   
-  put = (url: string, options: IOptions = {}): Promise<unknown>  => {
-    return this.request(url, { ...options, method: METHODS.PUT });
-  };
+  put<TResponse>(urlPart: string, options: IOptions = {}): Promise<TResponse> {
+    return this.request(urlPart, { ...options, method: METHODS.PUT });
+  }
   
-  delete = (url: string, options: IOptions = {}): Promise<unknown>  => { 
-    return this.request(url, { ...options, method: METHODS.DELETE });
-  };
+  delete<TResponse>(urlPart: string, options: IOptions = {}): Promise<TResponse> { 
+    return this.request(urlPart, { ...options, method: METHODS.DELETE });
+  }
   
-  request = (url: string, options: IOptions = {}): Promise<unknown>  => {
-    const { headers = {}, method, data } = options;
-  
+  request<TResponse>(urlPart: string, options: IOptions = {}): Promise<TResponse> {
+    const { headers = {}, method, data, signal, responseType = 'json', withCredentials = true } = options;
+    const baseUrl = this.endpoint;
     return new Promise(function (resolve, reject) {
       if (!method) {
         reject('No method');
@@ -51,33 +62,48 @@ export default class HTTPTransport {
   
       const xhr = new XMLHttpRequest();
       const isGet = method === METHODS.GET;
-  
+      const isFormData = data instanceof FormData;
       xhr.open(
         method, 
-        isGet && !!data
-          ? `${url}${queryStringify(data)}`
-          : url,
+        isGet && !!data && !isFormData
+          ? `${baseUrl + urlPart}${queryStringify(data as Record<string, string | number  >)}`
+          : baseUrl + urlPart,
       );
+
+      if (signal) {
+        signal.onabort = () => {xhr.abort();};
+      }
   
       Object.keys(headers).forEach(key => {
         xhr.setRequestHeader(key, headers[key]);
       });
   
       xhr.onload = function () {
-        resolve(xhr);
+        const status = xhr.status || 0;
+        if (status >= 200 && status < 300) {
+          resolve(xhr.response as TResponse);
+        } else {
+          const errorResponse = xhr.response as { reason: string };
+          reject({ reason: errorResponse.reason });
+        }
       };
   
-      xhr.onabort = reject;
-      xhr.onerror = reject;
-  
+      xhr.onabort = () => reject({ reason: 'abort' });
+      xhr.onerror = () => reject({ reason: 'network error' });
+      xhr.ontimeout = () => reject({ reason: 'timeout error' });
+
       xhr.timeout = options.timeout || 5000;
-      xhr.ontimeout = reject;
+      xhr.withCredentials = withCredentials;
+      xhr.responseType = responseType;
   
       if (isGet || !data) {
         xhr.send();
+      } else if (data instanceof FormData) {
+        xhr.send(data);
       } else {
+        xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(data));
       }
     });
-  };
+  }
 }

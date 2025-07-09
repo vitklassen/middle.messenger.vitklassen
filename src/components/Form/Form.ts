@@ -1,7 +1,6 @@
-import template from './template';
+import FormComponent from '../../abstract/FormComponent';
 import { ComponentProps } from '../../services/Component';
-import FormComponent from '../../utils/commonClasses';
-
+import template from './template';
 
 export default class Form extends FormComponent {
   constructor(props: ComponentProps) {

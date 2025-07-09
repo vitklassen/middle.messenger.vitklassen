@@ -1,0 +1,50 @@
+@use '../../styles/utils/constants.scss' as *;
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 60px;
+    padding: 0;
+
+
+    &__avatar {
+        background-color: $gray_color_type_1;
+        background-image: url('../../../public/profile__avatar-button-image.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        border: none;
+        border-radius: 50%;
+        color: $white_color;
+        font-size: 13px;
+        font-weight: 500;
+        height: 130px;
+        line-height: 14px;
+        margin: 0 auto 21px;
+        text-align: center;
+        width: 130px;
+
+        &:hover {
+            background-color: $black_color;
+            cursor: pointer;
+            opacity: 0.5;
+        }
+
+        &:hover::before {
+            content: "Поменять аватар";
+        }
+    }
+
+    &__user-name {
+        color: $gray_color_type_3;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 16px;
+        margin: 0;
+        padding: 0;
+
+        &_type_change {
+            color: $white_color;
+        }
+    }
+}

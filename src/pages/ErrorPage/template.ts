@@ -7,7 +7,7 @@ const template = `
       <h3 class="error__subtitle">
           {{errorMessage}}
       </h3>
-      <a href="navigate" data-ref="navigate" class="error__link">Назад к чатам</a>
+      <a href="/messenger" data-ref="/messenger" class="error__link">Назад к чатам</a>
     </div>  
 </main>
 `;
