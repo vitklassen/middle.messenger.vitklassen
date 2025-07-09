@@ -7,14 +7,87 @@
     margin: 0;
     height: 720px;
     padding: 0 20px 0 21px;
-    max-width: calc(100% * (97 / 128));
+    width: calc(100% * (97 / 128));
 
     &__dialogue {
         background-color: $white_color;
         display: flex;
+        flex-direction: column;
         height: 100%;
+        overflow: auto;
         margin: 0;
         padding: 0;
+        list-style: none;
+    }
+
+    &__chat-part {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 0;
+        margin-top: 48px;
+        padding: 0;
+    }
+
+    &__chat-date {
+        margin: 0 auto 30px;
+        padding: 0;
+        color: $gray_color_type_4;
+        font-family: Inter, Helvetica, sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 12px;
+    }
+
+
+    &__message-container {
+        display: flex;
+        box-sizing: border-box;
+        flex-direction: column;
+        max-width: 402px;
+        overflow: visible;
+        margin: 0 0 10px;
+        padding: 11px;
+        border-radius: 16px;
+
+        &_type_my-message {
+            background-color: $blue_color_type_2;
+            margin-left: auto;
+        }
+
+        &_type_other-message {
+            background-color: $gray_color_type_7;
+            margin-right: auto;
+        }
+    }
+
+    &__message-content {
+        color: $gray_color_type_3;
+        font-family: Inter, Helvetica, sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 15px;
+        margin: 0;
+        padding: 0;
+        text-align: left;
+    }
+
+    &__message-time {
+        font-family: Inter, Helvetica, sans-serif;
+        font-size: 9px;
+        font-weight: 500;
+        line-height: 9px;
+        margin: 0;
+        padding: 0;
+        text-align: right;
+
+        &_type_my-message {
+            color: $blue_color_type_1;
+        }
+
+        &_type_other-message {
+            color: $gray_color_type_4;
+        }
     }
 
     &__empty-chat {
@@ -32,7 +105,7 @@
         font-size: 12px;
         font-weight: 500;
         line-height: 12px;
-        margin: 0;
+        margin: 0 auto;
         margin-top: 360px;
         padding: 0;
     }

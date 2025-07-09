@@ -1,12 +1,12 @@
-import { TChatMessageInfo, TGetChatResponse } from '../models/chats/types';
+import { TChatList, TGetChatResponse } from '../models/chats/types';
 import { TUserInfoResponse } from '../models/auth/types';
 import { set } from '../utils/utils';
 import EventBus from './EventBus';
 import { WSTransport } from './WSTransport';
 
 type TStoreCallback = () => void;
-
-export type Indexed<T = any> = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Indexed<T = any> = { 
   [key in string]: T;
 };
 
@@ -19,13 +19,11 @@ export type TStore = {
   chats?: TGetChatResponse[];
   currentChatId?: number;
   currentWS?: WSTransport;
-  currentMessages?: TChatMessageInfo[];
+  currentMessages?: TChatList[];
 };
 
 class Store extends EventBus<TStoreCallback> {
-  private state: TStore = {
-
-  };
+  private state: TStore = {};
 
   public getState() {
     return this.state;

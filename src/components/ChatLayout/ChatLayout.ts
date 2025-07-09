@@ -17,7 +17,7 @@ function mapChatLayout(state: TStore) {
   if (state.currentChatId) {
     return { 
       isEmptyChat: false,
-      messages: state.currentMessages ? state.currentMessages : [],
+      chats: state.currentMessages ? state.currentMessages : [],
     };
   } else {
     return { isEmptyChat: true };

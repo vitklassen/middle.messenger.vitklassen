@@ -238,6 +238,8 @@ export default class Component {
   }
 
   public componentDidUpdate(oldProps: ComponentProps, newProps: ComponentProps): boolean {
+    // console.log(oldProps);
+    // console.log(newProps);
     if (isEqual(oldProps, newProps)) {
       return false;
     }
