@@ -6,7 +6,7 @@ class ChatConnectController {
       const token = await chatMesssageAPI.connectToChat(chatId);
       return token;
     } catch (err) {
-      console.log(err);
+      throw new Error('Ошибка при подключении к чату');
     }
   }
 }
