@@ -7,8 +7,8 @@
     display: flex;
     flex-direction: column;
     font-family: Inter, Helvetica, sans-serif;
-    margin: 0;
     height: 720px;
+    margin: 0;
     padding: 21px 10px 0;
     width: 310px;
 
@@ -33,18 +33,17 @@
     }
 
     &__button {
-        width: 290px;
-        height: 32px;
-        border: none;
-        margin: 0 auto 14px;
-        padding: 0;
         background-color: $blue_color_type_1;
+        border: none;
         border-radius: 8px;
         color: $white_color;
         font-size: 13px;
         height: 37px;
         line-height: 13px;
+        margin: 0 auto 14px;
+        padding: 0;
         text-align: center;
+        width: 290px;
 
          &:hover {
             @include hover_element;
@@ -56,9 +55,9 @@
     box-sizing: border-box;
     font-family: Inter, Helvetica, sans-serif;
     margin: 0 0 14px;
+    margin-bottom: 10px;
     max-height: 32px;
     max-width: 100%;
-    margin-bottom: 10px;
 
     &__input {
         background-color: $gray_color_type_1;

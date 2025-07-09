@@ -67,10 +67,10 @@
     }
 
     &__avatar-wrapper {
-        width: 130px;
-        position: relative;
         margin: 0 auto;
+        position: relative;
         text-align: center;
+        width: 130px;
     }
 
     &__avatar-input {
@@ -80,8 +80,8 @@
     }
 
     &__avatar-label {
-        max-width: 100%;
         margin: 0;
+        max-width: 100%;
         padding: 0;
     }
 
@@ -91,6 +91,7 @@
         font-weight: 500;
         line-height: 16px;
         text-decoration: underline;
+
         &:hover {
             @include hover_element;
         }
