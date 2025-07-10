@@ -1,5 +1,6 @@
 import userDataController from '../controllers/auth/UserDataController';
 import chatsGettingController from '../controllers/chats/ChatsGettingController';
+import { Routes } from '../utils/constants';
 import Component, { ComponentProps } from './Component';
 import Route from './Route';
 
@@ -56,8 +57,8 @@ class Router {
   private _onRoute(pathName: string): void {
     let route;
     userDataController.checkAuth().then(() => {
-      if (pathName === '/' || pathName === '/sign-up' || pathName === '/messenger') {
-        route = this._getRoute('/messenger');
+      if (pathName === Routes.SignIn || pathName === Routes.SignUp || pathName === Routes.Messenger) {
+        route = this._getRoute(Routes.Messenger);
         chatsGettingController.getChats().catch(err => console.log(err));
       } else {
         route = this._getRoute(pathName);
@@ -68,7 +69,7 @@ class Router {
       .catch(() => {
         route = this._getRoute(pathName);
         if (route.isProtected) {
-          this.go('/');
+          this.go(Routes.SignIn);
         } else {
           this._currentRoute = route;
           route.render(); 
@@ -79,7 +80,7 @@ class Router {
   private _getRoute(pathName: string): Route {
     const currentRoute = this._routes.find(route => route.matchPath(pathName));
     if (!currentRoute) {
-      const notFoundErrorRoute = this._routes.find(route => route.matchPath('/not-found'));
+      const notFoundErrorRoute = this._routes.find(route => route.matchPath(Routes.Error404));
       if (!notFoundErrorRoute) {
         throw new Error('');
       }

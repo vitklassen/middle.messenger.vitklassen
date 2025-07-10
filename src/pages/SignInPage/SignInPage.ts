@@ -1,6 +1,6 @@
 import template from './template';
 import Component from '../../services/Component';
-import { signInFormLabelsInfo } from '../../utils/constants';
+import { Routes, signInFormLabelsInfo } from '../../utils/constants';
 import FormV2 from '../../components/Form/Form';
 import userLoginController from '../../controllers/auth/UserLoginController';
 import { TSignInRequest } from '../../models/auth/types';
@@ -8,7 +8,7 @@ import { TSignInRequest } from '../../models/auth/types';
 const formElement = new FormV2({
   formTitle: 'Вход',
   fieldsets: signInFormLabelsInfo,
-  href: '/sign-up',
+  href: Routes.SignUp,
   linkText: 'Нет аккаунта?',
   buttonText: 'Войти',
   buttonClassName: 'form__submit-button_state_disabled',

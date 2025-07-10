@@ -7,6 +7,11 @@ enum METHODS {
   DELETE = 'DELETE',
 }
 
+enum HttpStatus {
+  OK = 200,
+  MULTIPLECHOICES = 300,
+}
+
 export interface IOptions {
   headers?: Record<string, string>;
   method?: METHODS;
@@ -80,7 +85,7 @@ export default class HTTPTransport {
   
       xhr.onload = function () {
         const status = xhr.status || 0;
-        if (status >= 200 && status < 300) {
+        if (status >= HttpStatus.OK  && status < HttpStatus.MULTIPLECHOICES) {
           resolve(xhr.response as TResponse);
         } else {
           const errorResponse = xhr.response as { reason: string };

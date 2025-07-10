@@ -1,15 +1,16 @@
-import authAPIInstance from './AuthAPIInstance';
 import type { TSignInRequest, TSignUpRequest, TSignUpResponse, TUserInfoResponse } from '../../models/auth/types';
-import { IOptions } from '../../services/HTTPTransport';
+import HTTPTransport, { IOptions } from '../../services/HTTPTransport';
 
 
 class AuthAPI {
+
+  private readonly http: HTTPTransport = new HTTPTransport('/auth');
 
   public async login(userData: TSignInRequest) {
     const options: IOptions = {
       data: userData,
     };
-    return authAPIInstance.post('/signin', options)
+    return this.http.post('/signin', options)
       .then(() => true);
   }
 
@@ -17,15 +18,15 @@ class AuthAPI {
     const options: IOptions = {
       data: userData,
     };
-    return authAPIInstance.post<TSignUpResponse>('/signup', options).then(() => true);
+    return this.http.post<TSignUpResponse>('/signup', options).then(() => true);
   }
 
   public async logoutUser() {
-    return authAPIInstance.post('/logout').then(() => true);
+    return this.http.post('/logout').then(() => true);
   }
 
   public async getUserData() {
-    return authAPIInstance.get<TUserInfoResponse>('/user')
+    return this.http.get<TUserInfoResponse>('/user')
       .then(response => response);
   }
 }

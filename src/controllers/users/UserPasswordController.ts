@@ -1,11 +1,12 @@
 import userAPI from '../../api/users/UserAPI';
 import { TChangePasswordRequest } from '../../models/users/types';
 import router from '../../services/Router';
+import { Routes } from '../../utils/constants';
 class UserPasswordController {
   public async changeUserPassword(data: TChangePasswordRequest): Promise<void> {
     // добавить валидацию ?
     await userAPI.changeUserPassword(data);
-    router.go('/settings');
+    router.go(Routes.Settings);
   }
 
 }

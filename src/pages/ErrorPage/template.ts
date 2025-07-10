@@ -1,3 +1,5 @@
+import { Routes } from '../../utils/constants';
+
 const template = `
 <main class="content content_type_error"> 
     <div class="error">
@@ -7,7 +9,7 @@ const template = `
       <h3 class="error__subtitle">
           {{errorMessage}}
       </h3>
-      <a href="/messenger" data-ref="/messenger" class="error__link">Назад к чатам</a>
+      <a href=${Routes.Messenger} data-ref=${Routes.Messenger} class="error__link">Назад к чатам</a>
     </div>  
 </main>
 `;

@@ -1,34 +1,36 @@
 import { TUserRequset, TUserResponse, TUserSearchModel, TChangePasswordRequest } from '../../models/users/types';
-import { IOptions } from '../../services/HTTPTransport';
-import userAPIInstance from './UserAPIInstance';
+import HTTPTransport, { IOptions } from '../../services/HTTPTransport';
 
 class UserAPI {
+
+  private readonly http: HTTPTransport = new HTTPTransport('/user');
+
   public async changeUserData(userData: TUserRequset) {
     const options: IOptions = {
       data: userData,
     };
-    return userAPIInstance.put<TUserResponse>('/profile', options).then(response => response);
+    return this.http.put<TUserResponse>('/profile', options).then(response => response);
   }
 
   public async changeUserAvatar(newAvatar: FormData) {
     const options: IOptions = {
       data: newAvatar,
     };
-    return userAPIInstance.put<TUserResponse>('/profile/avatar', options).then(response => response);
+    return this.http.put<TUserResponse>('/profile/avatar', options).then(response => response);
   }
 
   public async changeUserPassword(passwordData: TChangePasswordRequest) {
     const options: IOptions = {
       data: passwordData,
     };
-    return userAPIInstance.put('/password', options).then(() => true);
+    return this.http.put('/password', options).then(() => true);
   }
 
   public async findUsers(searchData: TUserSearchModel) {
     const options: IOptions = {
       data: searchData,
     };
-    return userAPIInstance.post<TUserResponse[]>('/search', options).then(response => response);
+    return this.http.post<TUserResponse[]>('/search', options).then(response => response);
   }
 }
 
