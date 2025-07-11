@@ -1,5 +1,5 @@
 import { ComponentProps } from '../../services/Component';
-import FormComponent from '../../utils/commonClasses';
+import FormComponent from '../../abstract/FormComponent';
 import template from './template';
 
 export default class MessageForm extends FormComponent {

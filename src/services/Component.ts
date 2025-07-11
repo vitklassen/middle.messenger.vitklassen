@@ -1,16 +1,19 @@
-import EventBus, { EventCallback } from './EventBus';
+import EventBus from './EventBus';
 import { v4 as makeUuid } from 'uuid';
 import Handlebars from 'handlebars';
+import { isEqual } from '../utils/utils';
+import { Indexed } from './Store';
 
+type EventCallback = (...arg: ComponentProps[]) => void;
 type TCallback = (strArg: string) => void;
 type TEventCallback = (evt: Event) => void;
 type TAttr = Record<string, string>;
-type TEvents = Record<string, TEventCallback>;
-type TProps = Record<string, string | number | boolean | TAttr | TEvents>;
+type TProps = Record<string, string | number | boolean | TAttr | TEvents | Indexed[]>;
 type TChildren = Record<string, Component>;
 type TLists = Record<string, Component[]>; 
-type CommonType = Component | Component[] | string | number | boolean | TAttr | TEvents | TCallback;
+type CommonType = Component | Component[] | string | number | boolean | TAttr | TEvents | TCallback | Indexed[];
 
+export type TEvents = Record<string, TEventCallback>;
 export type CallbackTuple = [string, TEventCallback];
 export type ComponentProps = Record<string, CommonType>;
 
@@ -34,10 +37,10 @@ export default class Component {
 
   protected _lists: TLists;
 
-  protected eventBus: () => EventBus;
+  protected eventBus: () => EventBus<EventCallback>;
 
   constructor(propsAndChildren: ComponentProps = {}) {
-    const eventBus = new EventBus();
+    const eventBus = new EventBus<EventCallback>();
     this.eventBus = () => eventBus;
     this._id = makeUuid();
     const { props, children, lists } = this._splitPropsAndChildren(propsAndChildren);
@@ -62,9 +65,17 @@ export default class Component {
       if (currentValue instanceof Component) {
         children[key] = currentValue;
       } else if (Array.isArray(currentValue)) {
-        lists[key] = currentValue;
+        if (currentValue.length > 0) {
+          if (currentValue[0] instanceof Component) {
+            lists[key] = currentValue as Component[];
+          } else {
+            props[key] = currentValue;
+          }
+        } else {
+          props[key] = currentValue;
+        }
       } else if (typeof currentValue === 'function') {
-
+        return;
       } else {
         props[key] = currentValue;
       }
@@ -92,7 +103,7 @@ export default class Component {
     });
   }
 
-  private _registerEvents(eventBus: EventBus): void {
+  private _registerEvents(eventBus: EventBus<EventCallback>): void {
     eventBus.on(Component.EVENTS.INIT, this._init.bind(this) as EventCallback);
     eventBus.on(Component.EVENTS.FLOW_CDM, this._componentDidMount.bind(this) as EventCallback);
     eventBus.on(Component.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this) as EventCallback);
@@ -227,7 +238,9 @@ export default class Component {
   }
 
   public componentDidUpdate(oldProps: ComponentProps, newProps: ComponentProps): boolean {
-    if (oldProps === newProps) {
+    // console.log(oldProps);
+    // console.log(newProps);
+    if (isEqual(oldProps, newProps)) {
       return false;
     }
     return true;

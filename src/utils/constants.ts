@@ -1,4 +1,15 @@
-const formElementsDescription = {
+export enum Routes {
+  SignIn = '/',
+  SignUp = '/sign-up',
+  Messenger = '/messenger',
+  Settings = '/settings',
+  SettingsGeneral = '/settings/general',
+  SettingsPassword = '/settings/password',
+  Error404 = '/404',
+  Error500 = '/500',
+}
+
+export const formElementsDescription = {
   login: {
     inputId: 'input__login',
     inputName: 'login',

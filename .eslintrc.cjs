@@ -31,6 +31,9 @@ module.exports = {
       'import/extensions': 'off',
       'import/no-extraneous-dependencies': 'off',
       '@typescript-eslint/no-use-before-define': 'off',
-      '@typescript-eslint/restrict-template-expressions': 'off'
+      '@typescript-eslint/restrict-template-expressions': 'off',
+      '@typescript-eslint/naming-convention': 'off',
+      '@typescript-eslint/ban-types': 'off',
+      '@typescript-eslint/no-unsafe-enum-comparison': 'off'
     },
   };
