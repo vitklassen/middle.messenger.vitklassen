@@ -1,6 +1,7 @@
 import authAPI from '../../api/auth/AuthAPI';
 import router from '../../services/Router';
 import store from '../../services/Store';
+import { Routes } from '../../utils/constants';
 
 class UserLogoutController {
   public async logout(): Promise<void> {
@@ -12,10 +13,10 @@ class UserLogoutController {
         store.set('currentChatId', null);
         store.set('currentWS', null);
         store.set('currentMessages', null);
-        router.go('/');
+        router.go(Routes.SignIn);
       }
     } catch (error) {
-      router.go('/server-error');
+      router.go(Routes.Error500);
     }
   }
 }

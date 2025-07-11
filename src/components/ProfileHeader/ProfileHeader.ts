@@ -3,6 +3,7 @@ import { TStore } from '../../services/Store';
 import ENV from '../../utils/env';
 import { connect } from '../../utils/utils';
 import template from './template';
+
 class ProfileHeader extends Component {
   constructor(props: ComponentProps) {
     super({

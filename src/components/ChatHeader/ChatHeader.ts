@@ -41,12 +41,13 @@ class ChatHeaderComponent extends Component {
 }
 
 function mapChatHeader(state: TStore) {
-  if (state.currentChatId) {
+  if (state.currentChatId && state.chats?.find(item => item.id === state.currentChatId)) {
     const currentChat = state.chats?.find(item => item.id === state.currentChatId);
     return {
       chatName: currentChat?.title,
       avatarLink: currentChat?.avatar ? currentChat.avatar : '/message-box__avatar-image.png',
     };
+    
   } else {
     return {};
   }

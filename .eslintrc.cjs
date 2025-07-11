@@ -34,5 +34,6 @@ module.exports = {
       '@typescript-eslint/restrict-template-expressions': 'off',
       '@typescript-eslint/naming-convention': 'off',
       '@typescript-eslint/ban-types': 'off',
+      '@typescript-eslint/no-unsafe-enum-comparison': 'off'
     },
   };
