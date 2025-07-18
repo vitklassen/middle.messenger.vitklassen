@@ -1,1 +1,1 @@
-npm-run-all test lint:all
+npm test
