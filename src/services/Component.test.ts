@@ -37,7 +37,7 @@ describe('Component', () => {
     testComponent.setProps({ text: newTextValue });
     const pText = testComponent.getContent().querySelector('#test-p')?.textContent;
 
-    expect(pText).to.be.eq(newTextValue);
+    expect(pText).to.eq(newTextValue);
   });
 
   it('Проверка добавления слушателя события на элемент', () => {
@@ -45,7 +45,7 @@ describe('Component', () => {
     const testComponent = new TestComponent({ 
       events: {
         click: clickHandler,
-      }});
+      } });
     const clickEvent = new MouseEvent('click');
     testComponent.getContent().dispatchEvent(clickEvent);
 
