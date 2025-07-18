@@ -1,5 +1,5 @@
 import { JSDOM } from 'jsdom';
-
+/* eslint-disable */
 const jsdom = new JSDOM('<body></body>', {
 url: 'https://example.org/',
 });
