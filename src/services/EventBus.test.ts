@@ -1,7 +1,7 @@
 import Sinon from 'sinon';
 import EventBus from './EventBus';
 import { assert, expect } from 'chai';
-
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 describe('EventBus', () => {
   let eventBus: EventBus<() => void>;
   const firstEventName = 'EVENT_1';

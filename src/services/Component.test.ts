@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import Component, { ComponentProps } from './Component';
 import Sinon from 'sinon';
-
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 describe('Component', () => {
   let TestComponent: typeof Component;
 
