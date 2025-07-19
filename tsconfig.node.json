@@ -5,6 +5,9 @@
       "moduleResolution": "Node",
       "allowSyntheticDefaultImports": true
     },
+    "ts-node": {
+      "experimentalSpecifierResolution": "node"
+    },
     "include": [
     "src/**/*.js",
     "*.js"
